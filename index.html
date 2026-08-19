@@ -1,13 +1,1166 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lustry Pvt Ltd</title>
+
+<title>Lustry Pvt Ltd | T-Shirt & Bag Manufacturer</title>
+
+<meta name="description" content="Lustry Pvt Ltd - Custom T-Shirts, Polo T-Shirts, Hoodies and Bags Manufacturer for Corporate, Events, Schools and Brands.">
+
+<style>
+:root{
+    --black:#111111;
+    --dark:#181818;
+    --white:#ffffff;
+    --light:#f6f6f4;
+    --gray:#6b6b6b;
+    --border:#e5e5e5;
+    --green:#16a34a;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    color:var(--black);
+    background:#fff;
+    line-height:1.5;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+button,
+input,
+select,
+textarea{
+    font-family:inherit;
+}
+
+.container{
+    width:92%;
+    max-width:1180px;
+    margin:auto;
+}
+
+/* TOP BAR */
+
+.topbar{
+    background:#111;
+    color:white;
+    font-size:13px;
+    padding:8px 0;
+}
+
+.topbar-inner{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+/* NAVBAR */
+
+nav{
+    background:white;
+    border-bottom:1px solid var(--border);
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.nav-inner{
+    height:72px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-size:29px;
+    font-weight:900;
+    letter-spacing:-1.5px;
+}
+
+.logo span{
+    font-weight:400;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:28px;
+    font-size:14px;
+    font-weight:700;
+}
+
+.nav-links a:hover{
+    opacity:.55;
+}
+
+.nav-btn{
+    background:#111;
+    color:white;
+    padding:12px 18px;
+    border-radius:9px;
+    font-weight:800;
+    font-size:13px;
+}
+
+.menu-btn{
+    display:none;
+    background:none;
+    border:0;
+    font-size:27px;
+    cursor:pointer;
+}
+
+/* BUTTONS */
+
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:13px 21px;
+    border-radius:10px;
+    border:0;
+    cursor:pointer;
+    font-weight:800;
+    transition:.2s;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+.btn-black{
+    background:#111;
+    color:white;
+}
+
+.btn-white{
+    background:white;
+    color:#111;
+    border:1px solid #ddd;
+}
+
+.btn-green{
+    background:var(--green);
+    color:white;
+}
+
+/* HERO */
+
+.hero{
+    background:linear-gradient(135deg,#f3f3f1,#fff);
+    padding:75px 0;
+}
+
+.hero-grid{
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:55px;
+    align-items:center;
+}
+
+.badge{
+    display:inline-block;
+    background:#111;
+    color:white;
+    padding:7px 13px;
+    border-radius:30px;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:.5px;
+    margin-bottom:18px;
+}
+
+.hero h1{
+    font-size:clamp(43px,6vw,72px);
+    line-height:1.02;
+    letter-spacing:-3px;
+    margin-bottom:22px;
+}
+
+.hero p{
+    max-width:620px;
+    color:var(--gray);
+    font-size:18px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:12px;
+    margin-top:28px;
+    flex-wrap:wrap;
+}
+
+/* HERO VISUAL */
+
+.hero-visual{
+    min-height:420px;
+    background:#111;
+    border-radius:28px;
+    position:relative;
+    overflow:hidden;
+    color:white;
+    display:flex;
+    align-items:flex-end;
+    padding:30px;
+}
+
+.circle{
+    position:absolute;
+    width:300px;
+    height:300px;
+    border-radius:50%;
+    background:#292929;
+    top:-80px;
+    right:-60px;
+}
+
+.shirt-icon{
+    position:absolute;
+    left:50%;
+    top:45%;
+    transform:translate(-50%,-50%);
+    font-size:145px;
+}
+
+.hero-label{
+    position:relative;
+    z-index:2;
+}
+
+.hero-label small{
+    color:#aaa;
+}
+
+.hero-label h3{
+    font-size:29px;
+    margin-top:4px;
+}
+
+/* SECTIONS */
+
+.section{
+    padding:80px 0;
+}
+
+.section.gray{
+    background:var(--light);
+}
+
+.section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:25px;
+    margin-bottom:30px;
+}
+
+.kicker{
+    font-size:11px;
+    letter-spacing:2px;
+    font-weight:900;
+    color:#777;
+    text-transform:uppercase;
+}
+
+.section h2{
+    font-size:39px;
+    letter-spacing:-1.5px;
+    margin-top:5px;
+}
+
+.section-head p{
+    color:var(--gray);
+    max-width:540px;
+}
+
+/* PRODUCTS */
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.product-card{
+    border:1px solid var(--border);
+    border-radius:18px;
+    overflow:hidden;
+    background:white;
+    transition:.25s;
+}
+
+.product-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+}
+
+.product-image{
+    height:220px;
+    background:#eee;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:80px;
+}
+
+.product-content{
+    padding:20px;
+}
+
+.product-content h3{
+    margin-bottom:6px;
+    font-size:19px;
+}
+
+.product-content p{
+    color:var(--gray);
+    font-size:14px;
+}
+
+.product-price{
+    font-weight:900;
+    margin-top:13px;
+}
+
+/* CUSTOMIZER */
+
+.customizer{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+}
+
+.panel{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:26px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.field{
+    margin-bottom:5px;
+}
+
+.field.full{
+    grid-column:1/-1;
+}
+
+label{
+    display:block;
+    font-size:13px;
+    font-weight:800;
+    margin-bottom:7px;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #d8d8d8;
+    border-radius:9px;
+    outline:none;
+    background:white;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:#111;
+}
+
+.calculate-btn{
+    width:100%;
+    margin-top:15px;
+}
+
+/* QUOTE */
+
+.quote-box{
+    background:#111;
+    color:white;
+    border-radius:20px;
+    padding:30px;
+}
+
+.quote-box .kicker{
+    color:#999;
+}
+
+.total{
+    font-size:42px;
+    font-weight:900;
+    margin:8px 0 15px;
+}
+
+.quote-note{
+    color:#aaa;
+    font-size:13px;
+}
+
+.quote-box button{
+    width:100%;
+    margin-top:15px;
+}
+
+/* BAG SECTION */
+
+.design-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.design-card{
+    height:250px;
+    border-radius:19px;
+    padding:24px;
+    background:linear-gradient(135deg,#eeeeee,#dcdcdc);
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    position:relative;
+    overflow:hidden;
+}
+
+.design-card:before{
+    content:"CUSTOM";
+    position:absolute;
+    right:-20px;
+    top:25px;
+    transform:rotate(-12deg);
+    font-size:55px;
+    font-weight:900;
+    color:rgba(255,255,255,.55);
+}
+
+.design-card h3{
+    font-size:26px;
+    position:relative;
+}
+
+.design-card p{
+    color:#555;
+    position:relative;
+}
+
+/* PROCESS */
+
+.steps{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.step{
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:25px;
+}
+
+.step-number{
+    font-size:13px;
+    color:#888;
+    font-weight:900;
+}
+
+.step h3{
+    margin:12px 0 7px;
+}
+
+.step p{
+    color:var(--gray);
+    font-size:14px;
+}
+
+/* ABOUT */
+
+.about{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    align-items:center;
+}
+
+.about-text p{
+    color:var(--gray);
+    margin-top:15px;
+}
+
+.about-list{
+    list-style:none;
+    margin-top:20px;
+}
+
+.about-list li{
+    margin:10px 0;
+}
+
+.about-list li:before{
+    content:"✓";
+    font-weight:900;
+    margin-right:10px;
+}
+
+.about-box{
+    background:#111;
+    color:white;
+    border-radius:24px;
+    padding:38px;
+}
+
+.about-box h3{
+    font-size:31px;
+    margin:8px 0 12px;
+}
+
+.about-box p{
+    color:#aaa;
+}
+
+/* CONTACT */
+
+.contact{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+}
+
+.contact-box{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:28px;
+}
+
+.contact-item{
+    padding:15px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.contact-item:last-child{
+    border-bottom:0;
+}
+
+.contact-item strong{
+    display:block;
+}
+
+.contact-item span{
+    color:var(--gray);
+    font-size:14px;
+}
+
+.contact-form input,
+.contact-form textarea{
+    margin-bottom:11px;
+}
+
+/* FOOTER */
+
+footer{
+    background:#111;
+    color:white;
+    padding:48px 0 25px;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    gap:40px;
+}
+
+.footer-grid p,
+.footer-grid a{
+    color:#aaa;
+    font-size:14px;
+}
+
+.footer-grid p{
+    margin-top:10px;
+}
+
+.footer-grid a{
+    display:block;
+    margin:8px 0;
+}
+
+.copyright{
+    border-top:1px solid #333;
+    margin-top:35px;
+    padding-top:20px;
+    color:#777;
+    font-size:12px;
+}
+
+/* WHATSAPP */
+
+.whatsapp{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    background:#20c063;
+    color:white;
+    padding:14px 19px;
+    border-radius:50px;
+    font-weight:900;
+    box-shadow:0 8px 25px rgba(0,0,0,.25);
+    z-index:2000;
+}
+
+/* TOAST */
+
+.toast{
+    display:none;
+    position:fixed;
+    bottom:85px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#111;
+    color:white;
+    padding:13px 20px;
+    border-radius:10px;
+    z-index:3000;
+}
+
+/* MOBILE */
+
+@media(max-width:850px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .hero-grid,
+    .customizer,
+    .about,
+    .contact{
+        grid-template-columns:1fr;
+    }
+
+    .products{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .steps{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .hero{
+        padding:50px 0;
+    }
+
+    .hero-visual{
+        min-height:320px;
+    }
+}
+
+@media(max-width:520px){
+
+    .topbar-inner{
+        justify-content:center;
+        text-align:center;
+    }
+
+    .nav-inner{
+        height:64px;
+    }
+
+    .hero h1{
+        font-size:43px;
+        letter-spacing:-2px;
+    }
+
+    .section{
+        padding:55px 0;
+    }
+
+    .section h2{
+        font-size:30px;
+    }
+
+    .section-head{
+        display:block;
+    }
+
+    .section-head p{
+        margin-top:10px;
+    }
+
+    .products,
+    .design-grid,
+    .steps,
+    .footer-grid,
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .whatsapp{
+        right:12px;
+        bottom:12px;
+    }
+}
+</style>
 </head>
-<body style="font-family:Arial;text-align:center;padding:50px;">
-<h1>Lustry Pvt Ltd</h1>
-<h2>We Work For Your Identity</h2>
-<p>Website Under Development</p>
-</body>
-</html>
+
+<body>
+
+<!-- TOP BAR -->
+
+<div class="topbar">
+    <div class="container topbar-inner">
+        <span>Direct Manufacturer • Bulk Orders • Custom Branding</span>
+        <span>Corporate • Events • Schools • Brands</span>
+    </div>
+</div>
+
+
+<!-- NAVBAR -->
+
+<nav>
+    <div class="container nav-inner">
+
+        <a href="#home" class="logo">
+            Lustry<span>.</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#products">Products</a>
+            <a href="#customize">Customize</a>
+            <a href="#bags">Bags</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+
+        <button class="menu-btn" onclick="mobileMenu()">
+            ☰
+        </button>
+
+        <a href="#customize" class="nav-btn">
+            Get Quote
+        </a>
+
+    </div>
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+    <div class="container hero-grid">
+
+        <div>
+
+            <span class="badge">
+                LUSTY PVT LTD • MANUFACTURER
+            </span>
+
+            <h1>
+                Custom apparel & bags, made for your brand.
+            </h1>
+
+            <p>
+                Premium T-shirts, polo shirts, round necks, hoodies
+                and custom bags manufactured for companies, events,
+                schools, teams and brands.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#customize" class="btn btn-black">
+                    Build Your Product
+                </a>
+
+                <a href="#products" class="btn btn-white">
+                    Explore Products
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-visual">
+
+            <div class="circle"></div>
+
+            <div class="shirt-icon">
+                👕
+            </div>
+
+            <div class="hero-label">
+
+                <small>
+                    YOUR BRAND • YOUR DESIGN
+                </small>
+
+                <h3>
+                    Made to order.
+                </h3>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PRODUCTS -->
+
+<section class="section" id="products">
+
+    <div class="container">
+
+        <div class="section-head">
+
+            <div>
+                <div class="kicker">
+                    Our Categories
+                </div>
+
+                <h2>
+                    Choose what you need
+                </h2>
+            </div>
+
+            <p>
+                Choose your product and customize fabric,
+                quantity, printing and branding requirements.
+            </p>
+
+        </div>
+
+
+        <div class="products">
+
+
+            <div class="product-card">
+
+                <div class="product-image">
+                    👕
+                </div>
+
+                <div class="product-content">
+
+                    <h3>
+                        Round Neck T-Shirts
+                    </h3>
+
+                    <p>
+                        Cotton, dry-fit and custom printing.
+                    </p>
+
+                    <div class="product-price">
+                        Starting from ₹99*
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="product-card">
+
+                <div class="product-image">
+                    👔
+                </div>
+
+                <div class="product-content">
+
+                    <h3>
+                        Polo T-Shirts
+                    </h3>
+
+                    <p>
+                        Corporate and premium polo shirts.
+                    </p>
+
+                    <div class="product-price">
+                        Starting from ₹110*
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="product-card">
+
+                <div class="product-image">
+                    🧥
+                </div>
+
+                <div class="product-content">
+
+                    <h3>
+                        Hoodies & Jackets
+                    </h3>
+
+                    <p>
+                        Custom branding and bulk orders.
+                    </p>
+
+                    <div class="product-price">
+                        Custom Quote
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="product-card">
+
+                <div class="product-image">
+                    👜
+                </div>
+
+                <div class="product-content">
+
+                    <h3>
+                        Custom Bags
+                    </h3>
+
+                    <p>
+                        Promotional, canvas, tote and more.
+                    </p>
+
+                    <div class="product-price">
+                        Custom Quote
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PRODUCT CUSTOMIZER -->
+
+<section class="section gray" id="customize">
+
+    <div class="container">
+
+        <div class="section-head">
+
+            <div>
+
+                <div class="kicker">
+                    Product Builder
+                </div>
+
+                <h2>
+                    Build your requirement
+                </h2>
+
+            </div>
+
+            <p>
+                Select product, fabric, quantity and printing.
+                See an estimated starting price instantly.
+            </p>
+
+        </div>
+
+
+        <div class="customizer">
+
+
+            <!-- FORM -->
+
+            <div class="panel">
+
+                <div class="form-grid">
+
+
+                    <div class="field">
+
+                        <label>
+                            Product
+                        </label>
+
+                        <select id="product" onchange="calculatePrice()">
+
+                            <option value="99">
+                                Round Neck T-Shirt
+                            </option>
+
+                            <option value="110">
+                                Polo T-Shirt
+                            </option>
+
+                            <option value="150">
+                                Hoodie
+                            </option>
+
+                            <option value="85">
+                                Custom Bag
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            Quantity
+                        </label>
+
+                        <input
+                            type="number"
+                            id="quantity"
+                            value="100"
+                            min="1"
+                            onchange="calculatePrice()"
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            Fabric / Material
+                        </label>
+
+                        <select id="fabric" onchange="calculatePrice()">
+
+                            <option value="0">
+                                Standard
+                            </option>
+
+                            <option value="15">
+                                Premium 180 GSM
+                            </option>
+
+                            <option value="25">
+                                Premium 220 GSM
+                            </option>
+
+                            <option value="20">
+                                Dry Fit
+                            </option>
+
+                            <option value="30">
+                                Canvas / Heavy Material
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            Printing / Branding
+                        </label>
+
+                        <select id="printing" onchange="calculatePrice()">
+
+                            <option value="0">
+                                No Print
+                            </option>
+
+                            <option value="10">
+                                Screen Printing
+                            </option>
+
+                            <option value="25">
+                                DTF Printing
+                            </option>
+
+                            <option value="20">
+                                Sublimation
+                            </option>
+
+                            <option value="30">
+                                Embroidery
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="field full">
+
+                        <label>
+                            Custom Text
+                        </label>
+
+                        <input
+                            type="text"
+                            id="customText"
+                            placeholder="Example: YOUR COMPANY NAME"
+                        >
+
+                    </div>
+
+
+                    <div class="field full">
+
+                        <label>
+                            Logo / Design Requirement
+                        </label>
+
+                        <textarea
+                            id="designRequirement"
+                            rows="4"
+                            placeholder="Tell us where you want your logo, text or artwork..."
+                        ></textarea>
+
+                    </div>
+
+
+                </div>
+
+
+                <button
+                    class="btn btn-black calculate-btn"
+                    onclick="calculatePrice()"
+                >
+                    Calculate Estimate
+                </button>
