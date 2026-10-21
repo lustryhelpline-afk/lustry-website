@@ -1,1166 +1,207 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Lustry Pvt Ltd | T-Shirt & Bag Manufacturer</title>
-
-<meta name="description" content="Lustry Pvt Ltd - Custom T-Shirts, Polo T-Shirts, Hoodies and Bags Manufacturer for Corporate, Events, Schools and Brands.">
-
-<style>
-:root{
-    --black:#111111;
-    --dark:#181818;
-    --white:#ffffff;
-    --light:#f6f6f4;
-    --gray:#6b6b6b;
-    --border:#e5e5e5;
-    --green:#16a34a;
-}
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    font-family:Arial,Helvetica,sans-serif;
-    color:var(--black);
-    background:#fff;
-    line-height:1.5;
-}
-
-a{
-    text-decoration:none;
-    color:inherit;
-}
-
-button,
-input,
-select,
-textarea{
-    font-family:inherit;
-}
-
-.container{
-    width:92%;
-    max-width:1180px;
-    margin:auto;
-}
-
-/* TOP BAR */
-
-.topbar{
-    background:#111;
-    color:white;
-    font-size:13px;
-    padding:8px 0;
-}
-
-.topbar-inner{
-    display:flex;
-    justify-content:space-between;
-    gap:15px;
-    flex-wrap:wrap;
-}
-
-/* NAVBAR */
-
-nav{
-    background:white;
-    border-bottom:1px solid var(--border);
-    position:sticky;
-    top:0;
-    z-index:1000;
-}
-
-.nav-inner{
-    height:72px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-
-.logo{
-    font-size:29px;
-    font-weight:900;
-    letter-spacing:-1.5px;
-}
-
-.logo span{
-    font-weight:400;
-}
-
-.nav-links{
-    display:flex;
-    align-items:center;
-    gap:28px;
-    font-size:14px;
-    font-weight:700;
-}
-
-.nav-links a:hover{
-    opacity:.55;
-}
-
-.nav-btn{
-    background:#111;
-    color:white;
-    padding:12px 18px;
-    border-radius:9px;
-    font-weight:800;
-    font-size:13px;
-}
-
-.menu-btn{
-    display:none;
-    background:none;
-    border:0;
-    font-size:27px;
-    cursor:pointer;
-}
-
-/* BUTTONS */
-
-.btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    padding:13px 21px;
-    border-radius:10px;
-    border:0;
-    cursor:pointer;
-    font-weight:800;
-    transition:.2s;
-}
-
-.btn:hover{
-    transform:translateY(-2px);
-}
-
-.btn-black{
-    background:#111;
-    color:white;
-}
-
-.btn-white{
-    background:white;
-    color:#111;
-    border:1px solid #ddd;
-}
-
-.btn-green{
-    background:var(--green);
-    color:white;
-}
-
-/* HERO */
-
-.hero{
-    background:linear-gradient(135deg,#f3f3f1,#fff);
-    padding:75px 0;
-}
-
-.hero-grid{
-    display:grid;
-    grid-template-columns:1.05fr .95fr;
-    gap:55px;
-    align-items:center;
-}
-
-.badge{
-    display:inline-block;
-    background:#111;
-    color:white;
-    padding:7px 13px;
-    border-radius:30px;
-    font-size:11px;
-    font-weight:800;
-    letter-spacing:.5px;
-    margin-bottom:18px;
-}
-
-.hero h1{
-    font-size:clamp(43px,6vw,72px);
-    line-height:1.02;
-    letter-spacing:-3px;
-    margin-bottom:22px;
-}
-
-.hero p{
-    max-width:620px;
-    color:var(--gray);
-    font-size:18px;
-}
-
-.hero-buttons{
-    display:flex;
-    gap:12px;
-    margin-top:28px;
-    flex-wrap:wrap;
-}
-
-/* HERO VISUAL */
-
-.hero-visual{
-    min-height:420px;
-    background:#111;
-    border-radius:28px;
-    position:relative;
-    overflow:hidden;
-    color:white;
-    display:flex;
-    align-items:flex-end;
-    padding:30px;
-}
-
-.circle{
-    position:absolute;
-    width:300px;
-    height:300px;
-    border-radius:50%;
-    background:#292929;
-    top:-80px;
-    right:-60px;
-}
-
-.shirt-icon{
-    position:absolute;
-    left:50%;
-    top:45%;
-    transform:translate(-50%,-50%);
-    font-size:145px;
-}
-
-.hero-label{
-    position:relative;
-    z-index:2;
-}
-
-.hero-label small{
-    color:#aaa;
-}
-
-.hero-label h3{
-    font-size:29px;
-    margin-top:4px;
-}
-
-/* SECTIONS */
-
-.section{
-    padding:80px 0;
-}
-
-.section.gray{
-    background:var(--light);
-}
-
-.section-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-end;
-    gap:25px;
-    margin-bottom:30px;
-}
-
-.kicker{
-    font-size:11px;
-    letter-spacing:2px;
-    font-weight:900;
-    color:#777;
-    text-transform:uppercase;
-}
-
-.section h2{
-    font-size:39px;
-    letter-spacing:-1.5px;
-    margin-top:5px;
-}
-
-.section-head p{
-    color:var(--gray);
-    max-width:540px;
-}
-
-/* PRODUCTS */
-
-.products{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:18px;
-}
-
-.product-card{
-    border:1px solid var(--border);
-    border-radius:18px;
-    overflow:hidden;
-    background:white;
-    transition:.25s;
-}
-
-.product-card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 15px 35px rgba(0,0,0,.08);
-}
-
-.product-image{
-    height:220px;
-    background:#eee;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:80px;
-}
-
-.product-content{
-    padding:20px;
-}
-
-.product-content h3{
-    margin-bottom:6px;
-    font-size:19px;
-}
-
-.product-content p{
-    color:var(--gray);
-    font-size:14px;
-}
-
-.product-price{
-    font-weight:900;
-    margin-top:13px;
-}
-
-/* CUSTOMIZER */
-
-.customizer{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:25px;
-}
-
-.panel{
-    background:white;
-    border:1px solid var(--border);
-    border-radius:20px;
-    padding:26px;
-}
-
-.form-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:15px;
-}
-
-.field{
-    margin-bottom:5px;
-}
-
-.field.full{
-    grid-column:1/-1;
-}
-
-label{
-    display:block;
-    font-size:13px;
-    font-weight:800;
-    margin-bottom:7px;
-}
-
-input,
-select,
-textarea{
-    width:100%;
-    padding:12px;
-    border:1px solid #d8d8d8;
-    border-radius:9px;
-    outline:none;
-    background:white;
-}
-
-input:focus,
-select:focus,
-textarea:focus{
-    border-color:#111;
-}
-
-.calculate-btn{
-    width:100%;
-    margin-top:15px;
-}
-
-/* QUOTE */
-
-.quote-box{
-    background:#111;
-    color:white;
-    border-radius:20px;
-    padding:30px;
-}
-
-.quote-box .kicker{
-    color:#999;
-}
-
-.total{
-    font-size:42px;
-    font-weight:900;
-    margin:8px 0 15px;
-}
-
-.quote-note{
-    color:#aaa;
-    font-size:13px;
-}
-
-.quote-box button{
-    width:100%;
-    margin-top:15px;
-}
-
-/* BAG SECTION */
-
-.design-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
-}
-
-.design-card{
-    height:250px;
-    border-radius:19px;
-    padding:24px;
-    background:linear-gradient(135deg,#eeeeee,#dcdcdc);
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-end;
-    position:relative;
-    overflow:hidden;
-}
-
-.design-card:before{
-    content:"CUSTOM";
-    position:absolute;
-    right:-20px;
-    top:25px;
-    transform:rotate(-12deg);
-    font-size:55px;
-    font-weight:900;
-    color:rgba(255,255,255,.55);
-}
-
-.design-card h3{
-    font-size:26px;
-    position:relative;
-}
-
-.design-card p{
-    color:#555;
-    position:relative;
-}
-
-/* PROCESS */
-
-.steps{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:18px;
-}
-
-.step{
-    border:1px solid var(--border);
-    border-radius:18px;
-    padding:25px;
-}
-
-.step-number{
-    font-size:13px;
-    color:#888;
-    font-weight:900;
-}
-
-.step h3{
-    margin:12px 0 7px;
-}
-
-.step p{
-    color:var(--gray);
-    font-size:14px;
-}
-
-/* ABOUT */
-
-.about{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:50px;
-    align-items:center;
-}
-
-.about-text p{
-    color:var(--gray);
-    margin-top:15px;
-}
-
-.about-list{
-    list-style:none;
-    margin-top:20px;
-}
-
-.about-list li{
-    margin:10px 0;
-}
-
-.about-list li:before{
-    content:"✓";
-    font-weight:900;
-    margin-right:10px;
-}
-
-.about-box{
-    background:#111;
-    color:white;
-    border-radius:24px;
-    padding:38px;
-}
-
-.about-box h3{
-    font-size:31px;
-    margin:8px 0 12px;
-}
-
-.about-box p{
-    color:#aaa;
-}
-
-/* CONTACT */
-
-.contact{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:25px;
-}
-
-.contact-box{
-    background:white;
-    border:1px solid var(--border);
-    border-radius:20px;
-    padding:28px;
-}
-
-.contact-item{
-    padding:15px 0;
-    border-bottom:1px solid var(--border);
-}
-
-.contact-item:last-child{
-    border-bottom:0;
-}
-
-.contact-item strong{
-    display:block;
-}
-
-.contact-item span{
-    color:var(--gray);
-    font-size:14px;
-}
-
-.contact-form input,
-.contact-form textarea{
-    margin-bottom:11px;
-}
-
-/* FOOTER */
-
-footer{
-    background:#111;
-    color:white;
-    padding:48px 0 25px;
-}
-
-.footer-grid{
-    display:grid;
-    grid-template-columns:2fr 1fr 1fr;
-    gap:40px;
-}
-
-.footer-grid p,
-.footer-grid a{
-    color:#aaa;
-    font-size:14px;
-}
-
-.footer-grid p{
-    margin-top:10px;
-}
-
-.footer-grid a{
-    display:block;
-    margin:8px 0;
-}
-
-.copyright{
-    border-top:1px solid #333;
-    margin-top:35px;
-    padding-top:20px;
-    color:#777;
-    font-size:12px;
-}
-
-/* WHATSAPP */
-
-.whatsapp{
-    position:fixed;
-    right:20px;
-    bottom:20px;
-    background:#20c063;
-    color:white;
-    padding:14px 19px;
-    border-radius:50px;
-    font-weight:900;
-    box-shadow:0 8px 25px rgba(0,0,0,.25);
-    z-index:2000;
-}
-
-/* TOAST */
-
-.toast{
-    display:none;
-    position:fixed;
-    bottom:85px;
-    left:50%;
-    transform:translateX(-50%);
-    background:#111;
-    color:white;
-    padding:13px 20px;
-    border-radius:10px;
-    z-index:3000;
-}
-
-/* MOBILE */
-
-@media(max-width:850px){
-
-    .nav-links{
-        display:none;
-    }
-
-    .menu-btn{
-        display:block;
-    }
-
-    .hero-grid,
-    .customizer,
-    .about,
-    .contact{
-        grid-template-columns:1fr;
-    }
-
-    .products{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .steps{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .footer-grid{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .hero{
-        padding:50px 0;
-    }
-
-    .hero-visual{
-        min-height:320px;
-    }
-}
-
-@media(max-width:520px){
-
-    .topbar-inner{
-        justify-content:center;
-        text-align:center;
-    }
-
-    .nav-inner{
-        height:64px;
-    }
-
-    .hero h1{
-        font-size:43px;
-        letter-spacing:-2px;
-    }
-
-    .section{
-        padding:55px 0;
-    }
-
-    .section h2{
-        font-size:30px;
-    }
-
-    .section-head{
-        display:block;
-    }
-
-    .section-head p{
-        margin-top:10px;
-    }
-
-    .products,
-    .design-grid,
-    .steps,
-    .footer-grid,
-    .form-grid{
-        grid-template-columns:1fr;
-    }
-
-    .whatsapp{
-        right:12px;
-        bottom:12px;
-    }
-}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101010">
+  <meta name="description" content="Custom apparel, bags and branded merchandise manufactured for teams, companies, schools and growing brands.">
+  <title>Lustry — Made for your identity</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-
-<!-- TOP BAR -->
-
-<div class="topbar">
-    <div class="container topbar-inner">
-        <span>Direct Manufacturer • Bulk Orders • Custom Branding</span>
-        <span>Corporate • Events • Schools • Brands</span>
+  <div class="announcement"><div class="wrap announcement-inner"><span>Custom manufacturing for teams, brands & businesses</span><span>Minimum order: 25 pieces · Final quote approved by Lustry</span></div></div>
+  <header class="site-header">
+    <div class="wrap nav-wrap">
+      <a class="brand" href="#home" aria-label="Lustry home"><img class="brand-logo" src="assets/lustry-logo.png" alt="Lustry logo" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="brand-fallback" hidden><span class="brand-mark">L</span><span>Lustry<span class="brand-dot">.</span><small>MADE FOR YOUR IDENTITY</small></span></span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+      <nav class="nav-links" id="navLinks">
+        <a href="#products" data-i18n="navProducts">Products</a><a href="#materials">Materials</a><a href="#work">Our work</a><a href="#clients">Clients</a><a href="#films">Films</a>
+        <label class="language-select"><span class="sr-only">Language</span><select id="languageSelect" aria-label="Choose language"><option value="en">English</option><option value="hi">हिन्दी</option></select></label>
+        <a class="button button-dark nav-cta" href="#builder" data-i18n="navQuote">Build your order <span>↗</span></a>
+      </nav>
     </div>
-</div>
+  </header>
 
-
-<!-- NAVBAR -->
-
-<nav>
-    <div class="container nav-inner">
-
-        <a href="#home" class="logo">
-            Lustry<span>.</span>
-        </a>
-
-        <div class="nav-links">
-            <a href="#home">Home</a>
-            <a href="#products">Products</a>
-            <a href="#customize">Customize</a>
-            <a href="#bags">Bags</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
+  <main>
+    <section class="hero" id="home">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-line"></span> CUSTOM-MADE. BUSINESS-READY.</div>
+          <h1>Make your brand<br><span>wearable.</span></h1>
+          <p class="hero-intro">Custom apparel, bags and branded merchandise made around your team, your idea and your identity.</p>
+          <div class="hero-actions"><a class="button button-dark" href="#builder">Configure a product <span>↗</span></a><a class="text-link" href="#products">Explore categories <span>↓</span></a></div>
+          <div class="hero-proof"><div class="proof-avatars"><span>✳</span><span>◎</span><span>✦</span></div><p><strong>One partner, many possibilities.</strong><br><small>From first brief to production-ready order.</small></p></div>
         </div>
-
-        <button class="menu-btn" onclick="mobileMenu()">
-            ☰
-        </button>
-
-        <a href="#customize" class="nav-btn">
-            Get Quote
-        </a>
-
-    </div>
-</nav>
-
-
-<!-- HERO -->
-
-<section class="hero" id="home">
-
-    <div class="container hero-grid">
-
-        <div>
-
-            <span class="badge">
-                LUSTY PVT LTD • MANUFACTURER
-            </span>
-
-            <h1>
-                Custom apparel & bags, made for your brand.
-            </h1>
-
-            <p>
-                Premium T-shirts, polo shirts, round necks, hoodies
-                and custom bags manufactured for companies, events,
-                schools, teams and brands.
-            </p>
-
-            <div class="hero-buttons">
-
-                <a href="#customize" class="btn btn-black">
-                    Build Your Product
-                </a>
-
-                <a href="#products" class="btn btn-white">
-                    Explore Products
-                </a>
-
-            </div>
-
+        <div class="hero-art" aria-label="Illustration of custom apparel and bags">
+          <div class="art-topline"><span>LSTR / STUDIO</span><span>01 — 06</span></div>
+          <div class="art-circle"></div><div class="art-label label-one">YOUR IDEA<br><b>YOUR IDENTITY</b></div>
+          <div class="product-stack">
+            <div class="mock-shirt"><span>L.</span></div><div class="mock-tote"><span>MAKE<br>IT YOURS.</span></div><div class="mock-tag">CUSTOM<br>MADE</div>
+          </div>
+          <div class="art-bottom"><span>DESIGNED AROUND YOU</span><span>INDIA · B2B</span></div>
         </div>
+      </div>
+      <div class="wrap ticker"><span>APPAREL</span><i>✳</i><span>BAGS</span><i>✳</i><span>TEAMWEAR</span><i>✳</i><span>CORPORATE MERCH</span><i>✳</i><span>CUSTOM BRANDING</span></div>
+    </section>
 
-
-        <div class="hero-visual">
-
-            <div class="circle"></div>
-
-            <div class="shirt-icon">
-                👕
-            </div>
-
-            <div class="hero-label">
-
-                <small>
-                    YOUR BRAND • YOUR DESIGN
-                </small>
-
-                <h3>
-                    Made to order.
-                </h3>
-
-            </div>
-
+    <section class="section products-section" id="products">
+      <div class="wrap">
+        <div class="section-heading"><div><p class="eyebrow">THE PRODUCT RANGE</p><h2>Start with a product.<br><span>Make it yours.</span></h2></div><p>Choose a category, define the details and send us your requirements. We’ll review the brief and confirm a final quotation.</p></div>
+        <div class="category-grid">
+          <button class="category-card cat-tee" data-product="tee"><span class="category-index">01 / APPAREL</span><span class="category-visual visual-tee">T</span><span class="category-title">T-shirts & polos <b>↗</b></span><span class="category-desc">Round neck, oversized, polo, dry-fit</span></button>
+          <button class="category-card cat-hoodie" data-product="hoodie"><span class="category-index">02 / APPAREL</span><span class="category-visual visual-hoodie">H</span><span class="category-title">Hoodies & sweatshirts <b>↗</b></span><span class="category-desc">Pullover, zip-up, fleece, French terry</span></button>
+          <button class="category-card cat-jacket" data-product="jacket"><span class="category-index">03 / OUTERWEAR</span><span class="category-visual visual-jacket">J</span><span class="category-title">Jackets <b>↗</b></span><span class="category-desc">Bomber, varsity, lightweight</span></button>
+          <button class="category-card cat-backpack" data-product="backpack"><span class="category-index">04 / BAGS</span><span class="category-visual visual-backpack">B</span><span class="category-title">Pittu bags & backpacks <b>↗</b></span><span class="category-desc">School, team, travel and corporate</span></button>
+          <button class="category-card cat-tote" data-product="tote"><span class="category-index">05 / BAGS</span><span class="category-visual visual-tote">T</span><span class="category-title">Tote & promotional bags <b>↗</b></span><span class="category-desc">Canvas, cotton, drawstring</span></button>
+          <button class="category-card cat-merch" data-product="merch"><span class="category-index">06 / MERCH</span><span class="category-visual visual-merch">P+</span><span class="category-title">Pens & bag tags <b>↗</b></span><span class="category-desc">Branded gifts and event merchandise</span></button>
         </div>
+      </div>
+    </section>
 
-    </div>
-
-</section>
-
-
-<!-- PRODUCTS -->
-
-<section class="section" id="products">
-
-    <div class="container">
-
-        <div class="section-head">
-
-            <div>
-                <div class="kicker">
-                    Our Categories
-                </div>
-
-                <h2>
-                    Choose what you need
-                </h2>
-            </div>
-
-            <p>
-                Choose your product and customize fabric,
-                quantity, printing and branding requirements.
-            </p>
-
+    <section class="section materials-section" id="materials">
+      <div class="wrap">
+        <div class="section-heading"><div><p class="eyebrow">MATERIALS, WITH INTENTION</p><h2>Start with the<br><span>right feel.</span></h2></div><p>Explore common material options for your custom order. Actual availability, composition and GSM will be confirmed with your final specification.</p></div>
+        <div class="material-grid">
+          <article class="material-card material-cotton"><div class="material-top"><span>01 / KNIT</span><span>APPAREL</span></div><div class="material-swatch swatch-cotton"></div><h3>Combed cotton</h3><p>Smooth hand-feel for premium tees, uniforms and everyday essentials.</p><div class="material-meta"><span>Typical reference</span><strong>160–220 GSM</strong></div></article>
+          <article class="material-card"><div class="material-top"><span>02 / KNIT</span><span>APPAREL</span></div><div class="material-swatch swatch-jersey"></div><h3>Single jersey</h3><p>Versatile knitted fabric for custom T-shirts and casualwear.</p><div class="material-meta"><span>Typical reference</span><strong>140–200 GSM</strong></div></article>
+          <article class="material-card"><div class="material-top"><span>03 / LOOPBACK</span><span>FLEECE</span></div><div class="material-swatch swatch-terry"></div><h3>French terry</h3><p>Structured, comfortable fabric for sweatshirts and lighter hoodies.</p><div class="material-meta"><span>Typical reference</span><strong>240–320 GSM</strong></div></article>
+          <article class="material-card"><div class="material-top"><span>04 / BRUSHED</span><span>FLEECE</span></div><div class="material-swatch swatch-fleece"></div><h3>Brushed fleece</h3><p>A warmer, soft inner finish for heavier hoodies and winter layers.</p><div class="material-meta"><span>Typical reference</span><strong>280–350 GSM</strong></div></article>
+          <article class="material-card"><div class="material-top"><span>05 / WOVEN</span><span>BAGS</span></div><div class="material-swatch swatch-canvas"></div><h3>Cotton canvas</h3><p>A firm woven option for totes, promotional bags and accessories.</p><div class="material-meta"><span>Specification</span><strong>Weight by quote</strong></div></article>
+          <article class="material-card"><div class="material-top"><span>06 / TECHNICAL</span><span>BAGS</span></div><div class="material-swatch swatch-poly"></div><h3>Polyester 600D / 900D</h3><p>Common bag-material options for backpacks and utility bags.</p><div class="material-meta"><span>Specification</span><strong>Denier, not GSM</strong></div></article>
+          <article class="material-card"><div class="material-top"><span>07 / WOVEN</span><span>OUTERWEAR</span></div><div class="material-swatch swatch-twill"></div><h3>Cotton twill</h3><p>Diagonal weave with a more structured look for jackets and workwear.</p><div class="material-meta"><span>Specification</span><strong>Weight by quote</strong></div></article>
+          <article class="material-card material-custom"><div class="material-top"><span>08 / YOUR BRIEF</span><span>CUSTOM</span></div><div class="custom-material-mark">L<span>+</span></div><h3>Need a specific material?</h3><p>Share your swatch, reference sample, blend, finish or technical requirement.</p><a class="text-link" href="#builder">Add it to your brief <span>↗</span></a></article>
         </div>
+        <p class="material-disclaimer">Material names and ranges above are illustrative guides. Replace them with your actual sourcing options and confirm exact specifications before publishing.</p>
+      </div>
+    </section>
 
-
-        <div class="products">
-
-
-            <div class="product-card">
-
-                <div class="product-image">
-                    👕
-                </div>
-
-                <div class="product-content">
-
-                    <h3>
-                        Round Neck T-Shirts
-                    </h3>
-
-                    <p>
-                        Cotton, dry-fit and custom printing.
-                    </p>
-
-                    <div class="product-price">
-                        Starting from ₹99*
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="product-card">
-
-                <div class="product-image">
-                    👔
-                </div>
-
-                <div class="product-content">
-
-                    <h3>
-                        Polo T-Shirts
-                    </h3>
-
-                    <p>
-                        Corporate and premium polo shirts.
-                    </p>
-
-                    <div class="product-price">
-                        Starting from ₹110*
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="product-card">
-
-                <div class="product-image">
-                    🧥
-                </div>
-
-                <div class="product-content">
-
-                    <h3>
-                        Hoodies & Jackets
-                    </h3>
-
-                    <p>
-                        Custom branding and bulk orders.
-                    </p>
-
-                    <div class="product-price">
-                        Custom Quote
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="product-card">
-
-                <div class="product-image">
-                    👜
-                </div>
-
-                <div class="product-content">
-
-                    <h3>
-                        Custom Bags
-                    </h3>
-
-                    <p>
-                        Promotional, canvas, tote and more.
-                    </p>
-
-                    <div class="product-price">
-                        Custom Quote
-                    </div>
-
-                </div>
-
-            </div>
-
-
+    <section class="section work-section" id="work">
+      <div class="wrap">
+        <div class="section-heading"><div><p class="eyebrow">SELECTED PRODUCT DETAILS</p><h2>Real products.<br><span>Real close-ups.</span></h2></div><p>Use your own clear product photographs here—front view, stitching, print or embroidery details, labels and packaging.</p></div>
+        <div class="work-grid">
+          <article class="work-card work-card-large"><div class="photo-frame"><div class="media-fallback"><span>01 / APPAREL</span><b>ADD YOUR<br>TEE PHOTO</b><small>assets/products/tshirts.jpg</small></div><img src="assets/products/tshirts.jpg" alt="Lustry custom T-shirts" loading="lazy" onload="this.previousElementSibling.hidden=true" onerror="this.hidden=true"></div><div class="work-caption"><div><h3>Custom apparel</h3><p>T-shirts · Polos · Teamwear</p></div><span>01</span></div></article>
+          <article class="work-card"><div class="photo-frame"><div class="media-fallback"><span>02 / LAYERS</span><b>ADD YOUR<br>HOODIE PHOTO</b><small>assets/products/hoodies.jpg</small></div><img src="assets/products/hoodies.jpg" alt="Lustry custom hoodies" loading="lazy" onload="this.previousElementSibling.hidden=true" onerror="this.hidden=true"></div><div class="work-caption"><div><h3>Hoodies & layers</h3><p>Fabric · Fit · Finish</p></div><span>02</span></div></article>
+          <article class="work-card"><div class="photo-frame"><div class="media-fallback"><span>03 / BAGS</span><b>ADD YOUR<br>BAG PHOTO</b><small>assets/products/bags.jpg</small></div><img src="assets/products/bags.jpg" alt="Lustry custom bags and backpacks" loading="lazy" onload="this.previousElementSibling.hidden=true" onerror="this.hidden=true"></div><div class="work-caption"><div><h3>Bags & backpacks</h3><p>Utility · Branding · Construction</p></div><span>03</span></div></article>
+          <article class="work-card"><div class="photo-frame"><div class="media-fallback"><span>04 / BRANDING</span><b>ADD PRINT OR<br>EMBROIDERY</b><small>assets/products/branding-detail.jpg</small></div><img src="assets/products/branding-detail.jpg" alt="Close-up of custom branding and embroidery" loading="lazy" onload="this.previousElementSibling.hidden=true" onerror="this.hidden=true"></div><div class="work-caption"><div><h3>Branding details</h3><p>Print · Embroidery · Labels</p></div><span>04</span></div></article>
+          <article class="work-card"><div class="photo-frame"><div class="media-fallback"><span>05 / ACCESSORIES</span><b>ADD TAGS &<br>MERCH PHOTO</b><small>assets/products/accessories.jpg</small></div><img src="assets/products/accessories.jpg" alt="Custom pens, bag tags and branded merchandise" loading="lazy" onload="this.previousElementSibling.hidden=true" onerror="this.hidden=true"></div><div class="work-caption"><div><h3>Branded merchandise</h3><p>Tags · Pens · Gifting</p></div><span>05</span></div></article>
         </div>
+      </div>
+    </section>
 
-    </div>
-
-</section>
-
-
-<!-- PRODUCT CUSTOMIZER -->
-
-<section class="section gray" id="customize">
-
-    <div class="container">
-
-        <div class="section-head">
-
-            <div>
-
-                <div class="kicker">
-                    Product Builder
-                </div>
-
-                <h2>
-                    Build your requirement
-                </h2>
-
-            </div>
-
-            <p>
-                Select product, fabric, quantity and printing.
-                See an estimated starting price instantly.
-            </p>
-
+    <section class="clients-section" id="clients">
+      <div class="wrap clients-wrap"><div class="clients-heading"><p class="eyebrow">COLLABORATION BUILDS TRUST</p><h2>Good work is<br><span>better together.</span></h2><p>Feature only client names and logos you have permission to display.</p></div>
+        <div class="client-logo-grid">
+          <div class="client-logo-card"><img src="assets/clients/client-01.png" alt="Client logo 1" loading="lazy" onload="this.parentElement.classList.add('has-logo')" onerror="this.hidden=true"><span>CLIENT LOGO 01</span></div>
+          <div class="client-logo-card"><img src="assets/clients/client-02.png" alt="Client logo 2" loading="lazy" onload="this.parentElement.classList.add('has-logo')" onerror="this.hidden=true"><span>CLIENT LOGO 02</span></div>
+          <div class="client-logo-card"><img src="assets/clients/client-03.png" alt="Client logo 3" loading="lazy" onload="this.parentElement.classList.add('has-logo')" onerror="this.hidden=true"><span>CLIENT LOGO 03</span></div>
+          <div class="client-logo-card"><img src="assets/clients/client-04.png" alt="Client logo 4" loading="lazy" onload="this.parentElement.classList.add('has-logo')" onerror="this.hidden=true"><span>CLIENT LOGO 04</span></div>
+          <div class="client-logo-card"><img src="assets/clients/client-05.png" alt="Client logo 5" loading="lazy" onload="this.parentElement.classList.add('has-logo')" onerror="this.hidden=true"><span>CLIENT LOGO 05</span></div>
+          <div class="client-logo-card"><img src="assets/clients/client-06.png" alt="Client logo 6" loading="lazy" onload="this.parentElement.classList.add('has-logo')" onerror="this.hidden=true"><span>CLIENT LOGO 06</span></div>
         </div>
+      </div>
+    </section>
 
+    <section class="section films-section" id="films">
+      <div class="wrap">
+        <div class="section-heading"><div><p class="eyebrow">INSIDE THE PROCESS</p><h2>See how it’s<br><span>made.</span></h2></div><p>Short, genuine videos of fabric, printing, stitching, quality checks and finished products help customers understand your work.</p></div>
+        <div class="film-grid">
+          <article class="film-card"><div class="film-screen"><div class="film-fallback"><span class="film-play">▶</span><strong>Inside production</strong><small>Add: assets/videos/production.mp4</small></div><video controls playsinline preload="metadata" poster="assets/videos/production-poster.jpg" onloadeddata="this.previousElementSibling.hidden=true" onerror="this.hidden=true"><source src="assets/videos/production.mp4" type="video/mp4">Your browser does not support video.</video></div><div class="film-caption"><span>FILM 01</span><h3>Inside production</h3><p>Show the making, people and process behind the product.</p></div></article>
+          <article class="film-card"><div class="film-screen"><div class="film-fallback"><span class="film-play">▶</span><strong>Materials & finish</strong><small>Add: assets/videos/materials.mp4</small></div><video controls playsinline preload="metadata" poster="assets/videos/materials-poster.jpg" onloadeddata="this.previousElementSibling.hidden=true" onerror="this.hidden=true"><source src="assets/videos/materials.mp4" type="video/mp4">Your browser does not support video.</video></div><div class="film-caption"><span>FILM 02</span><h3>Materials & finishing</h3><p>Show fabric texture, branding details and quality inspection.</p></div></article>
+          <article class="film-card"><div class="film-screen"><div class="film-fallback"><span class="film-play">▶</span><strong>Finished orders</strong><small>Add: assets/videos/finished-orders.mp4</small></div><video controls playsinline preload="metadata" poster="assets/videos/finished-orders-poster.jpg" onloadeddata="this.previousElementSibling.hidden=true" onerror="this.hidden=true"><source src="assets/videos/finished-orders.mp4" type="video/mp4">Your browser does not support video.</video></div><div class="film-caption"><span>FILM 03</span><h3>Finished orders</h3><p>Feature completed products and packaging with client approval.</p></div></article>
+        </div>
+      </div>
+    </section>
 
-        <div class="customizer">
+    <section class="builder-section" id="builder">
+      <div class="wrap">
+        <div class="section-heading builder-heading"><div><p class="eyebrow">YOUR ORDER, YOUR WAY</p><h2>Build your<br><span>custom brief.</span></h2></div><p>Estimates are indicative. Final pricing depends on the approved specification, artwork, size mix, delivery and taxes.</p></div>
+        <div class="builder-layout">
+          <form id="orderForm" class="builder-form">
+            <div class="form-section">
+              <div class="form-section-title"><span>01</span><div><h3>Choose your product</h3><p>Start with the item you want made.</p></div></div>
+              <div class="field-grid">
+                <label class="field full"><span>Product category</span><select id="product" name="product" required>
+                  <option value="tee">T-shirts & polos</option><option value="hoodie">Hoodies & sweatshirts</option><option value="jacket">Jackets</option><option value="backpack">Pittu bags & backpacks</option><option value="tote">Tote & promotional bags</option><option value="merch">Pens & bag tags</option>
+                </select></label>
+                <label class="field"><span>Style</span><select id="style" name="style"></select></label>
+                <label class="field"><span>Fabric / material</span><select id="fabric" name="fabric"></select></label>
+                <label class="field"><span>GSM / thickness</span><select id="gsm" name="gsm"></select></label>
+                <label class="field"><span>Colour</span><select id="color" name="color"><option>Black</option><option>White</option><option>Navy</option><option>Grey</option><option>Red</option><option>Royal blue</option><option>Custom colour (confirm later)</option></select></label>
+              </div>
+            </div>
+            <div class="form-section">
+              <div class="form-section-title"><span>02</span><div><h3>Quantity & branding</h3><p>Bulk pricing improves with quantity.</p></div></div>
+              <div class="field-grid">
+                <label class="field"><span>Total quantity (min. 25)</span><input id="quantity" name="quantity" type="number" min="25" step="1" value="100" required></label>
+                <label class="field"><span>Printing / branding</span><select id="branding" name="branding"><option value="none">No branding</option><option value="screen">Screen printing</option><option value="dtf">DTF printing</option><option value="sublimation">Sublimation</option><option value="embroidery">Embroidery</option><option value="woven">Woven label / tag</option><option value="multiple">Multiple methods (discuss)</option></select></label>
+                <label class="field"><span>Logo placement</span><select id="placement" name="placement"><option>Front</option><option>Back</option><option>Front + back</option><option>Sleeve / side</option><option>All-over / custom</option><option>Not sure yet</option></select></label>
+                <label class="field"><span>Need-by date (optional)</span><input id="needBy" name="needBy" type="date"></label>
+              </div>
+              <div class="sizes-panel"><div class="sizes-title"><div><strong>Size breakdown</strong><small>Optional for non-sized items. The total should match your order quantity.</small></div><button type="button" class="small-link" id="clearSizes">Clear sizes</button></div>
+                <div class="size-grid" id="sizeGrid">
+                  <label>XS<input type="number" min="0" value="0" data-size="XS"></label><label>S<input type="number" min="0" value="0" data-size="S"></label><label>M<input type="number" min="0" value="0" data-size="M"></label><label>L<input type="number" min="0" value="0" data-size="L"></label><label>XL<input type="number" min="0" value="0" data-size="XL"></label><label>XXL<input type="number" min="0" value="0" data-size="XXL"></label>
+                </div><p class="size-status" id="sizeStatus">Add sizes if needed. If used, size quantities must total the order quantity.</p>
+              </div>
+              <div class="field-grid">
+                <label class="field full"><span>Logo / artwork details</span><textarea id="design" name="design" rows="3" placeholder="Tell us about logo placement, print size, pockets, compartments, zips or other details."></textarea></label>
+                <label class="field full"><span>Upload artwork (optional)</span><input id="artwork" type="file" accept=".png,.jpg,.jpeg,.pdf,.svg,.ai,.eps"></label>
+              </div>
+            </div>
+            <div class="form-section">
+              <div class="form-section-title"><span>03</span><div><h3>Where should we send the quote?</h3><p>Your request goes to the Lustry team for review.</p></div></div>
+              <div class="field-grid">
+                <label class="field"><span>Your name *</span><input id="customerName" name="customerName" autocomplete="name" required maxlength="100" placeholder="Full name"></label>
+                <label class="field"><span>Company / organisation</span><input id="company" name="company" autocomplete="organization" maxlength="120" placeholder="Company name"></label>
+                <label class="field"><span>Email *</span><input id="email" name="email" type="email" autocomplete="email" required maxlength="254" placeholder="you@company.com"></label>
+                <label class="field"><span>Phone / WhatsApp *</span><input id="phone" name="phone" type="tel" autocomplete="tel" required maxlength="25" placeholder="+91..."></label>
+                <label class="field full"><span>Coupon code (optional)</span><input id="coupon" name="coupon" maxlength="40" placeholder="Enter a coupon code if you have one"><small>Coupon validity and gift eligibility are confirmed by Lustry. No coupon discount is included until verified.</small></label>
+              </div>
+              <label class="consent"><input type="checkbox" id="consent" required><span>I agree that Lustry may contact me about this quotation request. Please see the privacy note in the footer.</span></label>
+              <button class="button button-dark submit-button" id="submitOrder" type="submit">Submit quotation request <span>↗</span></button>
+              <p class="form-message" id="formMessage" role="status" aria-live="polite"></p>
+            </div>
+          </form>
+          <aside class="estimate-card">
+            <div class="estimate-top"><span class="estimate-label">LIVE ESTIMATE</span><span class="live-dot">● Indicative</span></div>
+            <p class="estimate-product" id="estimateProduct">T-shirts & polos</p>
+            <div class="estimate-total" id="estimateTotal">₹15,000</div>
+            <p class="estimate-caption">Estimated total before taxes, delivery and any unconfirmed extras.</p>
+            <div class="estimate-rule"></div>
+            <div class="estimate-row"><span>Quantity</span><strong id="estimateQuantity">100 pieces</strong></div>
+            <div class="estimate-row"><span>Estimated price / piece</span><strong id="estimateUnit">₹150</strong></div>
+            <div class="estimate-row"><span>Bulk discount</span><strong class="discount-value" id="estimateDiscount">6% · −₹900</strong></div>
+            <div class="discount-track"><div id="discountBar"></div></div>
+            <p class="discount-hint" id="discountHint">You’re getting a 6% bulk discount.</p>
+            <div class="estimate-rule"></div>
+            <div class="price-note"><span class="note-icon">i</span><p>This is a planning estimate, not a final offer. Lustry will review your brief and confirm the final quote before production.</p></div>
+            <div class="discount-table"><strong>Bulk discount levels</strong><div><span>25–49 pieces</span><b>2%</b></div><div><span>50–99 pieces</span><b>4%</b></div><div><span>100–249 pieces</span><b>6%</b></div><div><span>250–499 pieces</span><b>9%</b></div><div><span>500–999 pieces</span><b>12%</b></div><div><span>1,000+ pieces</span><b>15%</b></div><small>Illustrative policy: verify these slabs against your margin before publishing.</small></div>
+          </aside>
+        </div>
+      </div>
+    </section>
 
+    <section class="section process-section" id="how">
+      <div class="wrap">
+        <div class="section-heading"><div><p class="eyebrow">SIMPLE BY DESIGN</p><h2>From brief to<br><span>production.</span></h2></div><p>Clear steps, clear communication. Production starts only after final specifications and the quote are approved.</p></div>
+        <div class="process-grid"><article><span>01</span><div class="process-icon">↗</div><h3>Build your brief</h3><p>Choose products, materials, quantities and branding details.</p></article><article><span>02</span><div class="process-icon">⌕</div><h3>Review & quote</h3><p>Our team reviews the details and confirms the final quotation.</p></article><article><span>03</span><div class="process-icon">✳</div><h3>Approve the design</h3><p>Confirm the artwork, sizes, timeline and commercial terms.</p></article><article><span>04</span><div class="process-icon">□</div><h3>Make & dispatch</h3><p>Production and dispatch follow the agreed order terms.</p></article></div>
+      </div>
+    </section>
 
-            <!-- FORM -->
+    <section class="about-section" id="about"><div class="wrap about-grid"><div><p class="eyebrow">ABOUT LUSTRY</p><h2>Good products.<br><span>Thoughtful details.</span></h2><p class="about-copy">Lustry works with businesses, schools, teams and brands looking for custom-made apparel and merchandise. Share your brief with us and we’ll help you work through the options.</p><div class="about-checks"><p><span>✓</span> Customisation-led orders</p><p><span>✓</span> Multiple product categories</p><p><span>✓</span> Quote review before production</p></div><a class="button button-light" href="#builder">Start a project <span>↗</span></a></div><div class="about-card"><div class="about-card-label">THE LUSTRY APPROACH</div><div class="about-big">Make it<br>mean <em>more.</em></div><div class="about-card-footer"><span>PRODUCT / PEOPLE / PURPOSE</span><span>EST. [ADD YEAR]</span></div></div></div></section>
 
-            <div class="panel">
+    <section class="section trust-section"><div class="wrap"><div class="section-heading"><div><p class="eyebrow">BUILT ON REAL WORK</p><h2>Proof over promises.</h2></div><p>Add real project photography, client logos (with permission), customer testimonials and verified business details here before publishing.</p></div><div class="trust-grid"><div><span class="trust-number">01</span><h3>Our work</h3><p>Upload actual samples and completed projects.</p></div><div><span class="trust-number">02</span><h3>Our clients</h3><p>Feature approved client names and logos.</p></div><div><span class="trust-number">03</span><h3>Our standards</h3><p>Explain real quality checks and materials.</p></div></div></div></section>
 
-                <div class="form-grid">
+    <section class="section faq-section" id="faq"><div class="wrap faq-layout"><div><p class="eyebrow">GOOD TO KNOW</p><h2>Questions, <span>answered.</span></h2><p>Need help with a specification? Ask the Lustry support assistant or send us a quote request.</p></div><div class="faq-list"><details><summary>What is the minimum order quantity?</summary><p>The current website setup uses a minimum request quantity of 25 pieces. Special products may require a higher MOQ; Lustry will confirm this in the quotation.</p></details><details><summary>Are the prices final?</summary><p>No. The website shows an indicative estimate. The final price is confirmed by Lustry after checking the product specification, artwork, size mix, taxes, shipping and timeline.</p></details><details><summary>Can I order different sizes?</summary><p>Yes. For sized products, use the size breakdown. If you enter sizes, their total must match the total quantity.</p></details><details><summary>How do coupons and gifts work?</summary><p>Eligible customers may receive a coupon after a qualifying completed order. Coupon validity, minimum order value and available gifts must be confirmed by Lustry. This starter version does not automatically grant rewards until the reward rules are configured in the backend.</p></details><details><summary>When does production start?</summary><p>Production should begin only after the final quotation, artwork, specifications, timeline and payment terms are approved by both sides.</p></details></div></div></section>
+  </main>
 
+  <footer class="site-footer"><div class="wrap footer-grid"><div class="footer-brand"><a class="brand brand-inverse" href="#home"><img class="brand-logo" src="assets/lustry-logo.png" alt="Lustry logo" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="brand-fallback" hidden><span class="brand-mark">L</span><span>Lustry<span class="brand-dot">.</span><small>MADE FOR YOUR IDENTITY</small></span></span></a><p>Custom apparel, bags and branded merchandise for teams, companies, schools and growing brands.</p></div><div><h4>EXPLORE</h4><a href="#products">Products</a><a href="#materials">Materials</a><a href="#work">Our work</a><a href="#clients">Clients</a><a href="#films">Films</a><a href="#builder">Build an order</a><a href="#faq">FAQs</a></div><div><h4>CONTACT</h4><p>[ADD BUSINESS EMAIL]</p><p>[ADD PHONE / WHATSAPP]</p><p>[ADD BUSINESS ADDRESS]</p><p>[ADD GSTIN / LEGAL NAME IF APPLICABLE]</p></div><div><h4>BUSINESS HOURS</h4><p>[ADD WORKING DAYS]</p><p>[ADD WORKING HOURS]</p><p class="footer-note">We’ll confirm your final quotation before production.</p></div></div><div class="wrap footer-bottom"><span>© <span id="year"></span> Lustry. All rights reserved.</span><span>Privacy · Terms · Returns / cancellation policy — <b>add approved policy pages before launch</b></span></div></footer>
 
-                    <div class="field">
-
-                        <label>
-                            Product
-                        </label>
-
-                        <select id="product" onchange="calculatePrice()">
-
-                            <option value="99">
-                                Round Neck T-Shirt
-                            </option>
-
-                            <option value="110">
-                                Polo T-Shirt
-                            </option>
-
-                            <option value="150">
-                                Hoodie
-                            </option>
-
-                            <option value="85">
-                                Custom Bag
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <div class="field">
-
-                        <label>
-                            Quantity
-                        </label>
-
-                        <input
-                            type="number"
-                            id="quantity"
-                            value="100"
-                            min="1"
-                            onchange="calculatePrice()"
-                        >
-
-                    </div>
-
-
-                    <div class="field">
-
-                        <label>
-                            Fabric / Material
-                        </label>
-
-                        <select id="fabric" onchange="calculatePrice()">
-
-                            <option value="0">
-                                Standard
-                            </option>
-
-                            <option value="15">
-                                Premium 180 GSM
-                            </option>
-
-                            <option value="25">
-                                Premium 220 GSM
-                            </option>
-
-                            <option value="20">
-                                Dry Fit
-                            </option>
-
-                            <option value="30">
-                                Canvas / Heavy Material
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <div class="field">
-
-                        <label>
-                            Printing / Branding
-                        </label>
-
-                        <select id="printing" onchange="calculatePrice()">
-
-                            <option value="0">
-                                No Print
-                            </option>
-
-                            <option value="10">
-                                Screen Printing
-                            </option>
-
-                            <option value="25">
-                                DTF Printing
-                            </option>
-
-                            <option value="20">
-                                Sublimation
-                            </option>
-
-                            <option value="30">
-                                Embroidery
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <div class="field full">
-
-                        <label>
-                            Custom Text
-                        </label>
-
-                        <input
-                            type="text"
-                            id="customText"
-                            placeholder="Example: YOUR COMPANY NAME"
-                        >
-
-                    </div>
-
-
-                    <div class="field full">
-
-                        <label>
-                            Logo / Design Requirement
-                        </label>
-
-                        <textarea
-                            id="designRequirement"
-                            rows="4"
-                            placeholder="Tell us where you want your logo, text or artwork..."
-                        ></textarea>
-
-                    </div>
-
-
-                </div>
-
-
-                <button
-                    class="btn btn-black calculate-btn"
-                    onclick="calculatePrice()"
-                >
-                    Calculate Estimate
-                </button>
+  <button class="chat-launcher" id="chatLauncher" aria-label="Open Lustry AI support">✳ <span>Ask Lustry</span></button>
+  <section class="chat-panel" id="chatPanel" aria-label="Lustry support chat" hidden><div class="chat-head"><div><strong>Lustry Support</strong><small>AI assistant · Verify details with our team</small></div><button id="chatClose" aria-label="Close chat">×</button></div><div class="chat-messages" id="chatMessages"><div class="chat-bubble bot">Hi! I can help explain products, GSM, customisation and the quotation process. Final prices are confirmed by the Lustry team.</div></div><form id="chatForm" class="chat-compose"><label class="sr-only" for="chatInput">Your question</label><input id="chatInput" maxlength="1000" placeholder="Ask a question..." required><button type="submit" aria-label="Send message">↑</button></form><small class="chat-disclaimer">Please don’t share payment details or sensitive personal information.</small></section>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="config.js"></script><script src="app.js"></script>
+</body>
+</html>
