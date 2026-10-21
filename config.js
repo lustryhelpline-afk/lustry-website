@@ -1,6 +1,6 @@
 window.LUSTRY_CONFIG = {
   supabaseUrl: "https://yrzsjbjlaeteagvlyxeg.supabase.co",
-  supabaseAnonKey: "YAHAN_APNI_SB_PUBLISHABLE_KEY_PASTE_KARO",
+  supabaseAnonKey: "sb_publishable_oiqwpsAM-6YIZxCxuikaYw_f3aDhYsz",
   submitOrderFunction: "submit-order",
   aiSupportFunction: "ai-support",
   whatsappNumber: "",
