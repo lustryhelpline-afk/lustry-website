@@ -1,6 +1,6 @@
 window.LUSTRY_CONFIG = {
   supabaseUrl: "https://wpchzqmhngeokfzelsaf.supabase.co",
-  sb_publishable: "YAHAN_APNI_ASLI_PUBLISHABLE_KEY",
+  sb_publishable: "sb_publishable_gEIFJM_1CI5B5VNMq3AaLQ_UWKA4vD1",
   submitOrderFunction: "submit-order",
   aiSupportFunction: "ai-support",
   whatsappNumber: "",
