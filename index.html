@@ -59,8 +59,56 @@ $('#menuToggle').addEventListener('click',()=>$('#navLinks').classList.toggle('o
 $$('#navLinks a').forEach(a=>a.addEventListener('click',()=>$('#navLinks').classList.remove('open')));
 $$('[data-product]').forEach(a=>a.addEventListener('click',()=>{$('#product').value=a.dataset.product;updateEstimate()}));
 const indicativeRates={'T-shirts':240,'Hoodies & sweatshirts':650,'Bags & backpacks':320,'Corporate merchandise':150,'Other custom product':300};
-function updateEstimate(){let product=$('#product').value;let qty=Math.max(0,Number($('#qty').value)||0);let rate=indicativeRates[product]||300;let discount=qty>=1000?.15:qty>=500?.12:qty>=250?.08:qty>=100?.05:qty>=50?.02:0;let total=Math.round(qty*rate*(1-discount));$('#estimateValue').textContent=qty>=25?'₹'+total.toLocaleString('en-IN'):'₹ —';$('#estimateNote').textContent=qty<25?'Minimum quantity is 25 pieces.':'Illustrative only · '+Math.round(discount*100)+'% example volume discount';}
-$('#product').addEventListener('change',updateEstimate);$('#qty').addEventListener('input',updateEstimate);updateEstimate();
+
+function updateEstimate() {
+  const product = $('#product').value;
+  const qty = Math.max(0, Number($('#qty').value) || 0);
+
+  const baseRates = {
+    'T-shirts': 240,
+    'Hoodies & sweatshirts': 650,
+    'Bags & backpacks': 320,
+    'Corporate merchandise': 150,
+    'Other custom product': 300
+  };
+
+  const brandingCosts = {
+    'T-shirts': 25,
+    'Hoodies & sweatshirts': 40,
+    'Bags & backpacks': 30,
+    'Corporate merchandise': 20,
+    'Other custom product': 25
+  };
+
+  const basePrice = baseRates[product] || 300;
+  const brandingCost =
+    $('#branding').value === 'none'
+      ? 0
+      : (brandingCosts[product] || 25);
+
+  const discountPercent =
+    qty >= 500 ? 25 :
+    qty >= 200 ? 20 :
+    qty >= 100 ? 5 : 0;
+
+  const total = Math.round(
+    qty * (basePrice + brandingCost) *
+    (1 - discountPercent / 100)
+  );
+
+  $('#estimateValue').textContent =
+    qty >= 25 ? '₹' + total.toLocaleString('en-IN') : '₹ —';
+
+  $('#estimateNote').textContent =
+    qty < 25
+      ? 'Minimum quantity is 25 pieces.'
+      : discountPercent + '% bulk discount · Indicative estimate only';
+}
+
+$('#product').addEventListener('change', updateEstimate);
+$('#qty').addEventListener('input', updateEstimate);
+$('#branding').addEventListener('change', updateEstimate);
+updateEstimate();
 
 $('#orderForm').addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -158,5 +206,6 @@ $('#chatFab').addEventListener('click',()=>$('#chatPanel').classList.toggle('ope
 $('#chatForm').addEventListener('submit',e=>{e.preventDefault();let input=$('#chatInput');let q=input.value.trim();if(!q)return;let user=document.createElement('div');user.className='chat-message';user.textContent='You: '+q;$('#chatBody').appendChild(user);let answer=document.createElement('div');answer.className='chat-message';answer.textContent='Thanks for your question. For an accurate answer about stock, fabric availability, delivery or final pricing, please send an enquiry through the Build Your Order form. Lustry confirms final quotations with its team.';$('#chatBody').appendChild(answer);input.value='';$('#chatBody').scrollTop=$('#chatBody').scrollHeight;});
 // Replace the sample image URLs, client placeholders and video cards with approved Lustry media before launch.
 </script>
+  <script src="config.js"></script>
 </body>
 </html>
