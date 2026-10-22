@@ -98,7 +98,7 @@ $('#orderForm').addEventListener('submit', async (e) => {
   try {
     const config = window.LUSTRY_CONFIG;
 
-    if (!config?.supabaseUrl || !config?.supabaseAnonKey) {
+   if (!config?.supabaseUrl || !config?.sb_publishable) {
       throw new Error('Supabase configuration missing. Please check config.js.');
     }
 
@@ -108,8 +108,8 @@ $('#orderForm').addEventListener('submit', async (e) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'apikey': config.supabaseAnonKey,
-          'Authorization': `Bearer ${config.supabaseAnonKey}`
+         'apikey': config.sb_publishable,
+         'Authorization': `Bearer ${config.sb_publishable}`
         },
         body: JSON.stringify({
           customer: {
