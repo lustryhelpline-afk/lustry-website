@@ -96,7 +96,7 @@ $('#orderForm').addEventListener('submit', async (e) => {
   if (button) button.disabled = true;
 
   try {
-    const config = window.LUSTRY_CONFIG || window.SUPABASE_CONFIG;
+    const config = window.LUSTRY_CONFIG;
 
     if (!config?.supabaseUrl || !config?.supabaseAnonKey) {
       throw new Error('Supabase configuration missing. Please check config.js.');
