@@ -1,5 +1,5 @@
 window.LUSTRY_CONFIG = {
-  supabaseUrl: "https://yrzsjbjlaeteagvlyxeg.supabase.co",
+  supabaseUrl: "https://wpchzqmhngeokfzelsaf.supabase.co",
   supabaseAnonKey: "sb_publishable_oiqwpsAM-6YIZxCxuikaYw_f3aDhYsz",
   submitOrderFunction: "submit-order",
   aiSupportFunction: "ai-support",
