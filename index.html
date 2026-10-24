@@ -188,7 +188,29 @@ $('#orderForm').addEventListener('submit', async (e) => {
       throw new Error(result.error || result.message || 'Order request failed.');
     }
 
-    alert('Order request received! Our customer executive will connect with you shortly.');
+    const successMessage = 'Order request received! Our customer executive will connect with you shortly.';
+alert(successMessage);
+
+const waNumber = String(window.LUSTRY_CONFIG?.whatsappNumber || '').replace(/\D/g, '');
+
+if (waNumber) {
+  const waMessage = [
+    'New Lustry website enquiry',
+    'Customer: ' + name,
+    'Company: ' + (company || 'Not provided'),
+    'Product: ' + product,
+    'Quantity: ' + qty + ' pieces',
+    'Estimate: ' + (estimate !== null ? '₹' + estimate.toLocaleString('en-IN') : 'Not available'),
+    'Status: Saved in Supabase',
+    'Please check the order_enquiries table for full details.'
+  ].join('\n');
+
+  window.open(
+    'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(waMessage),
+    '_blank',
+    'noopener,noreferrer'
+  );
+}
     $('#orderForm').reset();
 
     if ($('#estimateValue')) {
