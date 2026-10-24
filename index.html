@@ -205,11 +205,15 @@ if (waNumber) {
     'Please check the order_enquiries table for full details.'
   ].join('\n');
 
-  window.open(
-    'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(waMessage),
-    '_blank',
-    'noopener,noreferrer'
-  );
+  const waUrl = 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(waMessage);
+
+const waTab = window.open('about:blank', '_blank');
+
+if (waTab) {
+  waTab.location.href = waUrl;
+} else {
+  alert('WhatsApp open nahi hua. Please allow pop-ups for lustry.in, then try again.');
+}
 }
     $('#orderForm').reset();
 
