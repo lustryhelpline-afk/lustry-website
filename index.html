@@ -218,7 +218,7 @@ if (waTab) {
     $('#orderForm').reset();
 
     if ($('#estimateValue')) {
-      $('#estimateValue').textContent = 'Price will be confirmed by our team';
+updateEstimate();
     }
   } catch (error) {
     console.error('Lustry order submission failed:', error);
