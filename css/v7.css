@@ -1,0 +1,22 @@
+/* Lustry V7: additive layer on top of V6 (remove the v7 link/script tags to roll back) */
+:root{--v7n:#113427;--v7g:#c8ad78}
+.v7-skip{position:absolute;left:-999px;top:8px;background:#fff;color:#113427;padding:10px 16px;border-radius:8px;z-index:200}.v7-skip:focus{left:8px}
+#v7-prog{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#c8ad78,#e8d3a0);z-index:150;transition:width .1s}
+.v7-fab{position:fixed;right:18px;bottom:18px;z-index:90;display:flex;flex-direction:column;gap:10px;align-items:flex-end}
+.v7-fab a,.v7-fab button{display:flex;align-items:center;gap:8px;border:0;cursor:pointer;text-decoration:none;font:700 .9rem 'Manrope',system-ui,sans-serif;border-radius:99px;padding:12px 18px;box-shadow:0 10px 26px #11342744;transition:transform .2s}
+.v7-fab a:hover,.v7-fab button:hover{transform:translateY(-3px)}.v7-wa{background:#1fa855;color:#fff}.v7-top{background:#113427;color:#c8ad78;opacity:0;pointer-events:none;transition:opacity .3s}.v7-top.on{opacity:1;pointer-events:auto}
+.v7-mbar{display:none}
+@media(max-width:760px){.v7-mbar{position:fixed;left:0;right:0;bottom:0;z-index:95;display:flex;gap:8px;padding:8px 10px;background:#113427;border-top:1px solid #c8ad7855}.v7-mbar a{flex:1;text-align:center;padding:12px;border-radius:10px;font:700 .9rem 'Manrope',sans-serif;text-decoration:none;background:#c8ad78;color:#113427}.v7-mbar a+a{background:#1fa855;color:#fff}.v7-fab{display:none}body{padding-bottom:62px}}
+.v7-qv{position:absolute;left:12px;bottom:12px;background:#fff;color:#113427;border:0;border-radius:99px;padding:8px 14px;font:700 .8rem 'Manrope',sans-serif;cursor:pointer;opacity:0;transform:translateY(8px);transition:.25s;box-shadow:0 6px 16px #11342733}
+.product-card{position:relative}.product-card:hover .v7-qv,.v7-qv:focus-visible{opacity:1;transform:none}@media(hover:none){.v7-qv{opacity:1;transform:none}}
+dialog.v7-dlg{border:0;border-radius:18px;padding:0;max-width:760px;width:calc(100% - 28px);box-shadow:0 30px 80px #11342766}dialog::backdrop{background:#113427cc;backdrop-filter:blur(3px)}
+.v7-dg{display:grid;grid-template-columns:1fr 1fr}.v7-dg img{width:100%;height:100%;object-fit:cover;min-height:280px;background:#f3eee2}.v7-db{padding:26px;font-family:'Manrope',sans-serif}.v7-db h3{font:600 1.9rem 'Cormorant Garamond',serif;margin:.2em 0;color:#113427}.v7-db small{color:#787673}.v7-x{position:absolute;top:10px;right:12px;border:0;background:#fff;border-radius:50%;width:36px;height:36px;font-size:1.2rem;cursor:pointer}
+.v7-ch{display:inline-block;border:1px solid #d9d2c0;border-radius:99px;padding:3px 11px;margin:0 6px 6px 0;font-size:.82rem}.v7-btn{display:inline-block;margin:12px 8px 0 0;padding:11px 20px;border-radius:99px;background:#c8ad78;color:#113427;font-weight:700;text-decoration:none}.v7-btn.o{background:transparent;border:1px solid #113427}
+@media(max-width:640px){.v7-dg{grid-template-columns:1fr}.v7-dg img{min-height:200px;max-height:240px}}
+.v7-calc{background:#113427;color:#f4efe3;padding:72px 0}.v7-calc .in{max-width:1100px;margin:auto;padding:0 22px;display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+.v7-calc h2{font:600 clamp(2rem,4vw,3rem)/1.05 'Cormorant Garamond',serif;margin:.2em 0 .4em;color:#fff}.v7-calc h2 em{color:#c8ad78}.v7-k{letter-spacing:.2em;font-size:.72rem;color:#c8ad78;font-weight:800}
+.v7-panel{background:#1b1917;border:1px solid #c8ad7844;border-radius:18px;padding:26px;font-family:'Manrope',sans-serif}.v7-panel label{font-weight:700;font-size:.88rem}.v7-panel input[type=number]{width:100%;margin:8px 0 12px;padding:12px;border-radius:10px;border:1px solid #c8ad7866;background:#113427;color:#fff;font:inherit}.v7-panel input[type=range]{width:100%;accent-color:#c8ad78}
+.v7-big{font:600 3.4rem/1 'Cormorant Garamond',serif;color:#c8ad78;margin:10px 0 2px}.v7-tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px}.v7-tiers div{border:1px solid #c8ad7833;border-radius:10px;padding:8px 4px;text-align:center;font-size:.78rem;transition:.3s}.v7-tiers b{display:block;font-size:1rem}.v7-tiers .on{background:#c8ad78;color:#113427;transform:translateY(-4px)}
+@media(max-width:820px){.v7-calc .in{grid-template-columns:1fr}}
+.v7-count{font-variant-numeric:tabular-nums}
+@media(prefers-reduced-motion:reduce){.v7-fab a,.v7-fab button,.v7-qv,.v7-tiers div,#v7-prog{transition:none}}

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://lustry.in/sitemap.xml
