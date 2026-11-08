@@ -47,7 +47,7 @@ if(new URLSearchParams(location.search).get('popup')==='1'){
   const mob=matchMedia('(max-width:760px)').matches;
   setTimeout(()=>{if(document.visibilityState==='visible')showPop(false)},mob?18000:12000);
 }
-let callbackBusy=false;
+let callbackBusy=false,callbackRequestId=null,callbackSignature='';
 $('#v8f').onsubmit=async e=>{
  e.preventDefault();if(callbackBusy)return;
  const f=e.target,o=$('#v8o'),b=$('#v8b');o.className='v8-ms';
@@ -56,8 +56,10 @@ $('#v8f').onsubmit=async e=>{
  const rawQuantity=String(fd.quantity||'').trim(),quantity=Number(rawQuantity);
  if(rawQuantity&&(!Number.isInteger(quantity)||quantity<1||quantity>100000)){o.classList.add('er');o.textContent='Please enter a whole quantity between 1 and 100,000, or leave it blank.';return}
  if(!$('#v8c').checked){o.classList.add('er');o.textContent='Please tick the consent box.';return}
+ const signature=JSON.stringify([fd.name.trim(),'+91'+fd.phone.replace(/\D/g,'').slice(-10),rawQuantity?quantity:null]);
+ if(signature!==callbackSignature){callbackSignature=signature;callbackRequestId=globalThis.crypto?.randomUUID?.()||null}
  callbackBusy=true;b.disabled=true;f.setAttribute('aria-busy','true');o.textContent='Sending…';
- try{const d=await call(C.callbackFunction||'callback-request',{name:fd.name,phone:fd.phone,quantity:fd.quantity||null,website:fd.website,consent:true,source:'popup'});if(!d.success)throw Error('failed');o.classList.add('ok');o.textContent='Thank you! Our team will call you shortly.';f.reset()}
+ try{const d=await call(C.callbackFunction||'callback-request',{name:fd.name,phone:fd.phone,quantity:fd.quantity||null,website:fd.website,consent:true,source:'popup',...(callbackRequestId?{requestId:callbackRequestId}:{})});if(d.success!==true||typeof d.reference!=='string'||!d.reference.trim())throw Error('Unconfirmed save');o.classList.add('ok');o.textContent='Thank you! Your callback request has been saved. Reference: '+d.reference+'. Our team will review your request.';f.reset();callbackRequestId=null;callbackSignature=''}
  catch(x){o.classList.add('er');o.textContent=x.name==='AbortError'?'We could not confirm your request in time. Please contact us on WhatsApp or Call now before submitting again.':'We could not confirm your request. Please tap WhatsApp or Call now before submitting again.'}
  finally{callbackBusy=false;b.disabled=false;f.setAttribute('aria-busy','false')}
 };

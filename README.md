@@ -46,7 +46,7 @@ The demo bag uses local storage. Studio-to-enquiry transfer uses session storage
 
 `js/config.js` is intentionally public and contains only the project URL, public publishable key, function names and contact details. Preserve the existing Supabase project and business workflow. Private service-role keys, AI keys and payment credentials must never be added to frontend code.
 
-No database migration was applied. The owner-approved CORS-only `submit-order` v4 deployment is complete. See [supabase/RELEASE-CORS.md](supabase/RELEASE-CORS.md) for the exact scope, live verification and rollback baseline. The uploaded V8.2 ZIP contains additional callback/AI source and proposed SQL not present in the baseline repository. Those are reference material, not evidence that their schemas or deployment settings match the live service. Do not run them blindly.
+An additive private callback-table migration was applied for the production callback repair; existing enquiry/pricing/media tables are unchanged. The owner-approved CORS-only `submit-order` v4 deployment is complete. See [supabase/RELEASE-CORS.md](supabase/RELEASE-CORS.md) for the exact scope, live verification and rollback baseline. The uploaded V8.2 ZIP contains additional callback/AI source and proposed SQL not present in the baseline repository. Those are reference material, not evidence that their schemas or deployment settings match the live service. Do not run them blindly.
 
 The deployed `submit-order` v3 includes an exact-origin wrapper that was missing from the old repository source. It has now been reconciled. The stable Workers preview origin is now included in the approved live v4 release. Existing production/GitHub Pages permissions, business logic and JWT verification remain preserved.
 
@@ -57,6 +57,10 @@ npx playwright install chromium
 npm test
 ```
 
-`npm test` runs 25 isolated backend tests, builds preview assets and runs browser regression tests with external requests blocked and backend responses mocked. To use an existing browser, set `LUSTRY_CHROMIUM_PATH` to its executable. No real enquiry/callback is submitted by these tests. Local syntax/reference checks and Wrangler dry runs do not require Cloudflare credentials.
+`npm test` runs 84 isolated backend tests, builds preview assets and runs browser regression tests with external requests blocked and backend responses mocked. To use an existing browser, set `LUSTRY_CHROMIUM_PATH` to its executable. No real enquiry/callback is submitted by these tests. Local syntax/reference checks and Wrangler dry runs do not require Cloudflare credentials.
 
 See [LAUNCH-READINESS.md](LAUNCH-READINESS.md) for the changes, test evidence and remaining launch dependencies. See [ASSET_GUIDE.md](ASSET_GUIDE.md) for the actual asset layout. Production publishing, DNS changes, checkout and paid services require explicit owner approval.
+
+## Callback repair
+
+The production callback endpoint is now deployed and saves confirmed requests into private `callback_requests`. The popup displays the saved reference and protects retries from duplicates. Live persistence, retry and public-access-denial checks passed; the clearly marked test entry was removed. See [supabase/RELEASE-CALLBACK.md](supabase/RELEASE-CALLBACK.md).

@@ -77,3 +77,7 @@ The preview source has 25 isolated backend checks and 17 browser regression grou
 ## Website production launch authorization
 
 The owner subsequently explicitly approved publishing the final website live. The release promotes reviewed source from `v8-preview` to `main` without rewriting existing main history, then uses the existing Cloudflare Worker/domain. A fresh production build before Wrangler prevents inherited preview indexing restrictions, and `--keep-vars` preserves existing dashboard variables. Actual release/build state is available in GitHub/Cloudflare for the final main SHA. See `PRODUCTION-RELEASE.md`; payment, AI services, schemas and DNS are outside this release.
+
+## Callback production repair
+
+The owner reported a real callback failure after launch. The missing callback endpoint/table are now implemented and live persistence verified, including a single saved record across an idempotent retry. The synthetic test row was removed without touching customer requests. A new private callback table has RLS and no public privileges/policies; the existing bulk enquiry function remains v4. Source includes 84 backend tests and 20 browser groups. See `supabase/RELEASE-CALLBACK.md`; this supersedes the earlier callback-availability observations.

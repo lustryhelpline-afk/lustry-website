@@ -49,3 +49,10 @@ dialog.v8-pop{border:0;border-radius:20px;padding:0;max-width:440px;width:calc(1
  .v5-header-search input{width:0;min-width:0;padding-inline:12px}
  .v5-header-search button{min-width:42px}
 }
+
+/* Keep the close control visible while tall/zoomed callback content scrolls. */
+dialog.v8-pop{max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px);overflow:hidden}
+.v8-pop .v8-pb{max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px);overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable;padding-top:42px}
+.v8-pop .v8-x2{position:absolute;top:6px;right:6px;z-index:2;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#fff;color:#113427;line-height:1}
+.v8-pop .v8-x2:focus-visible{outline:2px solid #a78b58;outline-offset:-4px}
+.v8-ms{overflow-wrap:anywhere}

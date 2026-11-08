@@ -1,6 +1,6 @@
 {
   "name": "lustry-website",
-  "version": "8.3.0",
+  "version": "8.3.1",
   "private": true,
   "description": "Lustry public catalogue and manufacturing enquiry website",
   "engines": {
@@ -15,7 +15,7 @@
     "deploy:preview": "node scripts/deploy.mjs preview",
     "deploy:production": "node scripts/deploy.mjs production",
     "deploy:dry-run": "node scripts/deploy.mjs dry-run",
-    "test:backend": "node --test tests/submit-order.cjs"
+    "test:backend": "node --test tests/submit-order.cjs tests/callback-request.cjs"
   },
   "devDependencies": {
     "playwright": "1.65.0",

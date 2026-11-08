@@ -177,6 +177,41 @@ async function fillEnquiry(page) {
   assert.equal(state.requests.filter(r=>r.url.includes('/callback-request')).length,1);
   release();await page.waitForFunction(()=>document.querySelector('#v8o').classList.contains('ok'));
  });
+ await run('callback requires saved reference and reuses request ID after an error',async({page,state})=>{
+  state.callback={status:201,body:{success:true}};
+  await page.goto(BASE+'/index.html');await page.locator('[data-open-bulk-popup]').click();
+  await page.locator('#v8n').fill('Local Mock Test');await page.locator('#v8p').fill('9119076674');await page.locator('#v8c').check();
+  await page.locator('#v8b').click();await page.waitForFunction(()=>document.querySelector('#v8o').classList.contains('er'));
+  assert.equal(await page.locator('#v8o').evaluate(n=>n.classList.contains('ok')),false);
+  const first=state.requests.find(r=>r.url.includes('/callback-request')).body.requestId;
+  assert.match(first,/^[0-9a-f-]{36}$/);
+  const reference='5f6c0302-732d-4ae5-ae76-3ab701536cf9';state.callback={status:201,body:{success:true,reference}};
+  await page.locator('#v8b').click();await page.waitForFunction(()=>document.querySelector('#v8o').classList.contains('ok'));
+  const requests=state.requests.filter(r=>r.url.includes('/callback-request'));
+  assert.equal(requests.length,2);assert.equal(requests[1].body.requestId,first);
+  assert.ok((await page.locator('#v8o').innerText()).includes(reference));
+ });
+ await run('callback changed details get a new request ID',async({page,state})=>{
+  state.callback={status:502,body:{error:'Mock save error'}};
+  await page.goto(BASE+'/index.html');await page.locator('[data-open-bulk-popup]').click();
+  await page.locator('#v8n').fill('Local Mock Test');await page.locator('#v8p').fill('9119076674');await page.locator('#v8c').check();
+  await page.locator('#v8b').click();await page.waitForFunction(()=>document.querySelector('#v8o').classList.contains('er'));
+  await page.locator('#v8n').fill('Changed Local Mock Test');await page.locator('#v8b').click();
+  await page.waitForFunction(()=>document.querySelector('#v8o').classList.contains('er'));
+  const requests=state.requests.filter(r=>r.url.includes('/callback-request'));
+  assert.equal(requests.length,2);assert.notEqual(requests[0].body.requestId,requests[1].body.requestId);
+ });
+ await run('callback close remains reachable on short narrow and enlarged layouts',async({page})=>{
+  for(const viewport of [{width:320,height:480},{width:1280,height:560}]){
+   await page.setViewportSize(viewport);await page.goto(BASE+'/custom.html?source=studio');
+   await page.evaluate(()=>document.documentElement.style.fontSize='125%');
+   await page.locator('[data-open-bulk-popup]').click();
+   await page.locator('.v8-pb').evaluate(el=>el.scrollTop=el.scrollHeight);
+   const close=await page.locator('.v8-x2').boundingBox();
+   assert.ok(close.y>=0&&close.y+close.height<=viewport.height);assert.ok(close.width>=44&&close.height>=44);
+   await page.locator('.v8-x2').click();assert.equal(await page.locator('.v8-pop').evaluate(el=>el.open),false);
+  }
+ });
  await run('local Studio artwork edits and real quote handoff',async({page,state})=>{
   await page.goto(BASE+'/design.html');
   await page.locator('#studio-product').selectOption('tote');
