@@ -6,6 +6,7 @@ The existing luxury V8 frontend is retained: an ivory, near-black, champagne-gol
 - Production branch: `main` (release approval required).
 - Production domain: https://lustry.in
 - Existing preview: https://lustryhelpline-afk.github.io/lustry-website/
+- New Workers preview: https://v8-preview-lustry-website.lustryhelpline.workers.dev (its enquiry origin still needs backend allowlist approval).
 
 ## Local development
 

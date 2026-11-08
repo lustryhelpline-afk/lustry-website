@@ -94,3 +94,9 @@ The audited branch previously had no package/build script, Wrangler configuratio
 8. Test existing enquiry CORS from the exact new preview origin. The existing working production/GitHub Pages enquiry flow must remain unchanged. A Worker preview hostname is a new origin; if rejected, approve and reconcile an exact origin allowlist in the backend rather than replacing the working function blindly.
 
 Outstanding remote checks: dashboard/build-log inspection, Cloudflare version upload and preview HTTP checks, and enquiry submission from that exact preview origin. No production deployment or DNS change is necessary to perform these preview checks.
+
+## Confirmed dashboard migration and Pages boundary
+
+The owner supplied a screenshot showing the new Build command `npm run check && npm run build:preview`, Version command `npm run deploy:preview` and root `/`. The production Deploy command was replaced with a `node -e` stop command so automatic production releases remain blocked pending approval. This intentionally replaces the former `public/` copy and `--assets ./public` overrides. Explicitly building preview assets in the build step also covers Workers Builds paths that skip Wrangler custom-build hooks.
+
+GitHub Pages still uses its existing Jekyll build from the source branch. `_config.yml` excludes backend/source, package/deployment metadata, documentation, tools/tests and unused root files. Confirm its actual build output and source-path404 responses after changes. Do not add `.nojekyll` while this source-root deployment is used: it bypasses exclusions. A future switch to an Actions Pages artifact should publish the already allowlisted `dist/` folder.

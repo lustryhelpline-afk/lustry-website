@@ -1,0 +1,79 @@
+# GitHub Pages builds the repository root with Jekyll. Keep its existing
+# HTML/CSS/JS/assets URLs while excluding source and operational files.
+# This is a known exclusion list, not a public-file allowlist. Add new private
+# paths here before committing them; Cloudflare uses the separate dist build.
+# Do not add .nojekyll while Pages publishes this source root: it bypasses this
+# configuration. A future Pages artifact deployment should publish dist only.
+exclude:
+  # Project documentation, including future Markdown guides.
+  - README.md
+  - ASSET_GUIDE.md
+  - DEPLOYMENT.md
+  - LAUNCH-READINESS.md
+  - "*.md"
+  - "**/*.md"
+  - docs
+
+  # Backend code, development tools and generated/local output.
+  - supabase
+  - scripts
+  - tests
+  - node_modules
+  - dist
+  - public
+  - work
+  - output
+  - coverage
+  - playwright-report
+  - test-results
+  - _site
+  - .sass-cache
+  - .jekyll-cache
+  - .jekyll-metadata
+  - vendor
+
+  # Package, deployment and repository metadata.
+  - package.json
+  - package-lock.json
+  - npm-shrinkwrap.json
+  - yarn.lock
+  - pnpm-lock.yaml
+  - bun.lock
+  - bun.lockb
+  - Gemfile
+  - Gemfile.lock
+  - wrangler.jsonc
+  - wrangler.json
+  - wrangler.toml
+  - _config.yml
+  - .git
+  - .github
+  - .gitignore
+  - .gitattributes
+  - .gitmodules
+  - .wrangler
+  - .openai
+  - .agents
+  - .codex
+  - .aws
+  - .vscode
+  - .npmrc
+  - .nvmrc
+  - .DS_Store
+
+  # Local secrets and release/scratch archives must never be public assets.
+  - .env
+  - ".env.*"
+  - .dev.vars
+  - ".dev.vars.*"
+  - "*.log"
+  - "**/*.log"
+  - "*.zip"
+  - "**/*.zip"
+  - "*.tar"
+  - "*.tar.gz"
+
+  # Unused starter-era root files. The active js/config.js and css/ stay public.
+  - app.js
+  - config.js
+  - styles.css
