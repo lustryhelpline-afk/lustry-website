@@ -208,6 +208,7 @@ const allowedOrigins = new Set([
   "https://lustry.in",
   "https://www.lustry.in",
   "https://lustryhelpline-afk.github.io",
+  "https://v8-preview-lustry-website.lustryhelpline.workers.dev",
   ...String(Deno.env.get("ALLOWED_ORIGIN") || "")
     .split(",")
     .map((origin) => origin.trim())

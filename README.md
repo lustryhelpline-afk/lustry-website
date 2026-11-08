@@ -10,7 +10,7 @@ The existing luxury V8 frontend is retained: an ivory, near-black, champagne-gol
 
 ## Local development
 
-Node.js 22 or newer is required.
+Node.js 22.13 or newer is required (the isolated backend tests use Node’s built-in TypeScript type stripping).
 
 ```sh
 npm ci
@@ -29,7 +29,7 @@ The local Wrangler preview serves the built public bundle on port 8787. See [DEP
 - Hoodies & Sweatshirts, Bags & Backpacks, and a quotation-only Corporate Merchandise section.
 - Manufacturing enquiry starts at 25 pieces; discounts are 100–199: 5%, 200–499: 20%, 500+: 25%.
 - Estimator reads active category pricing from the existing `product_prices` table. It explicitly remains category-level, not an approved specification-specific quote.
-- Existing `submit-order` request contract and checked-in function remain unchanged. A saved reference is required before showing a successful enquiry.
+- Existing `submit-order` request contract and business logic are preserved; the live v3 source is reconciled, with a one-origin CORS candidate awaiting live-release approval. A saved reference is required before showing a successful enquiry.
 - Callback popup, manual trigger, consent, configured endpoint and request payload are preserved, with stronger browser validation and duplicate-submit handling.
 - Chat uses the existing optional AI endpoint when it returns a valid reply and otherwise falls back to clearly labelled FAQs. No paid service is provisioned.
 - Browser-only Design Studio for T-shirts, totes and backpacks: styles, fabric/GSM, colour, logo/reference image, text, placement, front/back preview, design brief and handoff to manufacturing enquiry.
@@ -46,9 +46,9 @@ The demo bag uses local storage. Studio-to-enquiry transfer uses session storage
 
 `js/config.js` is intentionally public and contains only the project URL, public publishable key, function names and contact details. Preserve the existing Supabase project and business workflow. Private service-role keys, AI keys and payment credentials must never be added to frontend code.
 
-No database migration or Supabase function deployment is part of this revision. The uploaded V8.2 ZIP contains additional callback/AI source and proposed SQL not present in the baseline repository. Those are reference material, not evidence that their schemas or deployment settings match the live service. Do not run them blindly.
+No database migration or live Supabase function deployment is part of this revision. See [supabase/RELEASE-CORS.md](supabase/RELEASE-CORS.md) for the reconciled v3 source, exact one-origin CORS candidate and release boundary. The uploaded V8.2 ZIP contains additional callback/AI source and proposed SQL not present in the baseline repository. Those are reference material, not evidence that their schemas or deployment settings match the live service. Do not run them blindly.
 
-The checked-in `submit-order` source specifies a single origin, while live preflights observed both existing origins being accepted. Reconcile the deployed function source/settings before any future backend release. New Workers preview URLs also need their exact origin checked against that live policy.
+The deployed `submit-order` v3 includes an exact-origin wrapper that was missing from the old repository source. It has now been reconciled. The stable Workers preview origin is added in the candidate source only; live deployment still needs explicit approval. Existing production/GitHub Pages permissions and JWT verification remain preserved.
 
 ## Verification
 
@@ -57,6 +57,6 @@ npx playwright install chromium
 npm test
 ```
 
-`npm test` builds preview assets and runs browser regression tests with external requests blocked and backend responses mocked. To use an existing browser, set `LUSTRY_CHROMIUM_PATH` to its executable. No real enquiry/callback is submitted by these tests. Local syntax/reference checks and Wrangler dry runs do not require Cloudflare credentials.
+`npm test` runs 25 isolated backend tests, builds preview assets and runs browser regression tests with external requests blocked and backend responses mocked. To use an existing browser, set `LUSTRY_CHROMIUM_PATH` to its executable. No real enquiry/callback is submitted by these tests. Local syntax/reference checks and Wrangler dry runs do not require Cloudflare credentials.
 
 See [LAUNCH-READINESS.md](LAUNCH-READINESS.md) for the changes, test evidence and remaining launch dependencies. See [ASSET_GUIDE.md](ASSET_GUIDE.md) for the actual asset layout. Production publishing, DNS changes, checkout and paid services require explicit owner approval.

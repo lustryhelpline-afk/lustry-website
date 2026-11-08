@@ -3,16 +3,22 @@
   "version": "8.3.0",
   "private": true,
   "description": "Lustry public catalogue and manufacturing enquiry website",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22.13"
+  },
   "scripts": {
     "check": "node scripts/check.mjs",
-    "test": "npm run build:preview && node tests/browser.cjs",
+    "test": "npm run test:backend && npm run build:preview && node tests/browser.cjs",
     "build": "node scripts/build.mjs",
     "build:preview": "node scripts/build.mjs --preview",
     "preview": "node scripts/deploy.mjs local",
     "deploy:preview": "node scripts/deploy.mjs preview",
     "deploy:production": "node scripts/deploy.mjs production",
-    "deploy:dry-run": "node scripts/deploy.mjs dry-run"
+    "deploy:dry-run": "node scripts/deploy.mjs dry-run",
+    "test:backend": "node --test tests/submit-order.cjs"
   },
-  "devDependencies": { "playwright": "1.65.0", "wrangler": "4.158.0" }
+  "devDependencies": {
+    "playwright": "1.65.0",
+    "wrangler": "4.158.0"
+  }
 }
