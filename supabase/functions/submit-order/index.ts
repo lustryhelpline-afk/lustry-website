@@ -39,7 +39,7 @@ function getDiscount(quantity: number): number {
   return 0;
 }
 
-Deno.serve(async (req: Request) => {
+async function handle(req: Request): Promise<Response> {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
   }
@@ -201,4 +201,32 @@ Deno.serve(async (req: Request) => {
     console.error("submit-order error:", error);
     return reply({ error: "Something went wrong. Please try again." }, 500);
   }
+}
+
+// Allowed website origins
+const allowedOrigins = new Set([
+  "https://lustry.in",
+  "https://www.lustry.in",
+  "https://lustryhelpline-afk.github.io",
+  ...String(Deno.env.get("ALLOWED_ORIGIN") || "")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean),
+]);
+
+Deno.serve(async (req: Request): Promise<Response> => {
+  const response = await handle(req);
+  const origin = req.headers.get("Origin");
+
+  if (origin) {
+    if (allowedOrigins.has(origin)) {
+      response.headers.set("Access-Control-Allow-Origin", origin);
+    } else {
+      response.headers.delete("Access-Control-Allow-Origin");
+    }
+
+    response.headers.set("Vary", "Origin");
+  }
+
+  return response;
 });
