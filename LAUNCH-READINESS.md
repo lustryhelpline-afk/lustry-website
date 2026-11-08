@@ -64,6 +64,12 @@ Read-only `submit-order` preflights accepted the existing `https://lustry.in` an
 
 ## Connected Supabase inspection and CORS candidate
 
-The live `submit-order` function is ACTIVE version3 with `verify_jwt: true`. Its source matches the original business handler but adds an exact-origin response wrapper. This deployed source is now reconciled in the repository; the only candidate behavior change adds the stable Workers branch alias to its allowlist. The live function has not been replaced. See `supabase/RELEASE-CORS.md` for the exact scope and rollback baseline.
+The live `submit-order` function is ACTIVE version 3 with `verify_jwt: true`. Its source matches the original business handler but adds an exact-origin response wrapper. This deployed source is now reconciled in the repository; the only candidate behavior change adds the stable Workers branch alias to its allowlist. After the owner explicitly approved the CORS-only live update, the exact reviewed function was deployed as ACTIVE version 4 with JWT verification preserved. See `supabase/RELEASE-CORS.md` for the exact scope, verification and rollback baseline.
 
 A safe invalid-payload live POST returned the expected HTTP400 name/email error using the existing website public key; authentication reaches the function and needs no change. Twenty-five isolated backend tests passed with every database call mocked. No valid live enquiry, migration, JWT/key change or database write was made. Actual project function inventory lists only `submit-order`; existing callback UI remains preserved, while live callback persistence and AI service availability are not certified.
+
+## Final approved CORS release status
+
+The owner explicitly approved the CORS-only live update. Supabase `submit-order` v4 is ACTIVE; JWT verification remains true and its source exactly matches the reviewed one-entry allowlist addition over deployed v3. Twelve live OPTIONS/invalid-payload POST checks passed across four allowed and two denied origins. No valid customer enquiry record was created and no schema/key/pricing/business-logic change occurred. This supersedes the earlier pre-release CORS observations above.
+
+The preview source has 25 isolated backend checks and 17 browser regression groups passing in hosted CI, plus successful Cloudflare and GitHub Pages preview builds. Production website/main/DNS remain unchanged. Approved product prices/inventory/assets, legal/operational policy content and verification of any separate callback service still remain business launch dependencies; checkout and AI generation remain disabled as requested.

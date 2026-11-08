@@ -6,7 +6,7 @@ The existing luxury V8 frontend is retained: an ivory, near-black, champagne-gol
 - Production branch: `main` (release approval required).
 - Production domain: https://lustry.in
 - Existing preview: https://lustryhelpline-afk.github.io/lustry-website/
-- New Workers preview: https://v8-preview-lustry-website.lustryhelpline.workers.dev (its enquiry origin still needs backend allowlist approval).
+- New Workers preview: https://v8-preview-lustry-website.lustryhelpline.workers.dev (stable enquiry origin approved in live function v4).
 
 ## Local development
 
@@ -29,7 +29,7 @@ The local Wrangler preview serves the built public bundle on port 8787. See [DEP
 - Hoodies & Sweatshirts, Bags & Backpacks, and a quotation-only Corporate Merchandise section.
 - Manufacturing enquiry starts at 25 pieces; discounts are 100–199: 5%, 200–499: 20%, 500+: 25%.
 - Estimator reads active category pricing from the existing `product_prices` table. It explicitly remains category-level, not an approved specification-specific quote.
-- Existing `submit-order` request contract and business logic are preserved; the live v3 source is reconciled, with a one-origin CORS candidate awaiting live-release approval. A saved reference is required before showing a successful enquiry.
+- Existing `submit-order` request contract and business logic are preserved; the deployed source is reconciled, and the owner-approved v4 release adds only the stable preview origin. A saved reference is required before showing a successful enquiry.
 - Callback popup, manual trigger, consent, configured endpoint and request payload are preserved, with stronger browser validation and duplicate-submit handling.
 - Chat uses the existing optional AI endpoint when it returns a valid reply and otherwise falls back to clearly labelled FAQs. No paid service is provisioned.
 - Browser-only Design Studio for T-shirts, totes and backpacks: styles, fabric/GSM, colour, logo/reference image, text, placement, front/back preview, design brief and handoff to manufacturing enquiry.
@@ -46,9 +46,9 @@ The demo bag uses local storage. Studio-to-enquiry transfer uses session storage
 
 `js/config.js` is intentionally public and contains only the project URL, public publishable key, function names and contact details. Preserve the existing Supabase project and business workflow. Private service-role keys, AI keys and payment credentials must never be added to frontend code.
 
-No database migration or live Supabase function deployment is part of this revision. See [supabase/RELEASE-CORS.md](supabase/RELEASE-CORS.md) for the reconciled v3 source, exact one-origin CORS candidate and release boundary. The uploaded V8.2 ZIP contains additional callback/AI source and proposed SQL not present in the baseline repository. Those are reference material, not evidence that their schemas or deployment settings match the live service. Do not run them blindly.
+No database migration was applied. The owner-approved CORS-only `submit-order` v4 deployment is complete. See [supabase/RELEASE-CORS.md](supabase/RELEASE-CORS.md) for the exact scope, live verification and rollback baseline. The uploaded V8.2 ZIP contains additional callback/AI source and proposed SQL not present in the baseline repository. Those are reference material, not evidence that their schemas or deployment settings match the live service. Do not run them blindly.
 
-The deployed `submit-order` v3 includes an exact-origin wrapper that was missing from the old repository source. It has now been reconciled. The stable Workers preview origin is added in the candidate source only; live deployment still needs explicit approval. Existing production/GitHub Pages permissions and JWT verification remain preserved.
+The deployed `submit-order` v3 includes an exact-origin wrapper that was missing from the old repository source. It has now been reconciled. The stable Workers preview origin is now included in the approved live v4 release. Existing production/GitHub Pages permissions, business logic and JWT verification remain preserved.
 
 ## Verification
 

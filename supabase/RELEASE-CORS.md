@@ -1,10 +1,10 @@
-# Preview enquiry CORS release candidate
+# Approved preview enquiry CORS release
 
-Project: `wpchzqmhngeokfzelsaf`. Function: `submit-order`. Inspected live version: **3**, ACTIVE, `verify_jwt: true`.
+Project: `wpchzqmhngeokfzelsaf`. Function: `submit-order`. Baseline inspected version: **3**. Approved deployed version: **4**, ACTIVE, `verify_jwt: true`. The owner explicitly approved the CORS-only live update on 9 November 2026 (Asia/Kolkata).
 
 ## Exact change
 
-The repository first reconciles the existing deployed v3 source, including its final request/response wrapper and existing origin allowlist. The candidate then adds exactly one entry to that allowlist:
+The repository first reconciles the existing deployed v3 source, including its final request/response wrapper and existing origin allowlist. The approved release adds exactly one entry to that allowlist:
 
 ```text
 https://v8-preview-lustry-website.lustryhelpline.workers.dev
@@ -22,13 +22,13 @@ The request handler, pricing lookup, 25-piece MOQ, discount tiers, consent valid
 - `npm run test:backend`: 25 isolated VM tests, all backend fetches mocked. Tests cover allowed/unknown origins, configured comma-separated origins, method/contact/consent/MOQ checks, quantity discount boundaries, save payloads and error/unconfirmed responses.
 - The `supabase` directory is excluded from both Cloudflare public assets and GitHub Pages output.
 
-## Release boundary
+## Approved deployment and verification
 
-**Candidate only: not deployed to live Supabase.** The owner's original instruction requires explicit approval for production deployment. Deploying an Edge Function replaces the live version at its public URL immediately, so connecting the account or saving preview source does not by itself remove that release restriction.
+The owner explicitly approved replacing the live function with this CORS-only update. Immediately before deployment, live v3 source and metadata were re-read and confirmed unchanged. Version 4 was deployed with entrypoint `index.ts` and `verify_jwt: true`; a subsequent source read matched the exact reviewed one-line candidate.
 
-After owner approval, deploy the exact reviewed `supabase/functions/submit-order/index.ts`, entrypoint `index.ts`, preserving `verify_jwt: true`. Immediately repeat OPTIONS and invalid-payload POST checks for production, www, GitHub Pages, stable Workers alias and a denied origin. The checks must confirm both the CORS header and original validation behavior without creating customer records.
+All 12 live checks passed: OPTIONS and invalid-payload POST for production, www, GitHub Pages, the stable Workers alias, `https://example.com` and an unrelated Worker hostname. Allowed origins receive their exact CORS header; denied origins receive none. All invalid POSTs return the original HTTP400 name/email validation error before database access. No valid customer record was created.
 
-Before release, re-read the live version and source. If they changed after v3, rebase this one-line change on that newer source rather than overwriting other work. Rollback uses the reconciled deployed-v3 source from the commit immediately preceding the origin-addition commit, with the same `verify_jwt: true` setting.
+For any later release, re-read the live source before replacing it and get approval for changes beyond this scope. Rollback baseline: the exact reconciled v3 source at commit `ab122f17fbbcf4a490b0b9f4b82618dc0f530592`, preserving `verify_jwt: true`. Website production deployment, `main`, DNS and database schema were not changed.
 
 ## Other observations
 
