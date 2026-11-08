@@ -20,3 +20,6 @@ dialog.v7-dlg{border:0;border-radius:18px;padding:0;max-width:760px;width:calc(1
 @media(max-width:820px){.v7-calc .in{grid-template-columns:1fr}}
 .v7-count{font-variant-numeric:tabular-nums}
 @media(prefers-reduced-motion:reduce){.v7-fab a,.v7-fab button,.v7-qv,.v7-tiers div,#v7-prog{transition:none}}
+
+/* Keep quick-view controls outside links while preserving the photo overlay. */
+.v7-product-media{position:relative}.v7-product-media .v7-qv{z-index:2}

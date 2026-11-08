@@ -1,36 +1,15 @@
-# Lustry website media guide
+# Lustry public assets
 
-Put your original brand and media files here. Keep the filenames below, or change the matching `src` path in `index.html`.
+The working website uses these existing directories:
 
-## Brand logo
-- `assets/lustry-logo.png` — preferably transparent PNG, high-resolution, with comfortable clear space. The website uses a text fallback if this file is absent.
+- `assets/`: Lustry JPG logos/wordmark and original SVG product illustrations.
+- `css/`: active V8 styling layers and the scoped Design Studio stylesheet.
+- `js/`: public configuration, demo catalogue, interactions and browser-only studio.
 
-## Product photos
-Use crisp, genuine product photos (preferably 1200 px or wider; JPG/WebP recommended):
-- `assets/products/tshirts.jpg`
-- `assets/products/hoodies.jpg`
-- `assets/products/bags.jpg`
-- `assets/products/branding-detail.jpg`
-- `assets/products/accessories.jpg`
+The wordmark is `assets/lustry-wordmark.jpg`; the full logo is `assets/lustry-original-logo.jpg`. Product illustrations include `tee-ivory.svg`, `tee-charcoal.svg`, `tee-forest.svg`, `polo-forest.svg`, `polo-navy.svg`, `hoodie-olive.svg`, `hoodie-charcoal.svg`, `backpack.svg`, `tote-earth.svg` and `tote-ivory.svg`.
 
-The page will hide the designed placeholder automatically when the matching photo loads.
+Stock-photo URLs in `index.html` and `js/catalog.js` are illustrative. They must not be represented as confirmed inventory, manufacturing facilities or completed client work. Product cards start from local SVGs, with optional external imagery; the original homepage photo enhancer remains in use. Confirm external image licences and use real approved Lustry photography for launch.
 
-## Client logos
-- `assets/clients/client-01.png` through `assets/clients/client-06.png`
+When adding original images, use supported image extensions in `assets/`, meaningful alt text, optimized dimensions and permissions from any identifiable clients. Do not add private customer artwork or internal records. Client logos and media tables are not automatically consumed by the current gallery; those sections remain honest placeholders until approved assets are supplied.
 
-Use client marks only if you have permission to display them. Transparent PNG works well. Replace `alt` text in `index.html` with the real client name for accessibility.
-
-## Videos
-- `assets/videos/production.mp4`
-- `assets/videos/materials.mp4`
-- `assets/videos/finished-orders.mp4`
-
-Optional poster images:
-- `assets/videos/production-poster.jpg`
-- `assets/videos/materials-poster.jpg`
-- `assets/videos/finished-orders-poster.jpg`
-
-Use MP4/H.264 video, ideally compressed for the web. Keep video clips short and do not upload very large raw files. If using YouTube/Vimeo instead, replace the corresponding `<video>` element with an embed supplied by that platform.
-
-## Before publishing
-Replace the client placeholders, confirm all fabric names/GSM ranges against your actual stock and sourcing, and check you have permission for every photo/logo/video used.
+`npm run build` creates an allowlisted public `dist/` directory. Supabase source, docs, archives, Git files, secrets and unused root starter files are excluded. Never deploy the repository root as static assets.

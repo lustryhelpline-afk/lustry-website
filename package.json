@@ -1,0 +1,18 @@
+{
+  "name": "lustry-website",
+  "version": "8.3.0",
+  "private": true,
+  "description": "Lustry public catalogue and manufacturing enquiry website",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "check": "node scripts/check.mjs",
+    "test": "npm run build:preview && node tests/browser.cjs",
+    "build": "node scripts/build.mjs",
+    "build:preview": "node scripts/build.mjs --preview",
+    "preview": "node scripts/deploy.mjs local",
+    "deploy:preview": "node scripts/deploy.mjs preview",
+    "deploy:production": "node scripts/deploy.mjs production",
+    "deploy:dry-run": "node scripts/deploy.mjs dry-run"
+  },
+  "devDependencies": { "playwright": "1.65.0", "wrangler": "4.158.0" }
+}

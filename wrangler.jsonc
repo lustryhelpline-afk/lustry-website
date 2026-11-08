@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "lustry-website",
+  "compatibility_date": "2026-11-08",
+  "workers_dev": true,
+  "preview_urls": true,
+  "build": {
+    "command": "node scripts/wrangler-build.mjs",
+    "watch_dir": ["assets", "css", "js", "*.html"]
+  },
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "none",
+    "not_found_handling": "404-page"
+  }
+}

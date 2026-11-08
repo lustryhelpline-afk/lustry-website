@@ -1,116 +1,61 @@
-# Lustry Custom Order Platform — Starter
+# Lustry — V8 catalogue and manufacturing enquiries
 
-A static frontend for GitHub Pages plus Supabase Edge Functions and PostgreSQL schema for quotation requests and AI support.
+The existing luxury V8 frontend is retained: an ivory, near-black, champagne-gold identity with original Lustry branding and existing forest accents. This is a static website; Supabase hosts the existing enquiry backend.
 
-## Included
+- Work branch: `v8-preview`.
+- Production branch: `main` (release approval required).
+- Production domain: https://lustry.in
+- Existing preview: https://lustryhelpline-afk.github.io/lustry-website/
 
-- Premium responsive marketing site and product category pages
-- Product-specific options for T-shirts/polos, hoodies, jackets, pittu bags/backpacks, tote/promotional bags, pens and bag tags
-- Indicative estimate with quantity slabs: 25–49 2%, 50–99 4%, 100–249 6%, 250–499 9%, 500–999 12%, 1,000+ 15%
-- Minimum quantity validation (25 pieces)
-- Optional size breakdown validation
-- Quote request form, consent checkbox, coupon capture
-- Supabase Edge Function to validate request data and recompute estimate on the server before saving
-- AI support Edge Function; API key stays server-side
-- English/Hindi navigation-label demo (not a complete translation)
-- SQL schema for orders and coupon records
+## Local development
 
-## Important limitations before production
+Node.js 22 or newer is required.
 
-This is a starter, not a finished production commerce system. Before accepting real orders:
-1. Replace every `[ADD ...]` placeholder in `index.html` with verified company details.
-2. Verify the actual price table, GSM availability, product/material options, MOQ and discount slabs with your production team. The starter prices are example values, not validated Lustry prices.
-3. Configure a private artwork storage bucket and upload flow. The current UI deliberately does not submit files.
-4. Build an authenticated admin dashboard to view requests, change statuses and approve a final quote. The schema has no public order-reading policies by design.
-5. Configure rate limiting / bot protection, email notifications, privacy policy, terms, cancellation/returns policy, data retention and consent language.
-6. Configure coupon issuance only after qualifying orders and gift inventory rules are defined. This starter records and checks coupon metadata for review but does not automatically grant gifts or apply a coupon discount.
-7. Complete all-language translations and have them reviewed by fluent speakers.
-8. Test on mobile, with screen readers, and with realistic orders before publishing.
-
-## 1. Publish frontend to GitHub Pages
-
-- Create a GitHub repository, for example `lustry-platform`.
-- Upload `index.html`, `styles.css`, `app.js`, and `config.js` to the repository root.
-- In `config.js`, set `supabaseUrl` and `supabaseAnonKey` to your Supabase project URL and public anon/publishable key.
-- In GitHub, open **Settings → Pages**, select deploy from branch, choose `main` and `/ (root)`, and save.
-- Never place `SUPABASE_SERVICE_ROLE_KEY`, `OPENAI_API_KEY`, payment secrets, or email-provider secrets in frontend files or GitHub Pages.
-
-## 2. Configure Supabase database
-
-- Create a Supabase project.
-- Open SQL Editor and run `supabase/schema.sql`.
-- The `orders` and `coupons` tables have RLS enabled and no public table access. Orders are inserted by the server-side function using the service-role key.
-- Do not add public SELECT policies to orders. Build authenticated admin access separately.
-
-## 3. Deploy Edge Functions
-
-Install the Supabase CLI and sign in, then from this project folder:
-
-```bash
-supabase login
-supabase link --project-ref YOUR_PROJECT_REF
-supabase functions deploy submit-order
-supabase functions deploy ai-support
+```sh
+npm ci
+npm run check
+npm run build:preview
+npm run deploy:dry-run
+npm run preview
 ```
 
-Set secrets using the CLI (replace values locally; do not commit them):
+The local Wrangler preview serves the built public bundle on port 8787. See [DEPLOYMENT.md](DEPLOYMENT.md) for Cloudflare Workers commands, dashboard configuration, preview isolation and production safeguards. No framework rebuild or new hosting provider is needed.
 
-```bash
-supabase secrets set SUPABASE_URL=https://YOUR-PROJECT.supabase.co
-supabase secrets set SUPABASE_SERVICE_ROLE_KEY=YOUR_SERVICE_ROLE_KEY
-supabase secrets set OPENAI_API_KEY=YOUR_OPENAI_API_KEY
-supabase secrets set OPENAI_MODEL=gpt-4.1-mini
-supabase secrets set ALLOWED_ORIGIN=https://YOUR-GITHUB-USERNAME.github.io
+## Implemented behaviour
+
+- Searchable catalogue, category/style filters, sorting, product detail and a visitor-local demo bag.
+- T-Shirts contains Round Neck, Polo, Oversized and Dry-Fit; Polo is not a main category.
+- Hoodies & Sweatshirts, Bags & Backpacks, and a quotation-only Corporate Merchandise section.
+- Manufacturing enquiry starts at 25 pieces; discounts are 100–199: 5%, 200–499: 20%, 500+: 25%.
+- Estimator reads active category pricing from the existing `product_prices` table. It explicitly remains category-level, not an approved specification-specific quote.
+- Existing `submit-order` request contract and checked-in function remain unchanged. A saved reference is required before showing a successful enquiry.
+- Callback popup, manual trigger, consent, configured endpoint and request payload are preserved, with stronger browser validation and duplicate-submit handling.
+- Chat uses the existing optional AI endpoint when it returns a valid reply and otherwise falls back to clearly labelled FAQs. No paid service is provisioned.
+- Browser-only Design Studio for T-shirts, totes and backpacks: styles, fabric/GSM, colour, logo/reference image, text, placement, front/back preview, design brief and handoff to manufacturing enquiry.
+
+## Retail and artwork boundaries
+
+All current catalogue products have unconfirmed inventory. Numeric retail prices are marked demo prices; they are not approved Lustry offers. Quantity 1 is allowed in the demo bag, but no retail order or payment is created. Checkout remains disabled. No same-day delivery or stock claim is made.
+
+Studio images are local previews only. PNG/JPEG/WebP files stay in the visitor's browser, are not stored in browser storage, and are not uploaded or sent with the enquiry. Only the text/specification brief transfers through session storage. AI image generation is not connected; mockups are never labelled production-ready artwork. Original files must be coordinated with Lustry after enquiry submission.
+
+The demo bag uses local storage. Studio-to-enquiry transfer uses session storage and is read only when explicitly arriving from the studio. Neither stores customer contact details.
+
+## Supabase configuration
+
+`js/config.js` is intentionally public and contains only the project URL, public publishable key, function names and contact details. Preserve the existing Supabase project and business workflow. Private service-role keys, AI keys and payment credentials must never be added to frontend code.
+
+No database migration or Supabase function deployment is part of this revision. The uploaded V8.2 ZIP contains additional callback/AI source and proposed SQL not present in the baseline repository. Those are reference material, not evidence that their schemas or deployment settings match the live service. Do not run them blindly.
+
+The checked-in `submit-order` source specifies a single origin, while live preflights observed both existing origins being accepted. Reconcile the deployed function source/settings before any future backend release. New Workers preview URLs also need their exact origin checked against that live policy.
+
+## Verification
+
+```sh
+npx playwright install chromium
+npm test
 ```
 
-If using a custom domain, set `ALLOWED_ORIGIN` to that exact origin. The code defaults to `*` only for initial local testing if the secret is missing; set the production origin explicitly and consider stricter origin handling. Configure function JWT verification/CORS according to your chosen deployment; do not disable database security.
+`npm test` builds preview assets and runs browser regression tests with external requests blocked and backend responses mocked. To use an existing browser, set `LUSTRY_CHROMIUM_PATH` to its executable. No real enquiry/callback is submitted by these tests. Local syntax/reference checks and Wrangler dry runs do not require Cloudflare credentials.
 
-## 4. Company details you must supply
-
-- Exact legal company name (confirm whether “Lustry Pvt Ltd” is the registered name)
-- Public business email and phone/WhatsApp
-- Business address and business hours
-- GSTIN/CIN only if applicable and verified
-- Real base prices by product/style/material/GSM/branding
-- Actual available GSM and materials per product
-- Manufacturing lead times, shipping zones and payment terms
-- Approved privacy, cancellation, returns and terms policies
-- Real project photos and client logos with permission
-- Reward/coupon eligibility, coupon value, expiry and gift inventory
-
-## 5. Pricing model
-
-Current example base unit prices:
-- T-shirt/polo: ₹120
-- Hoodie: ₹360
-- Jacket: ₹550
-- Pittu backpack: ₹240
-- Tote bag: ₹65
-- Pens/bag tags: ₹25
-
-The estimate adds configured material, GSM/thickness and branding amounts, then applies the quantity slab to the subtotal. All values are placeholders and should be replaced by Lustry's approved cost/pricing sheet. The server recomputes the price from its own configuration; it does not trust the browser's displayed total.
-
-## 6. Features intentionally not represented as complete
-
-- Online payment / checkout
-- Customer login and order history
-- Admin quote approval interface
-- Artwork uploads and private storage
-- Email/SMS/WhatsApp automation
-- Coupon issuance after order completion, gift redemption and coupon stacking rules
-- Full multilingual translation
-- Live product mockup editor
-
-These require additional backend and operational decisions. The customer-facing wording is deliberately transparent that the online price is an estimate and the final quotation is approved by Lustry.
-
-
-## Brand logo, photos, fabrics, clients and videos
-
-The website now includes an editorial product photo gallery, material library, client-logo section, and video section. See `assets/ASSET_GUIDE.md` for exact filenames and where to place your own files. In short:
-
-- Brand logo: `assets/lustry-logo.png`
-- Product photos: `assets/products/tshirts.jpg`, `hoodies.jpg`, `bags.jpg`, `branding-detail.jpg`, `accessories.jpg`
-- Client logos: `assets/clients/client-01.png` through `client-06.png`
-- Videos: `assets/videos/production.mp4`, `materials.mp4`, `finished-orders.mp4`
-
-The page displays design placeholders until matching image/video files are provided. Fabric names and GSM ranges in the new material section are sample guidance only; verify them against the materials you actually source before publishing. Only display client logos with permission.
+See [LAUNCH-READINESS.md](LAUNCH-READINESS.md) for the changes, test evidence and remaining launch dependencies. See [ASSET_GUIDE.md](ASSET_GUIDE.md) for the actual asset layout. Production publishing, DNS changes, checkout and paid services require explicit owner approval.

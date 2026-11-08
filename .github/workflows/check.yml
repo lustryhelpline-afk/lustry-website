@@ -1,0 +1,22 @@
+name: Website checks
+on:
+  push:
+    branches: [v8-preview, main]
+  pull_request:
+    branches: [v8-preview, main]
+permissions:
+  contents: read
+jobs:
+  website:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npx playwright install --with-deps chromium
+      - run: npm test
+      - run: npm run deploy:dry-run
