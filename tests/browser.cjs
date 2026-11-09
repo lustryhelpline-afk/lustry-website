@@ -69,21 +69,81 @@ async function fillEnquiry(page) {
  await startLocalServer();
  const executablePath=process.env.LUSTRY_CHROMIUM_PATH||['/usr/bin/chromium','/usr/bin/chromium-browser'].find(file=>fs.existsSync(file));
  browser=await chromium.launch({...(executablePath?{executablePath}:{}),headless:true,args:['--no-sandbox']});
- await run('mobile storefront shows categories and real reference photos in the first screen',async({page})=>{
+ await run('mobile storefront balances visual categories, campaigns and visible product photography',async({page})=>{
   for(const width of [320,390]){
    await page.setViewportSize({width,height:780});await page.goto(BASE+'/index.html');
    const categories=page.getByRole('navigation',{name:'Product categories'});
    assert.equal(await categories.locator('[data-home-cat]').count(),5);
    assert.equal(await categories.locator('[data-home-cat="tshirts"]').isVisible(),true);
    const header=await page.locator('#site-header').boundingBox();assert.ok(header.height<=130,'compact header on '+width);
+   const tiles=page.locator('.c-category-tile');assert.equal(await tiles.count(),4);
+   const tileBounds=await tiles.last().boundingBox();assert.ok(tileBounds.y+tileBounds.height<400,'category shortcuts are near the top on '+width);
+   assert.equal(await page.locator('.c-campaigns').isVisible(),true);
    const first=await page.locator('#featured-grid .product-photo').first().boundingBox();
-   assert.ok(first.y<400&&first.y+first.height<780,'first product is visible without scrolling on '+width);
+   assert.ok(first.y<650&&first.y+Math.min(first.height,120)<780,'first product photography is visible without scrolling on '+width);
    const photos=page.locator('#featured-grid .product-photo img');
    await photos.first().evaluate(img=>img.decode());
    assert.ok((await photos.first().getAttribute('src')).startsWith('assets/photos/'),'first card uses local photography');
    assert.equal(await photos.first().evaluate(img=>img.naturalWidth>0),true);
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   }
+ });
+ await run('image categories and campaign links lead to the matching product collections',async({page,state})=>{
+  await page.goto(BASE+'/index.html');
+  const tiles=page.locator('.c-category-tile');assert.equal(await tiles.count(),4);
+  const categories=await tiles.evaluateAll(nodes=>nodes.map(a=>new URL(a.href).searchParams.get('cat')));
+  assert.deepEqual(categories,['tshirts','hoodies','bags','merch']);
+  await tiles.filter({hasText:'T-Shirts'}).click();await page.waitForLoadState('load');
+  assert.equal(new URL(page.url()).searchParams.get('cat'),'tshirts');
+  assert.equal(await page.locator('#tshirt-subfilters').isVisible(),true);
+  assert.ok(await page.locator('#shop-grid .product-card').count()>=4);
+  await page.goto(BASE+'/index.html');await page.locator('.c-campaign-bags').getByRole('link',{name:'Explore bags'}).click();await page.waitForLoadState('load');
+  assert.equal(new URL(page.url()).searchParams.get('cat'),'bags');
+  assert.equal(await page.locator('#shop-grid .product-card').count(),2);
+  assert.equal(state.requests.filter(r=>r.method==='POST').length,0);
+ });
+ await run('curated apparel and bags remain distinct and discovery returns after clearing a filter',async({page})=>{
+  await page.goto(BASE+'/index.html');
+  const productCategories=selector=>page.locator(selector+' .product-photo').evaluateAll(links=>links.map(a=>window.LUSTRY_CATALOG.find(p=>p.id===new URL(a.href).searchParams.get('id'))?.cat));
+  const apparel=await productCategories('#featured-grid');assert.equal(apparel.length,4);assert.ok(apparel.every(cat=>['tshirts','hoodies'].includes(cat)));
+  assert.deepEqual(await productCategories('#bags-edit-grid'),['bags','bags']);
+  await page.locator('[data-home-cat="bags"]').click();
+  assert.equal(await page.locator('#featured-grid .product-card').count(),2);
+  assert.equal(await page.locator('[data-home-discovery]').evaluateAll(nodes=>nodes.every(el=>el.hidden)),true);
+  await page.locator('[data-home-cat=""]').click();
+  assert.equal(await page.locator('#featured-grid .product-card').count(),4);
+  assert.equal(await page.locator('.c-campaigns').isVisible(),true);
+  assert.equal(await page.locator('.c-bags-section').isVisible(),true);
+  assert.equal(await page.locator('.c-season').isVisible(),true);
+  await page.goto(BASE+'/index.html?cat=bags');
+  assert.equal(await page.locator('.c-season').isVisible(),false);
+  await page.locator('.c-offer-strip').click();
+  await page.waitForURL('**/index.html#season-title');await page.waitForLoadState('load');
+  assert.equal(new URL(page.url()).searchParams.has('cat'),false);
+  assert.equal(await page.locator('.c-season').isVisible(),true,'seasonal link restores its destination when a category filter is active');
+  assert.equal(await page.locator('#featured-grid .product-card').count(),4);
+ });
+ await run('business and Studio cards preserve quotation and local-editor paths',async({page,state})=>{
+  await page.goto(BASE+'/index.html');await page.locator('.c-corporate-card').click();await page.waitForLoadState('load');
+  assert.equal(await page.locator('#q-category').inputValue(),'merch');
+  assert.equal(await page.locator('#q-qty').inputValue(),'25');
+  await page.goto(BASE+'/index.html');await page.locator('.c-manufacture-card').click();await page.waitForLoadState('load');
+  assert.equal(new URL(page.url()).pathname,new URL(BASE+'/custom.html').pathname);
+  assert.equal(await page.locator('#q-qty').getAttribute('min'),'25');
+  await page.goto(BASE+'/index.html');await page.locator('.c-studio-card').click();await page.waitForLoadState('load');
+  assert.equal(new URL(page.url()).pathname,new URL(BASE+'/design.html').pathname);
+  assert.equal(await page.locator('#studio-product').isVisible(),true);
+  assert.equal(state.requests.filter(r=>r.method==='POST').length,0,'discovery must not submit enquiries');
+ });
+ await run('desktop catalogue search is visible and submits the entered query',async({page})=>{
+  await page.setViewportSize({width:1440,height:1000});await page.goto(BASE+'/index.html');
+  const search=page.locator('.l-search-inline');assert.equal(await search.isVisible(),true);
+  await search.locator('#inline-shop-search').fill('cotton');
+  await search.getByRole('button',{name:'Submit catalogue search'}).click();
+  await page.waitForURL('**/shop.html?q=cotton');await page.waitForLoadState('load');
+  assert.equal(await page.locator('#shop-search').inputValue(),'cotton');
+  const names=await page.locator('#shop-grid .product-card').allTextContents();
+  assert.ok(names.length>0&&names.every(name=>/cotton/i.test(name)));
  });
  await run('home categories and T-shirt subcategories filter in place and survive reload',async({page})=>{
   await page.goto(BASE+'/index.html');
@@ -152,8 +212,8 @@ async function fillEnquiry(page) {
   const offer=await page.locator('.l-season-offer').innerText();
   for(const text of ['100–199','200–499','500+','5%','20%','25%','final quotation'])assert.ok(offer.includes(text),'missing bulk term '+text);
   assert.ok((await page.locator('.l-catalogue-note').innerText()).includes('confirmed by Lustry'));
-  assert.equal(await page.locator('.l-intro').evaluate(el=>getComputedStyle(el,'::before').animationName),'none');
-  assert.equal(await page.locator('.l-season').evaluate(el=>getComputedStyle(el,'::before').animationName),'none');
+  assert.equal(await page.locator('.c-campaign-apparel').evaluate(el=>getComputedStyle(el,'::before').animationName),'none');
+  assert.equal(await page.locator('.c-season').evaluate(el=>getComputedStyle(el,'::before').animationName),'none');
  });
  await run('shop uses the shared category navigation with persistent URL and selected state',async({page})=>{
   await page.setViewportSize({width:390,height:780});await page.goto(BASE+'/shop.html');
@@ -375,7 +435,7 @@ async function fillEnquiry(page) {
   assert.deepEqual(sent.body.order.sizes,{S:10,M:15});
  });
  await run('key pages fit mobile, tablet and desktop widths',async({page})=>{
-  for(const width of [320,390,1024,1440]) {
+  for(const width of [320,390,768,1024,1440]) {
    await page.setViewportSize({width,height:900});
    for(const route of ['/index.html','/shop.html','/custom.html','/product.html?id=rn-sarina','/design.html']) {
     await page.goto(BASE+route);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'overflow '+width+' '+route);

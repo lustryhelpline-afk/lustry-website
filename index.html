@@ -3,18 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#fafaf8">
+  <meta name="theme-color" content="#f8f5ef">
   <meta name="description" content="Explore Lustry apparel, bags and custom merchandise. Browse reference styles and request a manufacturing quotation from 25 pieces.">
   <title>Lustry — Apparel, Bags &amp; Custom Manufacturing</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/site.css">
   <link rel="stylesheet" href="css/v5.css">
   <link rel="stylesheet" href="css/v6-luxe.css">
   <link rel="stylesheet" href="css/v7.css">
   <link rel="stylesheet" href="css/v8.css">
   <link rel="stylesheet" href="css/storefront.css">
+  <link rel="stylesheet" href="css/commerce.css">
+  <link rel="stylesheet" href="css/home.css">
   <link rel="icon" type="image/jpeg" href="assets/lustry-emblem.jpg">
   <link rel="canonical" href="https://lustry.in/">
   <meta property="og:site_name" content="Lustry">
@@ -25,36 +27,59 @@
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Lustry","url":"https://lustry.in/","email":"info@lustry.in","logo":"https://lustry.in/assets/lustry-original-logo.jpg"}</script>
 </head>
 <body data-page="index">
+  <a class="c-offer-strip" href="index.html#season-title"><span>NEW YEAR 2027</span> Plan your next team collection <svg class="l-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></a>
   <div id="site-header"></div>
   <noscript><p class="notice">Please enable JavaScript to browse product previews. You can <a href="mailto:info@lustry.in">email Lustry</a> or <a href="tel:+919267373084">call +91 92673 73084</a> for product information.</p></noscript>
-  <main id="main">
-    <section class="l-intro">
-      <div class="wrap l-intro-inner">
-        <div><p class="l-eyebrow"><a href="#season-title">NEW YEAR 2027 / TEAM COLLECTIONS <svg class="l-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></a></p><h1>Made for your everyday.</h1><p>Apparel, bags and merchandise. Ready for your ideas.</p></div>
-        <a class="l-link" href="custom.html">Make it your brand <span aria-hidden="true"><svg class="l-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></span></a>
-      </div>
+  <main id="main" class="classic-home">
+    <section class="wrap c-category-strip" aria-label="Explore product categories">
+      <a class="c-category-tile" href="shop.html?cat=tshirts"><span class="c-category-image"><img src="assets/photos/reference-black-tee.jpg" width="120" height="120" alt="" loading="eager"></span><span><strong>T-Shirts</strong><small>Round Neck · Polo · Oversized · Dry-Fit</small></span><span class="c-tile-arrow" aria-hidden="true"><svg class="l-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></span></a>
+      <a class="c-category-tile" href="shop.html?cat=hoodies"><span class="c-category-image"><img src="assets/photos/reference-sweatshirt.jpg" width="120" height="120" alt="" loading="eager"></span><span><strong>Hoodies &amp; Sweatshirts</strong><small>Layers for everyday</small></span><span class="c-tile-arrow" aria-hidden="true"><svg class="l-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></span></a>
+      <a class="c-category-tile" href="shop.html?cat=bags"><span class="c-category-image"><img src="assets/photos/reference-backpack.jpg" width="120" height="120" alt="" loading="eager"></span><span><strong>Bags &amp; Backpacks</strong><small>Work, travel &amp; beyond</small></span><span class="c-tile-arrow" aria-hidden="true"><svg class="l-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></span></a>
+      <a class="c-category-tile" href="shop.html?cat=merch"><span class="c-category-image"><img src="assets/photos/newclassic-gifting.jpg" width="120" height="120" alt="" loading="eager"></span><span><strong>Corporate Merchandise</strong><small>Made around your brand</small></span><span class="c-tile-arrow" aria-hidden="true"><svg class="l-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></span></a>
     </section>
-    <section class="wrap l-collection" id="collection" aria-labelledby="collection-title">
-      <div class="l-collection-head"><h2 id="collection-title">The everyday collection</h2><span id="collection-count" role="status" aria-live="polite"></span></div>
+
+    <section class="wrap c-campaigns" aria-label="Explore the collections" data-home-discovery>
+      <article class="c-campaign c-campaign-apparel">
+        <img class="c-campaign-photo" src="assets/photos/newclassic-apparel-rack.jpg" width="1000" height="667" alt="Reference photograph of T-shirts in classic neutral colours" fetchpriority="high">
+        <div class="c-campaign-copy"><p class="c-kicker">THE APPAREL EDIT</p><h1>Everyday pieces.<br><em>Distinctly yours.</em></h1><p class="c-campaign-description">Considered essentials, from your first piece<br>to your next team collection.</p><a class="c-button" href="shop.html?cat=tshirts">Explore apparel <svg class="l-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></a></div>
+        <span class="c-campaign-foot">APPAREL / BAGS / YOUR BRAND</span>
+      </article>
+      <article class="c-campaign c-campaign-bags">
+        <div class="c-campaign-copy"><p class="c-kicker">THE EVERYDAY COMPANION</p><h2>Made to go.<br><em>Made for you.</em></h2><p class="c-campaign-description">Bags for working days<br>and everything after.</p><a class="c-button c-button-light" href="shop.html?cat=bags">Explore bags <svg class="l-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></a></div>
+        <img class="c-campaign-photo" src="assets/photos/reference-backpack.jpg" width="900" height="900" alt="Reference photograph of a navy backpack">
+        <span class="c-campaign-foot">BAGS &amp; BACKPACKS / THE COLLECTION</span>
+      </article>
+    </section>
+
+    <section class="wrap c-section c-featured" id="collection" aria-labelledby="collection-title">
+      <div class="c-section-heading"><div><p class="c-kicker">THE LUSTRY SELECTION</p><h2 id="collection-title">The apparel edit</h2></div><div class="c-collection-meta"><span id="collection-count" role="status" aria-live="polite"></span><a class="c-text-link" href="shop.html">View all products <svg class="l-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></a></div></div>
       <div id="home-style-filters" class="l-style-filters" aria-label="T-Shirt styles" hidden>
-        <button type="button" data-home-style="" aria-pressed="true">All T-Shirts</button>
-        <button type="button" data-home-style="round-neck" aria-pressed="false">Round Neck</button>
-        <button type="button" data-home-style="polo" aria-pressed="false">Polo</button>
-        <button type="button" data-home-style="oversized" aria-pressed="false">Oversized</button>
-        <button type="button" data-home-style="dryfit" aria-pressed="false">Dry-Fit</button>
+        <button type="button" data-home-style="" aria-pressed="true">All T-Shirts</button><button type="button" data-home-style="round-neck" aria-pressed="false">Round Neck</button><button type="button" data-home-style="polo" aria-pressed="false">Polo</button><button type="button" data-home-style="oversized" aria-pressed="false">Oversized</button><button type="button" data-home-style="dryfit" aria-pressed="false">Dry-Fit</button>
       </div>
-      <div id="featured-grid" class="product-grid l-product-grid"></div>
-      <p class="l-catalogue-note">Reference photography and concepts. Final product, colour, price and availability confirmed by Lustry. <a href="shop.html">Explore the full catalogue <svg class="l-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></a></p>
+      <div id="featured-grid" class="product-grid l-product-grid c-product-grid"></div>
+      <p class="l-catalogue-note c-reference-note">Reference photography and concepts. Final product, colour, price and availability confirmed by Lustry.</p>
+      <div class="c-assurances" data-home-discovery><span><b>01</b> Fabric &amp; GSM choices</span><span><b>02</b> Print &amp; embroidery options</span><span><b>03</b> Custom manufacturing from 25 pieces</span></div>
     </section>
-    <section class="wrap l-season" aria-labelledby="season-title">
-      <div class="l-season-copy"><p class="l-eyebrow">NEW YEAR 2027 / FOR YOUR TEAM</p><h2 id="season-title">A fresh year.<br>A shared identity.</h2><p>Make your next team collection yours.<br>Custom apparel, bags and merchandise from 25 pieces.</p><a class="l-button" href="custom.html">Plan your collection <span aria-hidden="true"><svg class="l-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></span></a></div>
-      <div class="l-season-offer"><span class="l-offer-label">BULK QUANTITY DISCOUNTS</span><p class="l-offer-big">Up to <strong>25%</strong></p><p class="l-offer-small">at 500+ pieces</p><div class="l-offer-tiers"><span><b>5%</b>100–199 pcs</span><span><b>20%</b>200–499 pcs</span><span><b>25%</b>500+ pcs</span></div><p class="l-offer-terms">Existing bulk pricing tiers. Indicative estimate; Lustry-approved final quotation required. Not a retail sale.</p></div>
+
+    <section class="c-bags-section" data-home-discovery aria-labelledby="bags-title">
+      <div class="wrap c-section"><div class="c-section-heading"><div><p class="c-kicker">BAGS &amp; BUSINESS ESSENTIALS</p><h2 id="bags-title">Carry your world.</h2></div><a class="c-text-link" href="shop.html?cat=bags">Explore all bags <svg class="l-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></a></div>
+        <div class="c-bags-layout"><div id="bags-edit-grid" class="product-grid l-product-grid c-product-grid"></div><a class="c-corporate-card" href="custom.html?category=merch"><img src="assets/photos/newclassic-gifting.jpg" alt="Reference photograph of gift packaging and desk accessories" width="1000" height="594" loading="lazy"><div><p class="c-kicker">CORPORATE MERCHANDISE</p><h3>A thoughtful way<br>to make your mark.</h3><p>Team gifts, welcome kits and branded essentials.<br>Specifications and pricing by quotation.</p><span class="c-text-link">Build your merchandise brief <svg class="l-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></span></div></a></div>
+      </div>
     </section>
-    <section class="wrap l-services" aria-label="Create with Lustry">
-      <a class="l-service" href="custom.html"><span class="l-service-number">01 / MADE FOR YOUR BRAND</span><h2>Your product.<br>Your specifications.</h2><p>Choose the fabric, GSM, colour and branding. Get an indicative estimate, then a team-approved quotation.</p><span class="l-link">Explore manufacturing <span aria-hidden="true"><svg class="l-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></span></span></a>
-      <a class="l-service" href="design.html"><span class="l-service-number">02 / THE DESIGN STUDIO</span><h2>See your idea<br>take shape.</h2><p>Try your logo on a T-shirt or bag in the local mockup editor. Concept previews stay separate from production artwork.</p><span class="l-link">Open the studio <span aria-hidden="true"><svg class="l-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></span></span></a>
+
+    <section class="wrap c-section c-create" data-home-discovery aria-labelledby="create-title">
+      <div class="c-section-heading"><div><p class="c-kicker">YOUR IDEAS, MADE PERSONAL</p><h2 id="create-title">Create something of your own.</h2></div><p class="c-section-caption">From the material to the finishing detail,<br>start with what matters to you.</p></div>
+      <div class="c-create-grid">
+        <a class="c-create-card c-manufacture-card" href="custom.html"><div><p class="c-kicker">CUSTOM MANUFACTURING</p><h3>Your product.<br>Your specifications.</h3><p>Choose fabric, GSM, colour and branding.<br>Get an indicative estimate and a team-reviewed quotation.</p><span class="c-text-link">Start a bulk enquiry <svg class="l-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></span><small>Minimum order: 25 pieces</small></div><img src="assets/photos/newclassic-apparel-rack.jpg" width="1000" height="667" alt="Reference photograph of an apparel collection" loading="lazy"></a>
+        <a class="c-create-card c-studio-card" href="design.html"><div><p class="c-kicker">THE DESIGN STUDIO</p><h3>See your idea<br>take shape.</h3><p>Preview your logo on a T-shirt or bag in our local mockup editor.</p><span class="c-text-link">Open the studio <svg class="l-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></span><small>Concept previews. Production artwork needs review.</small></div><div class="c-studio-sketch" aria-hidden="true"><svg viewBox="0 0 180 200" fill="none"><path d="m61 23-37 22 20 38 15-8v98h64V75l15 8 20-38-37-22c-8 18-50 18-60 0Z" stroke="currentColor" stroke-width="1.5"/><path d="M61 23c10 35 50 35 60 0M59 164h64" stroke="currentColor" stroke-width="1"/><rect x="76" y="78" width="31" height="31" rx="1" stroke="currentColor" stroke-dasharray="3 3"/><path d="M91.5 85v17M83 93.5h17" stroke="currentColor"/></svg><span>YOUR LOGO / YOUR IDEA</span></div></a>
+      </div>
     </section>
-    <div class="wrap l-help-line"><p>A question before you begin?</p><a class="l-link" href="contact.html">Talk to the Lustry team <span aria-hidden="true"><svg class="l-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></span></a></div>
+
+    <section class="wrap c-season" data-home-discovery aria-labelledby="season-title">
+      <div class="c-season-copy"><p class="c-kicker">NEW YEAR 2027 / TEAM COLLECTIONS</p><h2 id="season-title">A fresh year.<br><em>A shared identity.</em></h2><p>Start planning your next collection of branded apparel, bags and merchandise.</p><a class="c-button" href="custom.html">Plan your team collection <svg class="l-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></a></div>
+      <div class="l-season-offer c-season-offer"><p class="c-kicker">EXISTING BULK QUANTITY DISCOUNTS</p><p class="c-offer-value">Up to <strong>25%</strong><span>at 500+ pieces</span></p><div class="c-offer-tiers"><span><b>5%</b>100–199 pcs</span><span><b>20%</b>200–499 pcs</span><span><b>25%</b>500+ pcs</span></div><p class="c-offer-terms">Indicative estimate; Lustry-approved final quotation required. Existing bulk tiers, not a retail sale. Custom manufacturing starts at 25 pieces.</p></div>
+    </section>
+    <section class="wrap c-help" aria-label="Speak to Lustry"><p>Good things start with a conversation.</p><a class="c-text-link" href="contact.html">Talk to the Lustry team <svg class="l-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></a></section>
   </main>
   <div id="site-footer"></div>
   <div id="toast" role="status" aria-live="polite"></div>

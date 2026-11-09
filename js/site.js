@@ -39,6 +39,7 @@ function common(){
  const h=$('#site-header');
  if(h){h.className='site-header l-header';h.innerHTML=`
   <div class="l-head wrap"><a href="index.html" class="l-logo" aria-label="Lustry Home"><img src="assets/lustry-wordmark.jpg" width="190" height="52" alt="Lustry — Apparel and Bags Manufacturer"></a>
+   <form class="l-search-inline" action="shop.html" method="get" role="search" aria-label="Search catalogue"><label class="sr-only" for="inline-shop-search">Search products and fabrics</label><input id="inline-shop-search" name="q" type="search" placeholder="Search products, fabrics and styles" autocomplete="off"><button type="submit" aria-label="Submit catalogue search">${headerIcon('search')}</button></form>
    <nav class="l-business-nav" aria-label="Services"><a href="custom.html">Bulk manufacturing</a><a href="design.html">Design Studio</a></nav>
    <div class="l-actions"><button class="l-icon-btn l-search-toggle" type="button" aria-label="Search products" aria-expanded="false" aria-controls="l-search-panel">${headerIcon('search')}</button><button class="l-icon-btn l-contact-toggle" type="button" data-open-bulk-popup aria-label="Request a call">${headerIcon('phone')}<span>Contact</span></button><a class="l-icon-btn l-bag" href="cart.html" aria-label="Preview shopping bag">${headerIcon('bag')}<b data-cart-count>0</b></a><button class="l-icon-btn l-menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="l-menu-panel">${headerIcon('menu')}</button></div>
   </div>
@@ -69,18 +70,20 @@ function initHome(){
  if(!Object.hasOwn(catNames,active))active='';if(active!=='tshirts'||!validStyles.has(style))style='';
  function render(){
   const order=['rn-sarina','bp-lap','hood-ft','bag-nw','polo-pq','os-tee','sweat-ft','rn-comb','polo-dry'];
-  const products=order.filter((id,index)=>active||index<8).map(id=>P.find(p=>p.id===id)).filter(p=>p&&(!active||p.cat===active)&&(!style||(style==='dryfit'?/dry[ -]?fit/i.test(p.fabric+' '+p.name+' '+p.spec):p.subcat===style)));
+  const products=order.filter(id=>active||['rn-sarina','polo-pq','hood-ft','sweat-ft'].includes(id)).map(id=>P.find(p=>p.id===id)).filter(p=>p&&(!active||p.cat===active)&&(!style||(style==='dryfit'?/dry[ -]?fit/i.test(p.fabric+' '+p.name+' '+p.spec):p.subcat===style)));
   grid.innerHTML=active==='merch'?`<div class="l-merch"><span class="l-eyebrow">CUSTOM MERCHANDISE</span><h2>A little more you.</h2><p>Notebooks, bottles, welcome kits and corporate gifts. Tell us what you have in mind; our team will confirm specifications and a quotation.</p><a class="l-button" href="custom.html?category=merch">Build a merchandise brief <svg class="l-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></a><small>Custom manufacturing from 25 pieces.</small></div>`:products.map(homeCard).join('');
-  $('#collection-title').textContent=active?catNames[active]:'The everyday collection';
+  $('#collection-title').textContent=active?catNames[active]:'The apparel edit';
   $('#collection-count').textContent=active==='merch'?'Made to your brief':products.length+' reference styles';
   $$('[data-home-cat]').forEach(link=>{if(link.dataset.homeCat===active)link.setAttribute('aria-current','true');else link.removeAttribute('aria-current')});
   styleFilters.hidden=active!=='tshirts';
+  $$('[data-home-discovery]').forEach(section=>section.hidden=Boolean(active));
   $$('[data-home-style]').forEach(b=>{b.setAttribute('aria-pressed',String(b.dataset.homeStyle===style))});
   const params=new URLSearchParams(location.search);if(active)params.set('cat',active);else params.delete('cat');if(style)params.set('style',style);else params.delete('style');
   try{history.replaceState(null,'',location.pathname+(params.size?'?'+params.toString():'')+location.hash)}catch{}
  }
  $$('[data-home-cat]').forEach(link=>link.addEventListener('click',ev=>{if(ev.ctrlKey||ev.metaKey||ev.shiftKey||ev.altKey||ev.button!==0)return;ev.preventDefault();active=link.dataset.homeCat;style='';render();link.scrollIntoView({block:'nearest',inline:'nearest',behavior:'instant'})}));
  $$('[data-home-style]').forEach(b=>b.addEventListener('click',()=>{style=b.dataset.homeStyle;render()}));
+ const bagsGrid=$('#bags-edit-grid');if(bagsGrid)bagsGrid.innerHTML=P.filter(p=>p.cat==='bags').map(homeCard).join('');
  render();
 }
 function initShop(){

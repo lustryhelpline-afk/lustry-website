@@ -23,3 +23,14 @@ Further photo-page source records checked on 9 November 2026:
 The endpoints establish the retrieval source; they do not establish photographer names, model/property releases, ownership by Lustry, or the underlying product's availability. This document makes no new licensing or release claim. General Unsplash terms are available at https://unsplash.com/license; retain an asset's original source record when replacing it with owner-approved product photography.
 
 The existing oversized-T-shirt endpoint (`photo-1529139574466-a303027c1d8b`) was also inspected and rejected: it depicts a fashion portrait with conspicuous third-party clothing branding rather than a clear, plain oversized T-shirt. The previous sweatshirt endpoint (`photo-1578681994506-b8f463449011`) depicts a black branded sweatshirt and was replaced by the plain white sweatshirt reference above. Neither rejected image was added to these public assets.
+
+## Classic commerce campaign references — 9 November 2026
+
+Two additional real photographs were downloaded for category/campaign illustration. They are not Lustry production photography or evidence that a pictured item, material, packaging or colour is available. No brand artwork was added. The downloaded images were not edited; sizing/quality were requested through the image-service URL.
+
+| Local asset | Exact downloaded source | Verified visual content and use |
+| --- | --- | --- |
+| `assets/photos/newclassic-apparel-rack.jpg` | https://images.unsplash.com/photo-1666358062771-c806651d3bf7?auto=format&fit=crop&w=1000&q=82 | Four T-shirts in black, white, navy and beige on a black rack, white studio background. This same image endpoint was referenced by the original V8 homepage hero. A small non-Lustry garment mark is visible; use as general apparel reference, not as a photographed Lustry collection. Photographer and original photo-page URL have not been established; no new ownership or release claim is made. Downloaded JPEG: 1000×667, 41,804 bytes. |
+| `assets/photos/newclassic-gifting.jpg` | https://images.unsplash.com/photo-1544377208-215a63786183?auto=format&fit=crop&w=1000&q=82 | Real flatlay with a white gift box, red ribbon, notebook/desk accessories and gold details against a black background. Suitable for a corporate-gifting reference panel; does not establish actual gift-kit contents or packaging. Downloaded JPEG: 1000×594, 60,692 bytes. |
+
+The gifting photo's primary page is [NORTHFOLK — white gift box with red ribbon beside pencil, scissors, and tape dispenser](https://unsplash.com/photos/white-gift-box-with-red-ribbon-beside-pencil-scissors-and-tape-dispenser-Ts0g6PHe1q0). The page was checked on 9 November 2026 and describes the image as free under the Unsplash License, published 9 December 2018. The image endpoint was obtained from that page's image link. This source record does not imply Lustry ownership, a photographer endorsement, or confirmed production specifications.
