@@ -5,6 +5,7 @@ window.LUSTRY_CONFIG = {
   aiSupportFunction: "ai-support",
   callbackFunction: "callback-request",
 whatsappNumber: "919119076674",
+  callingNumber: "919267373084",
   companyEmail: "info@lustry.in",
   currency: "INR"
 };
