@@ -46,7 +46,6 @@ async function fixture(options={}) {
   // All external requests are blocked. These tests never reach a live backend.
   return route.abort('blockedbyclient');
  });
- await page.addInitScript(()=>sessionStorage.setItem('v8pop','1'));
  return {context,page,state};
 }
 async function run(name,fn) {
@@ -70,6 +69,117 @@ async function fillEnquiry(page) {
  await startLocalServer();
  const executablePath=process.env.LUSTRY_CHROMIUM_PATH||['/usr/bin/chromium','/usr/bin/chromium-browser'].find(file=>fs.existsSync(file));
  browser=await chromium.launch({...(executablePath?{executablePath}:{}),headless:true,args:['--no-sandbox']});
+ await run('mobile storefront shows categories and real reference photos in the first screen',async({page})=>{
+  for(const width of [320,390]){
+   await page.setViewportSize({width,height:780});await page.goto(BASE+'/index.html');
+   const categories=page.getByRole('navigation',{name:'Product categories'});
+   assert.equal(await categories.locator('[data-home-cat]').count(),5);
+   assert.equal(await categories.locator('[data-home-cat="tshirts"]').isVisible(),true);
+   const header=await page.locator('#site-header').boundingBox();assert.ok(header.height<=130,'compact header on '+width);
+   const first=await page.locator('#featured-grid .product-photo').first().boundingBox();
+   assert.ok(first.y<400&&first.y+first.height<780,'first product is visible without scrolling on '+width);
+   const photos=page.locator('#featured-grid .product-photo img');
+   await photos.first().evaluate(img=>img.decode());
+   assert.ok((await photos.first().getAttribute('src')).startsWith('assets/photos/'),'first card uses local photography');
+   assert.equal(await photos.first().evaluate(img=>img.naturalWidth>0),true);
+   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+  }
+ });
+ await run('home categories and T-shirt subcategories filter in place and survive reload',async({page})=>{
+  await page.goto(BASE+'/index.html');
+  const count=await page.locator('#featured-grid .product-card').count();assert.ok(count>=4);
+  await page.locator('[data-home-cat="bags"]').click();
+  assert.equal(await page.locator('#featured-grid .product-card').count(),2);
+  assert.equal(await page.locator('#collection-title').innerText(),'Bags & Backpacks');
+  assert.equal(new URL(page.url()).pathname,new URL(BASE+'/index.html').pathname);
+  assert.equal(new URL(page.url()).searchParams.get('cat'),'bags');
+  await page.locator('[data-home-cat="tshirts"]').click();
+  assert.equal(await page.locator('#home-style-filters').isVisible(),true);
+  await page.locator('[data-home-style="polo"]').click();
+  assert.equal(await page.locator('#featured-grid .product-card').count(),2);
+  await page.reload();
+  assert.equal(await page.locator('[data-home-style="polo"]').getAttribute('aria-pressed'),'true');
+  assert.equal(await page.locator('#featured-grid .product-card').count(),2);
+  await page.locator('[data-home-style="dryfit"]').click();
+  assert.ok((await page.locator('#featured-grid').innerText()).includes('Dry-fit'));
+  await page.locator('[data-home-cat="merch"]').click();
+  assert.equal(await page.locator('#featured-grid .product-card').count(),0);
+  await page.getByRole('link',{name:'Build a merchandise brief'}).click();
+  await page.waitForLoadState('load');
+  assert.equal(new URL(page.url()).searchParams.get('category'),'merch');
+  assert.equal(await page.locator('#q-category').inputValue(),'merch');
+ });
+ await run('compact navigation keeps search, phone, WhatsApp and quick view accessible',async({page})=>{
+  await page.setViewportSize({width:390,height:780});await page.goto(BASE+'/index.html');
+  await page.getByRole('button',{name:'Open menu',exact:true}).click();
+  assert.equal(await page.locator('#l-menu-panel').isVisible(),true);
+  assert.equal(await page.locator('#l-menu-panel a[href="tel:+919267373084"]').count(),1);
+  assert.equal(await page.locator('#l-menu-panel a[href="https://wa.me/919119076674"]').count(),1);
+  await page.keyboard.press('Escape');assert.equal(await page.locator('.l-menu-toggle').getAttribute('aria-expanded'),'false');
+  await page.getByRole('button',{name:'Search products',exact:true}).click();
+  await page.locator('#top-shop-search').fill('cotton');await page.locator('#top-shop-search').press('Enter');
+  await page.waitForURL('**/shop.html?q=cotton');
+  assert.equal(await page.locator('#shop-search').inputValue(),'cotton');
+  await page.goto(BASE+'/index.html');
+  await page.locator('#featured-grid .v7-qv').first().click();
+  assert.equal(await page.getByRole('dialog',{name:'Quick view',exact:true}).isVisible(),true);
+  await page.locator('.v7-x').click();
+  await page.locator('[data-open-bulk-popup]').click();
+  assert.equal(await page.locator('.v8-act a[href="tel:+919267373084"]').count(),1);
+ });
+ await run('browsing stays uninterrupted and FAQ support opens only on request',async({page})=>{
+  await page.clock.install();await page.goto(BASE+'/index.html');await page.clock.runFor(25000);
+  assert.equal(await page.locator('dialog[open]').count(),0);
+  assert.equal(await page.locator('.v7-mbar,.v7-fab,.v7-top,.v8-open').count(),0);
+  assert.equal(await page.locator('#v8-chat-window').getAttribute('aria-hidden'),'true');
+  const trigger=page.locator('[data-open-lustry-chat]');await trigger.click();
+  assert.equal(await trigger.getAttribute('aria-expanded'),'true');
+  await page.getByRole('button',{name:'Minimum order?',exact:true}).click();
+  await page.waitForFunction(()=>document.querySelector('#v8m').textContent.includes('25 pieces'));
+  assert.ok((await page.locator('#v8s').innerText()).includes('Quick answers'));
+  await page.getByRole('button',{name:'Close chat',exact:true}).click();
+  assert.equal(await trigger.getAttribute('aria-expanded'),'false');
+  assert.equal(await trigger.evaluate(el=>document.activeElement===el),true);
+  for(const viewport of [{width:320,height:480},{width:1280,height:560}]){
+   await page.setViewportSize(viewport);await trigger.click();
+   const close=page.getByRole('button',{name:'Close chat',exact:true}),bounds=await close.boundingBox();
+   assert.ok(bounds.x>=0&&bounds.y>=0&&bounds.x+bounds.width<=viewport.width&&bounds.y+bounds.height<=viewport.height,'FAQ close remains in viewport '+viewport.width);
+   await close.click();assert.equal(await trigger.getAttribute('aria-expanded'),'false');
+  }
+ });
+ await run('seasonal promotion uses approved bulk tiers and honours reduced motion',async({page})=>{
+  await page.emulateMedia({reducedMotion:'reduce'});await page.goto(BASE+'/index.html');
+  const offer=await page.locator('.l-season-offer').innerText();
+  for(const text of ['100–199','200–499','500+','5%','20%','25%','final quotation'])assert.ok(offer.includes(text),'missing bulk term '+text);
+  assert.ok((await page.locator('.l-catalogue-note').innerText()).includes('confirmed by Lustry'));
+  assert.equal(await page.locator('.l-intro').evaluate(el=>getComputedStyle(el,'::before').animationName),'none');
+  assert.equal(await page.locator('.l-season').evaluate(el=>getComputedStyle(el,'::before').animationName),'none');
+ });
+ await run('shop uses the shared category navigation with persistent URL and selected state',async({page})=>{
+  await page.setViewportSize({width:390,height:780});await page.goto(BASE+'/shop.html');
+  const categories=page.getByRole('navigation',{name:'Product categories'});
+  assert.equal(await categories.locator('[data-cat]').count(),5);
+  await categories.locator('[data-cat="bags"]').click();
+  assert.equal(new URL(page.url()).searchParams.get('cat'),'bags');
+  assert.equal(await page.locator('#shop-grid .product-card').count(),2);
+  assert.equal(await categories.locator('[data-cat="bags"]').getAttribute('aria-current'),'true');
+  assert.equal(await categories.locator('[aria-current]').count(),1);
+  await categories.locator('[data-cat="tshirts"]').click();
+  assert.equal(await page.locator('#tshirt-subfilters').isVisible(),true);
+  await page.locator('[data-style="polo"]').click();
+  assert.equal(new URL(page.url()).searchParams.get('style'),'polo');
+  assert.equal(await page.locator('#shop-grid .product-card').count(),2);
+  await page.reload();
+  assert.equal(await categories.locator('[data-cat="tshirts"]').getAttribute('aria-current'),'true');
+  assert.equal(await page.locator('[data-style="polo"]').getAttribute('aria-pressed'),'true');
+  assert.equal(await page.locator('#shop-grid .product-card').count(),2);
+  await categories.locator('[data-cat=""]').click();
+  assert.equal(new URL(page.url()).searchParams.has('cat'),false);
+  assert.equal(new URL(page.url()).searchParams.has('style'),false);
+  assert.equal(await page.locator('#tshirt-subfilters').isVisible(),false);
+  assert.equal(await categories.locator('[data-cat=""]').getAttribute('aria-current'),'true');
+  assert.ok(await page.locator('#shop-grid .product-card').count()>2);
+ });
  await run('category and subcategory filters',async({page})=>{
   await page.goto(BASE+'/shop.html?cat=tshirts');
   const all=await page.locator('.product-card').count();assert.ok(all>=4);
