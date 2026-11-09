@@ -4,6 +4,7 @@ window.LUSTRY_CONFIG = {
   submitOrderFunction: "submit-order",
   aiSupportFunction: "ai-support",
 whatsappNumber: "919119076674",
+  callingNumber: "919267373084",
   companyEmail: "info@lustry.in",
   currency: "INR"
 };
