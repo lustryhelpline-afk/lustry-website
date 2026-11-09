@@ -32,7 +32,7 @@ async function copyPublic(relative, allowedExtensions) {
 
 await rm(output, { recursive: true, force: true });
 await mkdir(output, { recursive: true });
-for (const file of [...pages, 'robots.txt', 'sitemap.xml']) await copyPublic(file);
+for (const file of [...pages, 'robots.txt', 'sitemap.xml', 'favicon.ico', 'favicon-192.png']) await copyPublic(file);
 for (const [directory, extensions] of Object.entries(publicDirectories)) await copyPublic(directory, extensions);
 
 // Cloudflare serves this file at the original missing URL, including nested paths.
