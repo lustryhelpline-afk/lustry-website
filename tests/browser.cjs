@@ -315,6 +315,7 @@ async function fillEnquiry(page) {
   assert.equal(await white.locator('span').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(255, 255, 255)');
   await page.locator('#product-qty').fill('2');await white.click();assert.equal(await page.locator('#product-qty').inputValue(),'2');
   await page.goto(BASE+'/product.html?id=js-v1');
+  assert.match(await page.locator('.detail-price').innerText(),/per set of 11 pieces/i);
   assert.equal(await page.locator('#product-qty').getAttribute('min'),'1');
   assert.match(await page.locator('#product-detail').innerText(),/(?:set|pack)[^\n]{0,25}11|11[^\n]{0,25}(?:set|pack|pieces)/i);
   await page.locator('#product-qty').fill('2');await page.locator('#add-demo-cart').click();await page.goto(BASE+'/cart.html');
@@ -538,6 +539,9 @@ async function fillEnquiry(page) {
     await page.goto(BASE+route);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'overflow '+width+' '+route);
    }
   }
+  await page.setViewportSize({width:320,height:900});await page.goto(BASE+'/product.html?id=rn-sarina');
+  await page.addStyleTag({content:':root{--sans:"DejaVu Sans",sans-serif!important}'});
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'legacy detail fits a wider fallback font at 320px');
  });
  await browser.close();browser=null;if(server){await new Promise(resolve=>server.close(resolve));server=null;}
  console.log(JSON.stringify({passed:results.filter(r=>r.status==='PASS').length,failed:results.filter(r=>r.status==='FAIL').length,results},null,2));

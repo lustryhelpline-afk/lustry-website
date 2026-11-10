@@ -95,3 +95,12 @@ em{font-style:normal!important;color:var(--commerce-gold-ink)}
  .c-campaign-description{font-size:10px;margin-bottom:15px}
  .c-campaign-copy,.c-campaign-bags .c-campaign-copy{padding-top:23px;padding-bottom:23px}
 }
+/* Product details must shrink and wrap on narrow screens across browser fonts. */
+@media(max-width:600px){
+  .product-page{grid-template-columns:minmax(0,1fr)}
+  .detail-info,.detail-image,.related .product-card{min-width:0;max-width:100%}
+  .detail-info .text-link{white-space:normal;max-width:100%;overflow-wrap:anywhere;line-height:1.8}
+  .detail-actions .btn{min-width:0;white-space:normal;overflow-wrap:anywhere}
+  .related .product-bottom{min-width:0}
+  .related .product-price{white-space:normal;overflow-wrap:anywhere}
+}

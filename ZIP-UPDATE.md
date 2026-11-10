@@ -11,7 +11,7 @@ Imported the owner's lustry-website-updated.zip over production source afdf40018
 - Set prices and quantity labels distinguish a piece from a retail pack. Bulk enquiries still start at 25 pieces and pack enquiries round up to a valid set quantity.
 - New-product quotation links preserve the exact SKU and use existing supported enquiry categories. Unknown materials require selection rather than assuming a fabric. Compatible Tote Studio links use the tote template; arbitrary bag models do not claim a matching backpack mockup.
 - Added White swatches, restored demo-total labels, and explain saved selections omitted after a catalogue update.
-- Fixed Studio/footer/offer contrast, kept printed bag details visible with contain-fit images, and corrected desktop campaign-button clipping at 768–1440px.
+- Fixed Studio/footer/offer contrast, kept printed bag details visible with contain-fit images, and corrected desktop campaign-button clipping at 768–1440px. Product details also wrap safely at 320px with wider fallback fonts, and indicative price units render correctly.
 - CI reuses the hosted runner's installed Chrome/Chromium, with the existing Playwright installation as fallback; all test and deployment checks remain enabled.
 
 ## Validation
