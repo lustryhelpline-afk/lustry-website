@@ -17,6 +17,22 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run check
-      - run: npx playwright install --with-deps chromium
+      - name: Select browser for regression tests
+        shell: bash
+        run: |
+          # Ubuntu hosted runners already include Chrome and its dependencies.
+          # Reuse that browser instead of repeating apt/browser installation.
+          lustry_browser_path=""
+          for lustry_browser_name in google-chrome google-chrome-stable chromium chromium-browser; do
+            if lustry_browser_path="$(command -v "$lustry_browser_name")"; then
+              break
+            fi
+          done
+          if [ -n "$lustry_browser_path" ]; then
+            printf 'LUSTRY_CHROMIUM_PATH=%s\n' "$lustry_browser_path" >> "$GITHUB_ENV"
+            "$lustry_browser_path" --version
+          else
+            npx --no-install playwright install --with-deps chromium
+          fi
       - run: npm test
       - run: npm run deploy:dry-run

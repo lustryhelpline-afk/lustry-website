@@ -73,7 +73,7 @@ async function fillEnquiry(page) {
   for(const width of [320,390]){
    await page.setViewportSize({width,height:780});await page.goto(BASE+'/index.html');
    const categories=page.getByRole('navigation',{name:'Product categories'});
-   assert.equal(await categories.locator('[data-home-cat]').count(),5);
+   assert.equal(await categories.locator('[data-home-cat]').count(),8);
    assert.equal(await categories.locator('[data-home-cat="tshirts"]').isVisible(),true);
    const header=await page.locator('#site-header').boundingBox();assert.ok(header.height<=130,'compact header on '+width);
    const tiles=page.locator('.c-category-tile');assert.equal(await tiles.count(),4);
@@ -87,28 +87,35 @@ async function fillEnquiry(page) {
    assert.equal(await photos.first().evaluate(img=>img.naturalWidth>0),true);
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   }
+  for(const width of [768,1024,1100,1440]){
+   await page.setViewportSize({width,height:1000});await page.goto(BASE+'/index.html');
+   for(const campaign of await page.locator('.c-campaign').all()){
+    const card=await campaign.boundingBox(),button=await campaign.locator('.c-button').boundingBox();
+    assert.ok(button.x>=card.x&&button.y>=card.y&&button.x+button.width<=card.x+card.width&&button.y+button.height<=card.y+card.height,'campaign action is not clipped at '+width);
+   }
+  }
  });
  await run('image categories and campaign links lead to the matching product collections',async({page,state})=>{
   await page.goto(BASE+'/index.html');
   const tiles=page.locator('.c-category-tile');assert.equal(await tiles.count(),4);
   const categories=await tiles.evaluateAll(nodes=>nodes.map(a=>new URL(a.href).searchParams.get('cat')));
-  assert.deepEqual(categories,['tshirts','hoodies','bags','merch']);
+  assert.deepEqual(categories,['tshirts','hoodies','bags','accessories']);
   await tiles.filter({hasText:'T-Shirts'}).click();await page.waitForLoadState('load');
   assert.equal(new URL(page.url()).searchParams.get('cat'),'tshirts');
   assert.equal(await page.locator('#tshirt-subfilters').isVisible(),true);
   assert.ok(await page.locator('#shop-grid .product-card').count()>=4);
   await page.goto(BASE+'/index.html');await page.locator('.c-campaign-bags').getByRole('link',{name:'Explore bags'}).click();await page.waitForLoadState('load');
   assert.equal(new URL(page.url()).searchParams.get('cat'),'bags');
-  assert.equal(await page.locator('#shop-grid .product-card').count(),2);
+  assert.equal(await page.locator('#shop-grid .product-card').count(),102);
   assert.equal(state.requests.filter(r=>r.method==='POST').length,0);
  });
  await run('curated apparel and bags remain distinct and discovery returns after clearing a filter',async({page})=>{
   await page.goto(BASE+'/index.html');
   const productCategories=selector=>page.locator(selector+' .product-photo').evaluateAll(links=>links.map(a=>window.LUSTRY_CATALOG.find(p=>p.id===new URL(a.href).searchParams.get('id'))?.cat));
   const apparel=await productCategories('#featured-grid');assert.equal(apparel.length,4);assert.ok(apparel.every(cat=>['tshirts','hoodies'].includes(cat)));
-  assert.deepEqual(await productCategories('#bags-edit-grid'),['bags','bags']);
+  assert.deepEqual(await productCategories('#bags-edit-grid'),['bags','bags','bags','bags']);
   await page.locator('[data-home-cat="bags"]').click();
-  assert.equal(await page.locator('#featured-grid .product-card').count(),2);
+  assert.equal(await page.locator('#featured-grid .product-card').count(),102);
   assert.equal(await page.locator('[data-home-discovery]').evaluateAll(nodes=>nodes.every(el=>el.hidden)),true);
   await page.locator('[data-home-cat=""]').click();
   assert.equal(await page.locator('#featured-grid .product-card').count(),4);
@@ -149,20 +156,20 @@ async function fillEnquiry(page) {
   await page.goto(BASE+'/index.html');
   const count=await page.locator('#featured-grid .product-card').count();assert.ok(count>=4);
   await page.locator('[data-home-cat="bags"]').click();
-  assert.equal(await page.locator('#featured-grid .product-card').count(),2);
+  assert.equal(await page.locator('#featured-grid .product-card').count(),102);
   assert.equal(await page.locator('#collection-title').innerText(),'Bags & Backpacks');
   assert.equal(new URL(page.url()).pathname,new URL(BASE+'/index.html').pathname);
   assert.equal(new URL(page.url()).searchParams.get('cat'),'bags');
   await page.locator('[data-home-cat="tshirts"]').click();
   assert.equal(await page.locator('#home-style-filters').isVisible(),true);
   await page.locator('[data-home-style="polo"]').click();
-  assert.equal(await page.locator('#featured-grid .product-card').count(),2);
+  assert.equal(await page.locator('#featured-grid .product-card').count(),5);
   await page.reload();
   assert.equal(await page.locator('[data-home-style="polo"]').getAttribute('aria-pressed'),'true');
-  assert.equal(await page.locator('#featured-grid .product-card').count(),2);
+  assert.equal(await page.locator('#featured-grid .product-card').count(),5);
   await page.locator('[data-home-style="dryfit"]').click();
   assert.ok((await page.locator('#featured-grid').innerText()).includes('Dry-fit'));
-  await page.locator('[data-home-cat="merch"]').click();
+  await page.goto(BASE+'/index.html?cat=merch');
   assert.equal(await page.locator('#featured-grid .product-card').count(),0);
   await page.getByRole('link',{name:'Build a merchandise brief'}).click();
   await page.waitForLoadState('load');
@@ -211,28 +218,29 @@ async function fillEnquiry(page) {
   await page.emulateMedia({reducedMotion:'reduce'});await page.goto(BASE+'/index.html');
   const offer=await page.locator('.l-season-offer').innerText();
   for(const text of ['100–199','200–499','500+','5%','20%','25%','final quotation'])assert.ok(offer.includes(text),'missing bulk term '+text);
-  assert.ok((await page.locator('.l-catalogue-note').innerText()).includes('confirmed by Lustry'));
+  const catalogueNote=await page.locator('.l-catalogue-note').innerText();
+  assert.match(catalogueNote,/indicative/i);assert.match(catalogueNote,/confirm/i);assert.match(catalogueNote,/Lustry/i);
   assert.equal(await page.locator('.c-campaign-apparel').evaluate(el=>getComputedStyle(el,'::before').animationName),'none');
   assert.equal(await page.locator('.c-season').evaluate(el=>getComputedStyle(el,'::before').animationName),'none');
  });
  await run('shop uses the shared category navigation with persistent URL and selected state',async({page})=>{
   await page.setViewportSize({width:390,height:780});await page.goto(BASE+'/shop.html');
   const categories=page.getByRole('navigation',{name:'Product categories'});
-  assert.equal(await categories.locator('[data-cat]').count(),5);
+  assert.equal(await categories.locator('[data-cat]').count(),8);
   await categories.locator('[data-cat="bags"]').click();
   assert.equal(new URL(page.url()).searchParams.get('cat'),'bags');
-  assert.equal(await page.locator('#shop-grid .product-card').count(),2);
+  assert.equal(await page.locator('#shop-grid .product-card').count(),102);
   assert.equal(await categories.locator('[data-cat="bags"]').getAttribute('aria-current'),'true');
   assert.equal(await categories.locator('[aria-current]').count(),1);
   await categories.locator('[data-cat="tshirts"]').click();
   assert.equal(await page.locator('#tshirt-subfilters').isVisible(),true);
   await page.locator('[data-style="polo"]').click();
   assert.equal(new URL(page.url()).searchParams.get('style'),'polo');
-  assert.equal(await page.locator('#shop-grid .product-card').count(),2);
+  assert.equal(await page.locator('#shop-grid .product-card').count(),5);
   await page.reload();
   assert.equal(await categories.locator('[data-cat="tshirts"]').getAttribute('aria-current'),'true');
   assert.equal(await page.locator('[data-style="polo"]').getAttribute('aria-pressed'),'true');
-  assert.equal(await page.locator('#shop-grid .product-card').count(),2);
+  assert.equal(await page.locator('#shop-grid .product-card').count(),5);
   await categories.locator('[data-cat=""]').click();
   assert.equal(new URL(page.url()).searchParams.has('cat'),false);
   assert.equal(new URL(page.url()).searchParams.has('style'),false);
@@ -248,6 +256,95 @@ async function fillEnquiry(page) {
   await page.locator('#shop-search').fill('no-match-<img src=x onerror=alert(1)>');
   assert.equal(await page.locator('.product-card').count(),0);
   assert.ok(await page.locator('#shop-grid').innerText().then(t=>t.includes('No matches')));
+ });
+ await run('new category filters expose their complete uploaded collections on home and shop',async({page})=>{
+  const expected={tshirts:10,hoodies:8,jerseys:4,bags:102,accessories:5,gifts:3,print:6};
+  for(const [route,grid,attribute]of [['/index.html','#featured-grid','data-home-cat'],['/shop.html','#shop-grid','data-cat']]){
+   await page.goto(BASE+route);
+   for(const [category,count]of Object.entries(expected)){
+    await page.locator('['+attribute+'="'+category+'"]').click();
+    assert.equal(await page.locator(grid+' .product-card').count(),count,route+' complete '+category);
+    const ids=await page.locator(grid+' .product-photo').evaluateAll(nodes=>nodes.map(a=>new URL(a.href).searchParams.get('id')));
+    assert.equal(new Set(ids).size,count,'no duplicate product links');
+    if(category==='bags')for(const id of ['bag-001','bag-050','bag-101','tote'])assert.ok(ids.includes(id),'missing '+id);
+    assert.ok(!ids.includes('rn-sarina')&&!ids.includes('bag-nw'),'legacy references stay out of new browsing');
+   }
+  }
+ });
+ await run('uploaded bag photography is included in the public build and product detail',async({page})=>{
+  const responses=await Promise.all(Array.from({length:101},(_,i)=>page.request.get(BASE+'/assets/bags/bag-'+String(i+1).padStart(3,'0')+'.jpg')));
+  for(let i=0;i<responses.length;i++){
+   const response=responses[i];assert.equal(response.status(),200,'bag photo '+(i+1));
+   assert.ok(response.headers()['content-type'].startsWith('image/jpeg'));
+   const bytes=await response.body();assert.ok(bytes.length>512);assert.equal(bytes[0],255);assert.equal(bytes[1],216);
+  }
+  await page.goto(BASE+'/product.html?id=bag-101');
+  assert.ok((await page.locator('#product-detail h1').innerText()).includes('101'));
+  const image=page.locator('#product-detail .detail-image img');await image.evaluate(img=>img.decode());
+  assert.ok((await image.getAttribute('src')).endsWith('/bag-101.jpg'));
+  assert.equal(await image.evaluate(img=>img.naturalWidth>0),true);
+ });
+ await run('unconfirmed stock, delivery and prices are not published as verified offers',async({page})=>{
+  for(const route of ['/index.html','/shop.html?cat=bags','/product.html?id=rn-cotton']){
+   await page.goto(BASE+route);
+   const body=await page.locator('body').innerText();
+   assert.ok(!/\b[13][- ]day delivery\b|1 day on T-shirts|in stock/i.test(body),'unverified claim in '+route);
+   const schema=(await page.locator('script[type="application/ld+json"]').allTextContents()).join(' ');
+   assert.ok(!/schema\.org\/InStock|"@type"\s*:\s*"Offer"/.test(schema),'unverified structured offer in '+route);
+   if(route.includes('product.html'))assert.match(await page.locator('.detail-price').innerText(),/demo|indicative|not final/i);
+   else assert.match(await page.locator('.product-card').first().innerText(),/demo|indicative|reference/i);
+  }
+  assert.equal((await page.request.get(BASE+'/google-merchant-feed.tsv')).status(),404,'unverified merchant feed stays unpublished');
+ });
+ await run('legacy links remain usable while Oversized remains a current T-shirt style',async({page})=>{
+  await page.goto(BASE+'/product.html?id=rn-sarina');
+  assert.ok((await page.locator('#product-detail h1').innerText()).includes('Essential'));
+  assert.equal(await page.locator('#product-qty').getAttribute('min'),'1');
+  await page.goto(BASE+'/shop.html?cat=tshirts');
+  assert.equal(await page.locator('#shop-grid .product-photo[href*="rn-sarina"]').count(),0);
+  await page.locator('[data-style="oversized"]').click();
+  assert.equal(await page.locator('#shop-grid .product-photo[href*="os-tee"]').count(),1);
+  await page.evaluate(()=>localStorage.setItem('lustry_demo_cart_v3',JSON.stringify([{id:'rn-sarina',color:'Ivory',size:'M',quantity:1},{id:'polo-dry',color:'Forest',size:'M',quantity:1}])));
+  await page.goto(BASE+'/cart.html');
+  assert.equal(await page.locator('.cart-row').count(),1,'compatible legacy selection survives the catalogue update');
+  assert.match(await page.locator('#catalogue-cart-notice').innerText(),/updated catalogue.*omitted/i);
+ });
+ await run('new apparel White swatches and pack quantities use the correct unit',async({page})=>{
+  await page.goto(BASE+'/product.html?id=rn-cotton');
+  const white=page.locator('[data-colour="White"]');
+  assert.equal(await white.locator('span').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(255, 255, 255)');
+  await page.locator('#product-qty').fill('2');await white.click();assert.equal(await page.locator('#product-qty').inputValue(),'2');
+  await page.goto(BASE+'/product.html?id=js-v1');
+  assert.equal(await page.locator('#product-qty').getAttribute('min'),'1');
+  assert.match(await page.locator('#product-detail').innerText(),/(?:set|pack)[^\n]{0,25}11|11[^\n]{0,25}(?:set|pack|pieces)/i);
+  await page.locator('#product-qty').fill('2');await page.locator('#add-demo-cart').click();await page.goto(BASE+'/cart.html');
+  const text=await page.locator('.cart-row .product-price').innerText();
+  assert.equal(Number(text.match(/₹\s*([\d,]+)/)[1].replaceAll(',','')),15652,'two packs multiply the pack price once');
+  assert.equal(await page.getByRole('button',{name:'Checkout not yet available'}).isDisabled(),true);
+ });
+ await run('new catalogue enquiries keep their reference and correct backend category',async({page,state})=>{
+  for(const [id,category,quantity]of [['js-v1','merch',33],['cap','merch',25],['jk-eco','merch',25],['sipper','merch',25],['vcard','merch',100],['bag-001','bags',25]]){
+   await page.goto(BASE+'/custom.html?product='+id);
+   assert.equal(await page.locator('#q-category').inputValue(),category,'quotation category '+id);
+   assert.equal(Number(await page.locator('#q-qty').inputValue()),quantity,'MOQ/pack quantity '+id);
+   const brief=await page.locator('#custom-form [name=design]').inputValue();
+   assert.ok(/Catalogue reference/i.test(brief));
+   if(id==='sipper'){
+    assert.ok(brief.includes('Sublimation Sipper Bottle'));
+    await fillEnquiry(page);await page.locator('#custom-submit').click();
+    await page.waitForFunction(()=>document.querySelector('#enquiry-response').textContent.includes('LOCAL-MOCK-ONLY'));
+    const sent=state.requests.filter(r=>r.url.includes('/submit-order')).at(-1);
+    assert.equal(sent.body.order.product,'merch');assert.ok(sent.body.order.design.includes('Sublimation Sipper Bottle'));
+   }
+  }
+ });
+ await run('Studio links are restricted to matching T-shirt and bag templates',async({page})=>{
+  await page.goto(BASE+'/product.html?id=tote');
+  assert.equal(await page.locator('a[href="design.html?product=tote"]').count(),1);
+  await page.goto(BASE+'/product.html?id=rn-cotton');
+  assert.equal(await page.locator('a[href="design.html?product=tee"]').count(),1);
+  await page.goto(BASE+'/product.html?id=bag-001');
+  assert.equal(await page.locator('#product-detail a[href^="design.html?product="]').count(),0,'unverified bag type is not assumed to be a backpack');
  });
  await run('malformed cart storage does not crash pages',async({page})=>{
   await page.goto(BASE+'/index.html');

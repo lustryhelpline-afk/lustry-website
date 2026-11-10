@@ -1,0 +1,97 @@
+/* Lustry theme: Midnight navy + saffron. Loaded last, overrides older layers. */
+:root{--ink:#0b1d33;--deep:#0e2a47;--pine:#0e2a47;--accent:#f28c1b;--commerce-gold-ink:#b45f06;--paper:#f4f7fb;--sand:#e8eef6;--mist:#eef3f9;--line:#dbe3ee;--muted:#5a6b7e;--serif:'Manrope','DM Sans',system-ui,sans-serif;--sans:'Manrope','DM Sans',system-ui,sans-serif}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans)}
+h1,h2,h3,h4{font-family:var(--sans);letter-spacing:-.02em;font-weight:800}
+.announcement{background:var(--deep);color:#fff}
+.l-category-band{background:#fff;border-bottom:1px solid var(--line)}
+.l-categories a.is-active,.l-categories a:hover{color:var(--deep)}
+.l-intro{background:linear-gradient(120deg,#0e2a47 0%,#1b4a7a 100%);color:#fff}
+.l-intro h1,.l-intro p,.l-intro .l-link{color:#fff}
+.l-intro .l-eyebrow{color:#ffc27a}
+.btn-dark,.l-button,.v5-btn-lime,.v5-btn{background:var(--accent);color:#0b1d33;border:1px solid var(--accent);font-weight:800}
+.btn-dark:hover,.l-button:hover,.v5-btn-lime:hover{background:#ffa33d;color:#0b1d33}
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px}
+.product-card{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 1px 3px rgba(11,29,51,.06);transition:transform .2s,box-shadow .2s}
+.product-card:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(11,29,51,.12)}
+.product-photo img{aspect-ratio:1/1;object-fit:cover;width:100%;background:var(--mist)}
+.product-tag{background:#fff;color:var(--deep);border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:11px;font-weight:700}
+.product-tag.fast{background:var(--accent);border-color:var(--accent);color:#0b1d33}
+.product-name{font-weight:700;font-size:15px;color:var(--ink)}
+.product-price{font-weight:800;font-size:19px;color:var(--deep)}
+.product-price small{display:block;font-weight:500;font-size:12px;color:var(--muted)}
+.product-circle{background:var(--deep);color:#fff;border-color:var(--deep)}
+.shop-search input,.shop-search select{background:#fff;border:1px solid var(--line);border-radius:10px}
+.footer,.l-footer{background:#0b1d33;color:#dbe6f3}
+.footer a,.l-footer a{color:#dbe6f3}
+.footer a:hover,.l-footer a:hover{color:var(--accent)}
+@media(max-width:600px){.product-grid{grid-template-columns:repeat(2,1fr);gap:12px}}
+.l-intro p,.l-intro-inner p,.l-intro h1{color:#fff!important}
+.l-intro .l-eyebrow{color:#ffc27a!important}
+.product-bottom{background:#fff}
+.product-price{color:var(--deep)!important}
+.product-price small{color:var(--muted)!important;text-transform:none;letter-spacing:0}
+#site-header,#site-header header,#site-header .l-header{background:#fff!important}
+.shop-meta,.shop-meta span{color:var(--muted)}
+
+h1,h2,h3,.c-section-heading,.c-campaign h2{font-family:var(--sans)!important;font-style:normal!important}
+em{font-style:normal!important;color:var(--commerce-gold-ink)}
+.c-campaign-bags em,.l-intro em{color:#ffc27a}
+.c-kicker,.l-eyebrow{color:var(--commerce-gold-ink)}
+.c-campaign-apparel{background:linear-gradient(135deg,#eaf1fa,#d3e2f4)!important}
+.c-campaign-bags{background:var(--deep)!important}
+.c-button,.c-button-light{background:var(--accent)!important;color:#0b1d33!important;border-color:var(--accent)!important;font-weight:800}
+.c-category-image{border-color:var(--accent)!important}
+.c-text-link,.l-price-link{color:var(--deep)!important;font-weight:800}
+.l-price-link small{color:var(--muted);font-weight:500}
+.c-season-offer,.c-offer-strip{background:var(--deep)!important;color:#fff}
+.c-season-offer *{color:#fff}
+.c-season-offer .c-kicker,.c-offer-value{color:#ffc27a!important}
+.l-photo-label{display:none}
+.c-bags-section,.c-bags-layout{background:var(--mist)!important}
+.c-section-caption,.c-collection-meta{color:var(--muted)}
+.c-create-card,.c-corporate-card{background:#fff!important;border:1px solid var(--line)!important}
+.c-assurances,.c-help{background:var(--mist)!important}
+
+/* Preserve legibility where the new palette meets existing campaign panels. */
+.c-create-card.c-studio-card{background:var(--deep)!important;border-color:var(--deep)!important}
+.c-studio-card h3{color:#fff}
+.c-studio-card .c-kicker{color:#ffc27a}
+.c-studio-card p:not(.c-kicker){color:#dce7f4}
+.c-studio-card small{color:#c3d2e5}
+.c-studio-card .c-text-link,.c-corporate-card .c-text-link{color:#ffd399!important}
+.c-studio-card .c-text-link .l-arrow,.c-corporate-card .c-text-link .l-arrow{color:currentColor}
+.c-season-offer .c-offer-value strong,.c-season-offer .c-offer-tiers b{color:#ffc27a}
+.c-season-offer .c-offer-value>span,.c-season-offer .c-offer-tiers span,.c-season-offer .c-offer-terms{color:#e4edf7}
+.l-footer .l-footer-top h2{color:#ffc27a}
+.l-footer .l-logo{display:inline-block;padding:7px 10px;background:#fff;border-radius:4px}
+.l-footer .l-logo img{mix-blend-mode:normal}
+.l-footer .l-footer-intro p,.l-footer .l-footer-bottom{color:#c3d1e2}
+.l-footer .l-footer-top>div>a:not(.l-logo),.l-footer .l-footer-top button{color:#e4edf7}
+.l-footer .l-footer-top>div>a:hover,.l-footer .l-footer-top button:hover{color:#ffbd70}
+.l-footer .l-footer-bottom{border-top-color:#344b66}
+.l-footer .l-footer-top button:focus-visible,.l-footer a:focus-visible{outline-color:#ffbd70}
+
+/* Uploaded bag photographs include product details; keep the full image visible. */
+.shop-section .product-photo img[src^="assets/bags/"],
+.classic-home .l-product .product-photo img[src^="assets/bags/"],
+.detail-image img[src^="assets/bags/"],
+.v7-dg>img[src^="assets/bags/"],
+.cart-row>img[src^="assets/bags/"]{object-fit:contain;background:#fff}
+.shop-section .product-tag{font-size:9px;color:var(--deep);background:#fffffff2;border-color:#dbe3ee}
+.shop-section .product-photo{background:#fff}
+
+@media(prefers-reduced-motion:reduce){.product-card{transition:none}.product-card:hover{transform:none}}
+
+/* The supplied sans-serif headings need less space than the previous display layout. */
+@media(min-width:761px){
+ .c-campaign h1{font-size:clamp(34px,3.2vw,46px);line-height:1.08;margin-bottom:14px}
+ .c-campaign-bags h2{font-size:clamp(32px,3vw,42px);line-height:1.08;margin-bottom:14px}
+ .c-campaign-copy,.c-campaign-bags .c-campaign-copy{padding-top:27px;padding-bottom:26px}
+ .c-campaign-description{line-height:1.7;margin-bottom:18px}
+}
+@media(min-width:761px) and (max-width:900px){
+ .c-campaign h1{font-size:32px}
+ .c-campaign-bags h2{font-size:30px}
+ .c-campaign-description{font-size:10px;margin-bottom:15px}
+ .c-campaign-copy,.c-campaign-bags .c-campaign-copy{padding-top:23px;padding-bottom:23px}
+}
