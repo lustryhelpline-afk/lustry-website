@@ -96,7 +96,7 @@ async function fillEnquiry(page) {
    await photos.first().evaluate(img=>img.decode());
    assert.equal(await photos.first().getAttribute('src'),conceptPath('rn-cotton'),'first card uses its own local product concept');
    assert.match(await photos.first().getAttribute('alt'),/AI-generated concept/i);
-   assert.equal(await page.locator('#featured-grid .product-card').first().locator('.ai-concept-tag').innerText(),'AI CONCEPT');
+   assert.doesNotMatch(await page.locator('#featured-grid .product-card').first().innerText(),/\bAI CONCEPT\b/i,'product image has no visible generated-image badge');
    assert.equal(await photos.first().evaluate(img=>img.naturalWidth>0),true);
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   }
@@ -283,12 +283,12 @@ async function fillEnquiry(page) {
      assert.deepEqual([...ids].sort(),[...conceptCollections[category]].sort(),route+' product identities in '+category);
      const images=await page.locator(grid+' .product-card').evaluateAll(cards=>cards.map(card=>{
       const link=card.querySelector('.product-photo'),img=link.querySelector('img');
-      return {id:new URL(link.href).searchParams.get('id'),src:img.getAttribute('src'),alt:img.alt,ai:img.classList.contains('ai-product-image'),fit:getComputedStyle(img).objectFit,label:card.querySelector('.product-tag')?.textContent};
+      return {id:new URL(link.href).searchParams.get('id'),src:img.getAttribute('src'),alt:img.alt,ai:img.classList.contains('ai-product-image'),fit:getComputedStyle(img).objectFit,text:card.innerText};
      }));
      for(const image of images){
       assert.equal(image.src,conceptPath(image.id),route+' individual '+image.id+' image mapping');
       assert.match(image.alt,/AI-generated concept image/i,route+' honest image alt for '+image.id);
-      assert.equal(image.label,'AI CONCEPT',route+' honest image badge for '+image.id);
+      assert.doesNotMatch(image.text,/\bAI CONCEPT\b/i,route+' no visible generated-image badge for '+image.id);
       assert.equal(image.ai,true);assert.equal(image.fit,'contain',route+' entire product is visible for '+image.id);
      }
     }
@@ -344,7 +344,7 @@ async function fillEnquiry(page) {
    assert.equal(await image.getAttribute('src'),conceptPath(id),'detail image '+id);
    assert.match(await image.getAttribute('alt'),/AI-generated concept image/i);
    assert.equal(await image.evaluate(img=>getComputedStyle(img).objectFit),'contain','complete detail product '+id);
-   assert.equal(await page.locator('#product-detail .ai-concept-tag').innerText(),'AI CONCEPT');
+   assert.doesNotMatch(await page.locator('#product-detail').innerText(),/\bAI CONCEPT\b/i,'detail has no visible generated-image badge for '+id);
    assert.match(await page.locator('#product-detail .notice').innerText(),/AI-generated concept.*not a verified production photograph/i,'honest detail disclosure '+id);
    assert.match(await page.locator('.detail-price').innerText(),/demo|not final|request price/i,'unconfirmed pricing '+id);
    assert.ok(!/\bin stock\b|same[- ]day delivery/i.test(await page.locator('#product-detail').innerText()),'no invented fulfilment '+id);
@@ -360,8 +360,8 @@ async function fillEnquiry(page) {
     assert.equal(await dialog.isVisible(),true);
     assert.equal(await dialog.locator('img').getAttribute('src'),conceptPath(id),'quick view image '+id);
     assert.match(await dialog.locator('img').getAttribute('alt'),/AI-generated concept image/i);
-    assert.equal(await dialog.locator('.ai-concept-label').innerText(),'AI CONCEPT');
     const text=await dialog.innerText();
+    assert.doesNotMatch(text,/\bAI CONCEPT\b/i,'quick view has no visible generated-image badge for '+id);
     assert.match(text,/AI-generated concept, not a verified production photograph/i);
     assert.match(text,/demo reference|enquire for price/i);
     assert.ok(!/\bin stock\b|same[- ]day delivery/i.test(text),'no invented quick view fulfilment '+id);

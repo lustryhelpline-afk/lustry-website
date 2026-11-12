@@ -4,7 +4,7 @@
 
 The 36 visible non-bag products now each use a separately generated, unbranded OpenAI `image_gen` concept in `assets/products/<product-id>.webp`. These replace the shared reference photographs and illustrations on their product cards, details, cart images and quick views. All 138 visible products have distinct image paths and distinct SHA-256 file contents, including the existing 102 bag images.
 
-Generated images are labelled **AI CONCEPT** on product cards, details and quick views, with descriptive alternative text. Details explain that these are not verified production photographs. Images illustrate the product type; actual fabric, GSM, colour, construction, artwork, stock and final price require Lustry confirmation. These images are not production-ready artwork and do not establish environmental certifications.
+Generated images use descriptive alternative text, with no image-overlay badges. Product details and quick views explain that they are AI-generated concepts, not verified production photographs. Images illustrate the product type; actual fabric, GSM, colour, construction, artwork, stock and final price require Lustry confirmation. These images are not production-ready artwork and do not establish environmental certifications.
 
 Each concept was generated separately on a warm-white studio background without logos, copied from its preserved original PNG, and encoded to WebP at its original 1254 × 1254 dimensions for website delivery. No cropping or retouching was applied. The 36 delivered images total 3,476,452 bytes. No Google image search assets were used for this update.
 

@@ -28,7 +28,7 @@ function toast(t){const e=$('#toast');if(!e)return;e.textContent=t;e.classList.a
 function isAiConcept(p){return p.image_kind==='ai-concept'}
 function imageSource(p){return isAiConcept(p)?(p.img||p.fallback):(referencePhotos[p.id]||p.img||p.fallback)}
 function imageAlt(p){return (isAiConcept(p)?'AI-generated concept image of ':'Reference image for ')+p.name}
-function imageBadge(p,label='REFERENCE'){return `<span class="product-tag${isAiConcept(p)?' ai-concept-tag':''}">${isAiConcept(p)?'AI CONCEPT':label}</span>`}
+function imageBadge(p,label='REFERENCE'){return isAiConcept(p)?'':`<span class="product-tag">${label}</span>`}
 function productImage(p){return `<img loading="lazy" src="${esc(imageSource(p))}"${isAiConcept(p)?' class="ai-product-image"':''} alt="${esc(imageAlt(p))}">`}
 function productCard(p){return `<article class="product-card"><a class="product-photo" href="product.html?id=${encodeURIComponent(p.id)}">${productImage(p)}${imageBadge(p)}<span class="product-circle" aria-hidden="true"><svg class="l-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15 15 5M5 5h10v10"/></svg></span></a><div class="product-bottom"><div><a class="product-name" href="product.html?id=${encodeURIComponent(p.id)}">${esc(p.name)}</a><small>${esc(p.fabric)}</small></div><div class="product-price">${p.demo_price==null?'Request price':money(p.demo_price)}<small>${p.demo_price==null?'On enquiry':'Indicative · '+priceUnit(p)}</small></div></div></article>`}
 // Reference photography illustrates product types; it does not verify inventory or specifications.
