@@ -4,6 +4,17 @@ const http = require('node:http');
 const fs = require('node:fs');
 const fsp = require('node:fs/promises');
 const path = require('node:path');
+const { createHash } = require('node:crypto');
+const conceptCollections={
+ tshirts:['rn-cotton','rn-dry','rn-eco','rn-ultra','polo-dry','polo-eco','polo-ultra','polo-men','polo-emb','os-tee'],
+ hoodies:['hd-custom','hd-eco','hd-emb','sw-crew','jk-eco','jk-embeco','hd-ultra','jk-high'],
+ jerseys:['js-v1','js-v2','js-polo','js-rn'],
+ accessories:['cap','rainsuit','raincoat','umb-fold','umb-long'],
+ gifts:['sipper','photoprint','frame'],
+ print:['vcard','vcard-shape','booklet','sticker','label','mailer']
+};
+const conceptIds=Object.values(conceptCollections).flat();
+const conceptPath=id=>'assets/products/'+id+'.webp';
 let BASE = process.env.LUSTRY_TEST_BASE;
 let server;
 async function startLocalServer() {
@@ -17,8 +28,8 @@ async function startLocalServer() {
    const filename=path.resolve(directory,'.'+(pathname.endsWith('/')?pathname+'index.html':pathname));
    if(!filename.startsWith(directory+path.sep)){response.writeHead(403);response.end();return;}
    try {const data=await fsp.readFile(filename);response.writeHead(200,{'Content-Type':types[path.extname(filename)]||'application/octet-stream'});response.end(data);}
-   catch {response.writeHead(404,{'Content-Type':'text/html; charset=utf-8'});response.end(await fsp.readFile(path.join(directory,'404.html')));}
-  }catch {response.writeHead(400);response.end();}
+   catch {const missing=await fsp.readFile(path.join(directory,'404.html'));if(!response.headersSent){response.writeHead(404,{'Content-Type':'text/html; charset=utf-8'});response.end(missing);}}
+  }catch {if(!response.headersSent&&!response.destroyed){response.writeHead(500);response.end();}else if(!response.destroyed)response.destroy();}
  });
  await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(0,'127.0.0.1',resolve)});
  BASE='http://127.0.0.1:'+server.address().port;
@@ -83,7 +94,9 @@ async function fillEnquiry(page) {
    assert.ok(first.y<650&&first.y+Math.min(first.height,120)<780,'first product photography is visible without scrolling on '+width);
    const photos=page.locator('#featured-grid .product-photo img');
    await photos.first().evaluate(img=>img.decode());
-   assert.ok((await photos.first().getAttribute('src')).startsWith('assets/photos/'),'first card uses local photography');
+   assert.equal(await photos.first().getAttribute('src'),conceptPath('rn-cotton'),'first card uses its own local product concept');
+   assert.match(await photos.first().getAttribute('alt'),/AI-generated concept/i);
+   assert.equal(await page.locator('#featured-grid .product-card').first().locator('.ai-concept-tag').innerText(),'AI CONCEPT');
    assert.equal(await photos.first().evaluate(img=>img.naturalWidth>0),true);
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   }
@@ -266,6 +279,19 @@ async function fillEnquiry(page) {
     assert.equal(await page.locator(grid+' .product-card').count(),count,route+' complete '+category);
     const ids=await page.locator(grid+' .product-photo').evaluateAll(nodes=>nodes.map(a=>new URL(a.href).searchParams.get('id')));
     assert.equal(new Set(ids).size,count,'no duplicate product links');
+    if(conceptCollections[category]){
+     assert.deepEqual([...ids].sort(),[...conceptCollections[category]].sort(),route+' product identities in '+category);
+     const images=await page.locator(grid+' .product-card').evaluateAll(cards=>cards.map(card=>{
+      const link=card.querySelector('.product-photo'),img=link.querySelector('img');
+      return {id:new URL(link.href).searchParams.get('id'),src:img.getAttribute('src'),alt:img.alt,ai:img.classList.contains('ai-product-image'),fit:getComputedStyle(img).objectFit,label:card.querySelector('.product-tag')?.textContent};
+     }));
+     for(const image of images){
+      assert.equal(image.src,conceptPath(image.id),route+' individual '+image.id+' image mapping');
+      assert.match(image.alt,/AI-generated concept image/i,route+' honest image alt for '+image.id);
+      assert.equal(image.label,'AI CONCEPT',route+' honest image badge for '+image.id);
+      assert.equal(image.ai,true);assert.equal(image.fit,'contain',route+' entire product is visible for '+image.id);
+     }
+    }
     if(category==='bags')for(const id of ['bag-001','bag-050','bag-101','tote'])assert.ok(ids.includes(id),'missing '+id);
     assert.ok(!ids.includes('rn-sarina')&&!ids.includes('bag-nw'),'legacy references stay out of new browsing');
    }
@@ -283,6 +309,65 @@ async function fillEnquiry(page) {
   const image=page.locator('#product-detail .detail-image img');await image.evaluate(img=>img.decode());
   assert.ok((await image.getAttribute('src')).endsWith('/bag-101.jpg'));
   assert.equal(await image.evaluate(img=>img.naturalWidth>0),true);
+ });
+ await run('all 138 visible products have distinct delivered image paths and bytes',async({page})=>{
+  await page.goto(BASE+'/shop.html');
+  const images=await page.locator('#shop-grid .product-photo').evaluateAll(links=>links.map(link=>({id:new URL(link.href).searchParams.get('id'),src:link.querySelector('img').getAttribute('src')})));
+  assert.equal(images.length,138,'complete visible catalogue');
+  assert.equal(new Set(images.map(image=>image.id)).size,138);
+  assert.equal(new Set(images.map(image=>image.src)).size,138,'a different product must never reuse the same image path');
+  assert.deepEqual(images.filter(image=>conceptIds.includes(image.id)).map(image=>image.id).sort(),[...conceptIds].sort());
+  const hashes=new Map();
+  for(let offset=0;offset<images.length;offset+=12){
+   const batch=images.slice(offset,offset+12);
+   const delivered=await Promise.all(batch.map(async image=>{
+    const response=await page.request.get(BASE+'/'+image.src);assert.equal(response.status(),200,'public image '+image.id);
+    assert.match(response.headers()['content-type'],/^image\//,'image MIME for '+image.id);
+    const bytes=await response.body();assert.ok(bytes.length>512,'nonempty product image '+image.id);
+    if(conceptIds.includes(image.id)){
+     assert.equal(image.src,conceptPath(image.id));
+     assert.match(response.headers()['content-type'],/^image\/webp/);
+     assert.equal(bytes.toString('ascii',0,4),'RIFF');assert.equal(bytes.toString('ascii',8,12),'WEBP');
+    }
+    return {id:image.id,hash:createHash('sha256').update(bytes).digest('hex')};
+   }));
+   for(const image of delivered){assert.ok(!hashes.has(image.hash),'image bytes repeated between '+image.id+' and '+hashes.get(image.hash));hashes.set(image.hash,image.id);}
+  }
+  assert.equal(hashes.size,138,'unique artwork across the complete catalogue');
+  const dimensions=await page.evaluate(async paths=>Promise.all(paths.map(async src=>{const image=new Image();image.src=src;await image.decode();return {src,width:image.naturalWidth,height:image.naturalHeight};})),conceptIds.map(conceptPath));
+  for(const image of dimensions)assert.ok(image.width>=480&&image.height>=480,'adequate decodable resolution for '+image.src);
+ });
+ await run('every generated product detail uses its own honest concept preview',async({page})=>{
+  for(const id of conceptIds){
+   await page.goto(BASE+'/product.html?id='+encodeURIComponent(id));
+   const image=page.locator('#product-detail .detail-image img');
+   assert.equal(await image.getAttribute('src'),conceptPath(id),'detail image '+id);
+   assert.match(await image.getAttribute('alt'),/AI-generated concept image/i);
+   assert.equal(await image.evaluate(img=>getComputedStyle(img).objectFit),'contain','complete detail product '+id);
+   assert.equal(await page.locator('#product-detail .ai-concept-tag').innerText(),'AI CONCEPT');
+   assert.match(await page.locator('#product-detail .notice').innerText(),/AI-generated concept.*not a verified production photograph/i,'honest detail disclosure '+id);
+   assert.match(await page.locator('.detail-price').innerText(),/demo|not final|request price/i,'unconfirmed pricing '+id);
+   assert.ok(!/\bin stock\b|same[- ]day delivery/i.test(await page.locator('#product-detail').innerText()),'no invented fulfilment '+id);
+  }
+ });
+ await run('quick view keeps all 36 product concepts distinct and labels generated imagery',async({page})=>{
+  const dialog=page.getByRole('dialog',{name:'Quick view',exact:true});
+  for(const [category,ids]of Object.entries(conceptCollections)){
+   await page.goto(BASE+'/shop.html?cat='+category);
+   for(const id of ids){
+    const card=page.locator('#shop-grid .product-card').filter({has:page.locator('.product-photo[href="product.html?id='+id+'"]')});
+    await card.locator('.v7-qv').click();
+    assert.equal(await dialog.isVisible(),true);
+    assert.equal(await dialog.locator('img').getAttribute('src'),conceptPath(id),'quick view image '+id);
+    assert.match(await dialog.locator('img').getAttribute('alt'),/AI-generated concept image/i);
+    assert.equal(await dialog.locator('.ai-concept-label').innerText(),'AI CONCEPT');
+    const text=await dialog.innerText();
+    assert.match(text,/AI-generated concept, not a verified production photograph/i);
+    assert.match(text,/demo reference|enquire for price/i);
+    assert.ok(!/\bin stock\b|same[- ]day delivery/i.test(text),'no invented quick view fulfilment '+id);
+    await dialog.getByRole('button',{name:'Close',exact:true}).click();
+   }
+  }
  });
  await run('unconfirmed stock, delivery and prices are not published as verified offers',async({page})=>{
   for(const route of ['/index.html','/shop.html?cat=bags','/product.html?id=rn-cotton']){

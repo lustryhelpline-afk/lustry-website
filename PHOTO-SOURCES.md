@@ -1,5 +1,26 @@
 # Storefront reference photography
 
+## Current product concepts — 12 November 2026
+
+The 36 visible non-bag products now each use a separately generated, unbranded OpenAI `image_gen` concept in `assets/products/<product-id>.webp`. These replace the shared reference photographs and illustrations on their product cards, details, cart images and quick views. All 138 visible products have distinct image paths and distinct SHA-256 file contents, including the existing 102 bag images.
+
+Generated images are labelled **AI CONCEPT** on product cards, details and quick views, with descriptive alternative text. Details explain that these are not verified production photographs. Images illustrate the product type; actual fabric, GSM, colour, construction, artwork, stock and final price require Lustry confirmation. These images are not production-ready artwork and do not establish environmental certifications.
+
+Each concept was generated separately on a warm-white studio background without logos, copied from its preserved original PNG, and encoded to WebP at its original 1254 × 1254 dimensions for website delivery. No cropping or retouching was applied. The 36 delivered images total 3,476,452 bytes. No Google image search assets were used for this update.
+
+| Collection | Individual product-image filenames (under `assets/products/`, `.webp`) |
+| --- | --- |
+| T-shirts, polos and oversized | `rn-cotton`, `rn-dry`, `rn-eco`, `rn-ultra`, `polo-dry`, `polo-eco`, `polo-ultra`, `polo-men`, `polo-emb`, `os-tee` |
+| Hoodies, sweatshirt and jackets | `hd-custom`, `hd-eco`, `hd-emb`, `sw-crew`, `jk-eco`, `jk-embeco`, `hd-ultra`, `jk-high` |
+| Sports jerseys | `js-v1`, `js-v2`, `js-polo`, `js-rn` |
+| Cap, rainwear and umbrellas | `cap`, `rainsuit`, `raincoat`, `umb-fold`, `umb-long` |
+| Bottle and gifts | `sipper`, `photoprint`, `frame` |
+| Print and stationery | `vcard`, `vcard-shape`, `booklet`, `sticker`, `label`, `mailer` |
+
+Category navigation can show a thumbnail of its own product; a different product never shares that product image. Historical reference photos below remain available for campaign illustrations and legacy product links. Their source records continue to apply only to those photographs.
+
+## Historical reference photography
+
 These photographs illustrate product categories. They are not photographs of verified Lustry inventory, approved production samples, or guaranteed product specifications. The storefront should display: **“Reference photography. Final product, colour and availability confirmed with Lustry.”**
 
 The first four image endpoints were already referenced by the existing catalogue. Three further relevant photographs were added as recorded below. Local copies were downloaded on 9 November 2026 with Unsplash's image endpoint requesting `auto=format&fit=crop&w=900&q=85`. Each file was visually reviewed. No generative imagery was used, and no Lustry branding was added to the photographs. Image service resizing/formatting was requested in the URL; the downloaded files were not otherwise edited.

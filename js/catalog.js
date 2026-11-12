@@ -10,8 +10,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Cotton",
     "spec": "",
     "demo_price": 399,
-    "img": "assets/photos/reference-round-neck.jpg",
-    "fallback": "assets/tee-ivory.svg",
+    "img": "assets/products/rn-cotton.webp",
+    "fallback": "assets/products/rn-cotton.webp",
     "sizes": [
       "S",
       "M",
@@ -26,7 +26,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 1,
-    "minq": 1
+    "minq": 1,
+    "image_kind": "ai-concept"
   },
   {
     "id": "rn-dry",
@@ -36,8 +37,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Dry-fit polyester",
     "spec": "",
     "demo_price": 463,
-    "img": "assets/photos/reference-round-neck.jpg",
-    "fallback": "assets/tee-charcoal.svg",
+    "img": "assets/products/rn-dry.webp",
+    "fallback": "assets/products/rn-dry.webp",
     "sizes": [
       "S",
       "M",
@@ -52,7 +53,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 1,
-    "minq": 1
+    "minq": 1,
+    "image_kind": "ai-concept"
   },
   {
     "id": "rn-eco",
@@ -62,8 +64,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Eco cotton blend",
     "spec": "",
     "demo_price": 303,
-    "img": "assets/photos/reference-round-neck.jpg",
-    "fallback": "assets/tee-ivory.svg",
+    "img": "assets/products/rn-eco.webp",
+    "fallback": "assets/products/rn-eco.webp",
     "sizes": [
       "S",
       "M",
@@ -78,7 +80,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 1,
-    "minq": 1
+    "minq": 1,
+    "image_kind": "ai-concept"
   },
   {
     "id": "rn-ultra",
@@ -88,8 +91,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Premium combed cotton",
     "spec": "",
     "demo_price": 503,
-    "img": "assets/photos/reference-round-neck.jpg",
-    "fallback": "assets/tee-charcoal.svg",
+    "img": "assets/products/rn-ultra.webp",
+    "fallback": "assets/products/rn-ultra.webp",
     "sizes": [
       "S",
       "M",
@@ -104,7 +107,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 1,
-    "minq": 1
+    "minq": 1,
+    "image_kind": "ai-concept"
   },
   {
     "id": "polo-dry",
@@ -114,8 +118,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Dry-fit polyester",
     "spec": "",
     "demo_price": 671,
-    "img": "assets/photos/reference-polo.jpg",
-    "fallback": "assets/polo-navy.svg",
+    "img": "assets/products/polo-dry.webp",
+    "fallback": "assets/products/polo-dry.webp",
     "sizes": [
       "S",
       "M",
@@ -130,7 +134,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 1,
-    "minq": 1
+    "minq": 1,
+    "image_kind": "ai-concept"
   },
   {
     "id": "polo-eco",
@@ -140,8 +145,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Eco cotton blend",
     "spec": "",
     "demo_price": 464,
-    "img": "assets/photos/reference-polo.jpg",
-    "fallback": "assets/polo-navy.svg",
+    "img": "assets/products/polo-eco.webp",
+    "fallback": "assets/products/polo-eco.webp",
     "sizes": [
       "S",
       "M",
@@ -156,7 +161,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 1,
-    "minq": 1
+    "minq": 1,
+    "image_kind": "ai-concept"
   },
   {
     "id": "polo-ultra",
@@ -166,8 +172,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Premium piqué cotton",
     "spec": "",
     "demo_price": 783,
-    "img": "assets/photos/reference-polo.jpg",
-    "fallback": "assets/polo-navy.svg",
+    "img": "assets/products/polo-ultra.webp",
+    "fallback": "assets/products/polo-ultra.webp",
     "sizes": [
       "S",
       "M",
@@ -182,7 +188,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 1,
-    "minq": 1
+    "minq": 1,
+    "image_kind": "ai-concept"
   },
   {
     "id": "polo-men",
@@ -192,8 +199,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Cotton piqué",
     "spec": "",
     "demo_price": 503,
-    "img": "assets/photos/reference-polo.jpg",
-    "fallback": "assets/polo-navy.svg",
+    "img": "assets/products/polo-men.webp",
+    "fallback": "assets/products/polo-men.webp",
     "sizes": [
       "S",
       "M",
@@ -208,7 +215,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 1,
-    "minq": 1
+    "minq": 1,
+    "image_kind": "ai-concept"
   },
   {
     "id": "polo-emb",
@@ -218,8 +226,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Cotton, embroidered logo",
     "spec": "",
     "demo_price": 791,
-    "img": "assets/photos/reference-polo.jpg",
-    "fallback": "assets/polo-navy.svg",
+    "img": "assets/products/polo-emb.webp",
+    "fallback": "assets/products/polo-emb.webp",
     "sizes": [
       "S",
       "M",
@@ -234,7 +242,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 3,
-    "minq": 1
+    "minq": 1,
+    "image_kind": "ai-concept"
   },
   {
     "id": "hd-custom",
@@ -244,8 +253,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Fleece blend",
     "spec": "",
     "demo_price": 719,
-    "img": "assets/photos/reference-hoodie.jpg",
-    "fallback": "assets/hoodie-charcoal.svg",
+    "img": "assets/products/hd-custom.webp",
+    "fallback": "assets/products/hd-custom.webp",
     "sizes": [
       "S",
       "M",
@@ -260,7 +269,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 3,
-    "minq": 1
+    "minq": 1,
+    "image_kind": "ai-concept"
   },
   {
     "id": "hd-eco",
@@ -270,8 +280,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Eco fleece",
     "spec": "",
     "demo_price": 719,
-    "img": "assets/photos/reference-hoodie.jpg",
-    "fallback": "assets/hoodie-charcoal.svg",
+    "img": "assets/products/hd-eco.webp",
+    "fallback": "assets/products/hd-eco.webp",
     "sizes": [
       "S",
       "M",
@@ -286,7 +296,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 3,
-    "minq": 1
+    "minq": 1,
+    "image_kind": "ai-concept"
   },
   {
     "id": "hd-emb",
@@ -296,8 +307,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Fleece, embroidered logo",
     "spec": "",
     "demo_price": 887,
-    "img": "assets/photos/reference-hoodie.jpg",
-    "fallback": "assets/hoodie-charcoal.svg",
+    "img": "assets/products/hd-emb.webp",
+    "fallback": "assets/products/hd-emb.webp",
     "sizes": [
       "S",
       "M",
@@ -312,7 +323,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 3,
-    "minq": 1
+    "minq": 1,
+    "image_kind": "ai-concept"
   },
   {
     "id": "sw-crew",
@@ -322,8 +334,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Premium fleece",
     "spec": "",
     "demo_price": 805,
-    "img": "assets/photos/reference-sweatshirt.jpg",
-    "fallback": "assets/hoodie-charcoal.svg",
+    "img": "assets/products/sw-crew.webp",
+    "fallback": "assets/products/sw-crew.webp",
     "sizes": [
       "S",
       "M",
@@ -338,7 +350,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 3,
-    "minq": 1
+    "minq": 1,
+    "image_kind": "ai-concept"
   },
   {
     "id": "jk-eco",
@@ -348,8 +361,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Eco fabric",
     "spec": "",
     "demo_price": 1012,
-    "img": "assets/photos/reference-hoodie.jpg",
-    "fallback": "assets/hoodie-charcoal.svg",
+    "img": "assets/products/jk-eco.webp",
+    "fallback": "assets/products/jk-eco.webp",
     "sizes": [
       "S",
       "M",
@@ -364,7 +377,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 3,
-    "minq": 1
+    "minq": 1,
+    "image_kind": "ai-concept"
   },
   {
     "id": "jk-embeco",
@@ -374,8 +388,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Eco fabric, embroidered logo",
     "spec": "",
     "demo_price": 967,
-    "img": "assets/photos/reference-hoodie.jpg",
-    "fallback": "assets/hoodie-charcoal.svg",
+    "img": "assets/products/jk-embeco.webp",
+    "fallback": "assets/products/jk-embeco.webp",
     "sizes": [
       "S",
       "M",
@@ -390,7 +404,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 3,
-    "minq": 1
+    "minq": 1,
+    "image_kind": "ai-concept"
   },
   {
     "id": "hd-ultra",
@@ -400,8 +415,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Premium fleece",
     "spec": "",
     "demo_price": 1215,
-    "img": "assets/photos/reference-hoodie.jpg",
-    "fallback": "assets/hoodie-charcoal.svg",
+    "img": "assets/products/hd-ultra.webp",
+    "fallback": "assets/products/hd-ultra.webp",
     "sizes": [
       "S",
       "M",
@@ -416,7 +431,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 3,
-    "minq": 1
+    "minq": 1,
+    "image_kind": "ai-concept"
   },
   {
     "id": "jk-high",
@@ -426,8 +442,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Polyester blend",
     "spec": "",
     "demo_price": 1231,
-    "img": "assets/photos/reference-hoodie.jpg",
-    "fallback": "assets/hoodie-charcoal.svg",
+    "img": "assets/products/jk-high.webp",
+    "fallback": "assets/products/jk-high.webp",
     "sizes": [
       "S",
       "M",
@@ -442,7 +458,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 3,
-    "minq": 1
+    "minq": 1,
+    "image_kind": "ai-concept"
   },
   {
     "id": "js-v1",
@@ -452,8 +469,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Sublimation print, polyester",
     "spec": "",
     "demo_price": 7826,
-    "img": "assets/tee-charcoal.svg",
-    "fallback": "assets/tee-charcoal.svg",
+    "img": "assets/products/js-v1.webp",
+    "fallback": "assets/products/js-v1.webp",
     "sizes": [
       "S",
       "M",
@@ -468,7 +485,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 3,
-    "minq": 11
+    "minq": 11,
+    "image_kind": "ai-concept"
   },
   {
     "id": "js-v2",
@@ -478,8 +496,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Sublimation print, polyester",
     "spec": "",
     "demo_price": 7383,
-    "img": "assets/tee-charcoal.svg",
-    "fallback": "assets/tee-charcoal.svg",
+    "img": "assets/products/js-v2.webp",
+    "fallback": "assets/products/js-v2.webp",
     "sizes": [
       "S",
       "M",
@@ -494,7 +512,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 3,
-    "minq": 11
+    "minq": 11,
+    "image_kind": "ai-concept"
   },
   {
     "id": "js-polo",
@@ -504,8 +523,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Sublimation print, polyester",
     "spec": "",
     "demo_price": 7826,
-    "img": "assets/tee-charcoal.svg",
-    "fallback": "assets/tee-charcoal.svg",
+    "img": "assets/products/js-polo.webp",
+    "fallback": "assets/products/js-polo.webp",
     "sizes": [
       "S",
       "M",
@@ -520,7 +539,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 3,
-    "minq": 11
+    "minq": 11,
+    "image_kind": "ai-concept"
   },
   {
     "id": "js-rn",
@@ -530,8 +550,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Sublimation print, polyester",
     "spec": "",
     "demo_price": 6940,
-    "img": "assets/tee-charcoal.svg",
-    "fallback": "assets/tee-charcoal.svg",
+    "img": "assets/products/js-rn.webp",
+    "fallback": "assets/products/js-rn.webp",
     "sizes": [
       "S",
       "M",
@@ -546,7 +566,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 3,
-    "minq": 11
+    "minq": 11,
+    "image_kind": "ai-concept"
   },
   {
     "id": "bag-001",
@@ -2597,8 +2618,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Cotton, printed logo",
     "spec": "",
     "demo_price": 223,
-    "img": "assets/cat-acc.svg",
-    "fallback": "assets/cat-acc.svg",
+    "img": "assets/products/cap.webp",
+    "fallback": "assets/products/cap.webp",
     "sizes": [
       "Standard"
     ],
@@ -2607,7 +2628,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 3,
-    "minq": 1
+    "minq": 1,
+    "image_kind": "ai-concept"
   },
   {
     "id": "rainsuit",
@@ -2617,8 +2639,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Waterproof",
     "spec": "",
     "demo_price": 799,
-    "img": "assets/cat-acc.svg",
-    "fallback": "assets/cat-acc.svg",
+    "img": "assets/products/rainsuit.webp",
+    "fallback": "assets/products/rainsuit.webp",
     "sizes": [
       "Standard"
     ],
@@ -2627,7 +2649,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 3,
-    "minq": 1
+    "minq": 1,
+    "image_kind": "ai-concept"
   },
   {
     "id": "raincoat",
@@ -2637,8 +2660,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Waterproof",
     "spec": "",
     "demo_price": 799,
-    "img": "assets/cat-acc.svg",
-    "fallback": "assets/cat-acc.svg",
+    "img": "assets/products/raincoat.webp",
+    "fallback": "assets/products/raincoat.webp",
     "sizes": [
       "Standard"
     ],
@@ -2647,7 +2670,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 3,
-    "minq": 1
+    "minq": 1,
+    "image_kind": "ai-concept"
   },
   {
     "id": "umb-fold",
@@ -2657,8 +2681,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Printed logo",
     "spec": "",
     "demo_price": 504,
-    "img": "assets/cat-acc.svg",
-    "fallback": "assets/cat-acc.svg",
+    "img": "assets/products/umb-fold.webp",
+    "fallback": "assets/products/umb-fold.webp",
     "sizes": [
       "Standard"
     ],
@@ -2667,7 +2691,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 3,
-    "minq": 1
+    "minq": 1,
+    "image_kind": "ai-concept"
   },
   {
     "id": "umb-long",
@@ -2677,8 +2702,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Printed logo",
     "spec": "",
     "demo_price": 760,
-    "img": "assets/cat-acc.svg",
-    "fallback": "assets/cat-acc.svg",
+    "img": "assets/products/umb-long.webp",
+    "fallback": "assets/products/umb-long.webp",
     "sizes": [
       "Standard"
     ],
@@ -2687,7 +2712,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 3,
-    "minq": 1
+    "minq": 1,
+    "image_kind": "ai-concept"
   },
   {
     "id": "sipper",
@@ -2697,8 +2723,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Printed bottle",
     "spec": "",
     "demo_price": 362,
-    "img": "assets/cat-gift.svg",
-    "fallback": "assets/cat-gift.svg",
+    "img": "assets/products/sipper.webp",
+    "fallback": "assets/products/sipper.webp",
     "sizes": [
       "Standard"
     ],
@@ -2707,7 +2733,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 3,
-    "minq": 1
+    "minq": 1,
+    "image_kind": "ai-concept"
   },
   {
     "id": "photoprint",
@@ -2717,8 +2744,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Photo prints",
     "spec": "",
     "demo_price": 236,
-    "img": "assets/cat-gift.svg",
-    "fallback": "assets/cat-gift.svg",
+    "img": "assets/products/photoprint.webp",
+    "fallback": "assets/products/photoprint.webp",
     "sizes": [
       "Standard"
     ],
@@ -2727,7 +2754,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 3,
-    "minq": 10
+    "minq": 10,
+    "image_kind": "ai-concept"
   },
   {
     "id": "frame",
@@ -2737,8 +2765,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Framed print",
     "spec": "",
     "demo_price": 284,
-    "img": "assets/cat-gift.svg",
-    "fallback": "assets/cat-gift.svg",
+    "img": "assets/products/frame.webp",
+    "fallback": "assets/products/frame.webp",
     "sizes": [
       "Standard"
     ],
@@ -2747,7 +2775,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 3,
-    "minq": 1
+    "minq": 1,
+    "image_kind": "ai-concept"
   },
   {
     "id": "vcard",
@@ -2757,8 +2786,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Printed cards",
     "spec": "",
     "demo_price": 179,
-    "img": "assets/cat-print.svg",
-    "fallback": "assets/cat-print.svg",
+    "img": "assets/products/vcard.webp",
+    "fallback": "assets/products/vcard.webp",
     "sizes": [
       "Standard"
     ],
@@ -2767,7 +2796,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 3,
-    "minq": 100
+    "minq": 100,
+    "image_kind": "ai-concept"
   },
   {
     "id": "vcard-shape",
@@ -2777,8 +2807,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Die-cut cards",
     "spec": "",
     "demo_price": 1444,
-    "img": "assets/cat-print.svg",
-    "fallback": "assets/cat-print.svg",
+    "img": "assets/products/vcard-shape.webp",
+    "fallback": "assets/products/vcard-shape.webp",
     "sizes": [
       "Standard"
     ],
@@ -2787,7 +2817,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 3,
-    "minq": 1
+    "minq": 1,
+    "image_kind": "ai-concept"
   },
   {
     "id": "booklet",
@@ -2797,8 +2828,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Printed booklet",
     "spec": "",
     "demo_price": 420,
-    "img": "assets/cat-print.svg",
-    "fallback": "assets/cat-print.svg",
+    "img": "assets/products/booklet.webp",
+    "fallback": "assets/products/booklet.webp",
     "sizes": [
       "Standard"
     ],
@@ -2807,7 +2838,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 3,
-    "minq": 5
+    "minq": 5,
+    "image_kind": "ai-concept"
   },
   {
     "id": "sticker",
@@ -2817,8 +2849,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Printed stickers",
     "spec": "",
     "demo_price": 108,
-    "img": "assets/cat-print.svg",
-    "fallback": "assets/cat-print.svg",
+    "img": "assets/products/sticker.webp",
+    "fallback": "assets/products/sticker.webp",
     "sizes": [
       "Standard"
     ],
@@ -2827,7 +2859,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 3,
-    "minq": 1
+    "minq": 1,
+    "image_kind": "ai-concept"
   },
   {
     "id": "label",
@@ -2837,8 +2870,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Printed labels",
     "spec": "",
     "demo_price": 238,
-    "img": "assets/cat-print.svg",
-    "fallback": "assets/cat-print.svg",
+    "img": "assets/products/label.webp",
+    "fallback": "assets/products/label.webp",
     "sizes": [
       "Standard"
     ],
@@ -2847,7 +2880,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 3,
-    "minq": 50
+    "minq": 50,
+    "image_kind": "ai-concept"
   },
   {
     "id": "mailer",
@@ -2857,8 +2891,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Printed box",
     "spec": "",
     "demo_price": 227,
-    "img": "assets/cat-print.svg",
-    "fallback": "assets/cat-print.svg",
+    "img": "assets/products/mailer.webp",
+    "fallback": "assets/products/mailer.webp",
     "sizes": [
       "Standard"
     ],
@@ -2867,7 +2901,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "days": 3,
-    "minq": 1
+    "minq": 1,
+    "image_kind": "ai-concept"
   },
   {
     "id": "rn-sarina",
@@ -2929,8 +2964,8 @@ window.LUSTRY_CATALOG = [
     "fabric": "Oversized • cotton",
     "spec": "220 GSM reference",
     "demo_price": 549,
-    "img": "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1000&q=82",
-    "fallback": "assets/tee-forest.svg",
+    "img": "assets/products/os-tee.webp",
+    "fallback": "assets/products/os-tee.webp",
     "sizes": [
       "M",
       "L",
@@ -2943,7 +2978,8 @@ window.LUSTRY_CATALOG = [
     ],
     "inventory_confirmed": false,
     "legacy": true,
-    "hidden_from_catalog": false
+    "hidden_from_catalog": false,
+    "image_kind": "ai-concept"
   },
   {
     "id": "polo-pq",

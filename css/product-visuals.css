@@ -1,0 +1,28 @@
+/* AI product concepts keep their full silhouette; verified stock is not implied. */
+.classic-home .l-product .product-photo img.ai-product-image,
+.shop-section .product-photo img.ai-product-image,
+.product-photo img.ai-product-image,
+.detail-image img.ai-product-image,
+.v7-dg > img.ai-product-image,
+.cart-row > img.ai-product-image,
+.classic-home .c-category-image img.ai-product-image {
+  object-fit: contain;
+  object-position: center;
+  background: #f8f7f3;
+}
+.product-tag.ai-concept-tag {
+  font-size: 9px;
+  letter-spacing: .05em;
+}
+.ai-concept-label {
+  display: table;
+  margin-bottom: 12px;
+  padding: 4px 9px;
+  border: 1px solid var(--line, #e1dfd8);
+  border-radius: 999px;
+  color: var(--deep, #152233);
+  background: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .05em;
+}
